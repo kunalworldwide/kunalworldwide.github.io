@@ -1,0 +1,1527 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.6.39">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="dcterms.date" content="2024-12-06">
+<meta name="description" content="Deep dive into running and managing GPU workloads on Kubernetes clusters, including setup, optimization, and best practices">
+
+<title>Comprehensive Guide: Running GPU Workloads on Kubernetes – Kunal Das</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../assets/icon.png" rel="icon" type="image/png">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-0626ff4d7a71b55c8707dcae1d04a9b6.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-e25cc82807363e79c52e96bc8b7855f1.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-3f61d0e17626aaa9b46affb506996c33.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-671e28117951ce057572969c968798a8.min.css" rel="prefetch" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-X8X02516LE"></script>
+
+<script type="text/javascript">
+
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-X8X02516LE', { 'anonymize_ip': true});
+</script>
+
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">Kunal Das</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../about.html"> 
+<span class="menu-text">About Me</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../posts.html"> 
+<span class="menu-text">Blog</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../talks.html"> 
+<span class="menu-text">Talks</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../contact.html"> 
+<span class="menu-text">Contact</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://twitter.com/kunald_official"> <i class="bi bi-twitter" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/kunalworldwide"> <i class="bi bi-github" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://linkedin.com/in/kunaldaskd"> <i class="bi bi-linkedin" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#understanding-gpu-computing-in-kubernetes" id="toc-understanding-gpu-computing-in-kubernetes" class="nav-link active" data-scroll-target="#understanding-gpu-computing-in-kubernetes">Understanding GPU Computing in Kubernetes</a>
+  <ul class="collapse">
+  <li><a href="#architectural-overview" id="toc-architectural-overview" class="nav-link" data-scroll-target="#architectural-overview">Architectural Overview</a></li>
+  <li><a href="#how-gpu-scheduling-works-in-kubernetes" id="toc-how-gpu-scheduling-works-in-kubernetes" class="nav-link" data-scroll-target="#how-gpu-scheduling-works-in-kubernetes">How GPU Scheduling Works in Kubernetes</a></li>
+  <li><a href="#deep-dive-nvidia-device-plugin-workflow" id="toc-deep-dive-nvidia-device-plugin-workflow" class="nav-link" data-scroll-target="#deep-dive-nvidia-device-plugin-workflow">Deep Dive: NVIDIA Device Plugin Workflow</a></li>
+  <li><a href="#multi-instance-gpu-mig-technology" id="toc-multi-instance-gpu-mig-technology" class="nav-link" data-scroll-target="#multi-instance-gpu-mig-technology">Multi-Instance GPU (MIG) Technology</a></li>
+  <li><a href="#gpu-memory-management" id="toc-gpu-memory-management" class="nav-link" data-scroll-target="#gpu-memory-management">GPU Memory Management</a></li>
+  </ul></li>
+  <li><a href="#understanding-the-gpu-workflow-in-kubernetes" id="toc-understanding-the-gpu-workflow-in-kubernetes" class="nav-link" data-scroll-target="#understanding-the-gpu-workflow-in-kubernetes">Understanding the GPU Workflow in Kubernetes</a>
+  <ul class="collapse">
+  <li><a href="#pod-scheduling-flow" id="toc-pod-scheduling-flow" class="nav-link" data-scroll-target="#pod-scheduling-flow">1. Pod Scheduling Flow</a></li>
+  <li><a href="#data-flow-in-gpu-computing" id="toc-data-flow-in-gpu-computing" class="nav-link" data-scroll-target="#data-flow-in-gpu-computing">2. Data Flow in GPU Computing</a></li>
+  <li><a href="#resource-lifecycle" id="toc-resource-lifecycle" class="nav-link" data-scroll-target="#resource-lifecycle">3. Resource Lifecycle</a></li>
+  </ul></li>
+  <li><a href="#best-practices-and-guidelines" id="toc-best-practices-and-guidelines" class="nav-link" data-scroll-target="#best-practices-and-guidelines">Best Practices and Guidelines</a>
+  <ul class="collapse">
+  <li><a href="#resource-optimization" id="toc-resource-optimization" class="nav-link" data-scroll-target="#resource-optimization">Resource Optimization</a></li>
+  </ul></li>
+  <li><a href="#enough-talk-lets-dig-in" id="toc-enough-talk-lets-dig-in" class="nav-link" data-scroll-target="#enough-talk-lets-dig-in">Enough talk, let’s dig in</a></li>
+  <li><a href="#prerequisites" id="toc-prerequisites" class="nav-link" data-scroll-target="#prerequisites">Prerequisites</a></li>
+  <li><a href="#gpu-node-pool-setup" id="toc-gpu-node-pool-setup" class="nav-link" data-scroll-target="#gpu-node-pool-setup">GPU Node Pool Setup</a>
+  <ul class="collapse">
+  <li><a href="#select-appropriate-gpu-vm-size" id="toc-select-appropriate-gpu-vm-size" class="nav-link" data-scroll-target="#select-appropriate-gpu-vm-size">1. Select appropriate GPU VM size</a></li>
+  <li><a href="#create-gpu-node-pool" id="toc-create-gpu-node-pool" class="nav-link" data-scroll-target="#create-gpu-node-pool">2. Create GPU node pool</a></li>
+  </ul></li>
+  <li><a href="#nvidia-driver-installation" id="toc-nvidia-driver-installation" class="nav-link" data-scroll-target="#nvidia-driver-installation">NVIDIA Driver Installation</a>
+  <ul class="collapse">
+  <li><a href="#option-1-default-aks-installation" id="toc-option-1-default-aks-installation" class="nav-link" data-scroll-target="#option-1-default-aks-installation">Option 1: Default AKS Installation</a></li>
+  <li><a href="#option-2-manual-installation-if-needed" id="toc-option-2-manual-installation-if-needed" class="nav-link" data-scroll-target="#option-2-manual-installation-if-needed">Option 2: Manual Installation (if needed)</a></li>
+  </ul></li>
+  <li><a href="#nvidia-device-plugin-installation" id="toc-nvidia-device-plugin-installation" class="nav-link" data-scroll-target="#nvidia-device-plugin-installation">NVIDIA Device Plugin Installation</a>
+  <ul class="collapse">
+  <li><a href="#using-helm-recommended-method" id="toc-using-helm-recommended-method" class="nav-link" data-scroll-target="#using-helm-recommended-method">Using Helm (Recommended Method)</a></li>
+  </ul></li>
+  <li><a href="#verification-steps" id="toc-verification-steps" class="nav-link" data-scroll-target="#verification-steps">Verification Steps</a></li>
+  <li><a href="#running-gpu-workloads" id="toc-running-gpu-workloads" class="nav-link" data-scroll-target="#running-gpu-workloads">Running GPU Workloads</a>
+  <ul class="collapse">
+  <li><a href="#example-gpu-workload-yaml" id="toc-example-gpu-workload-yaml" class="nav-link" data-scroll-target="#example-gpu-workload-yaml">Example GPU Workload YAML</a></li>
+  <li><a href="#deploy-the-workload" id="toc-deploy-the-workload" class="nav-link" data-scroll-target="#deploy-the-workload">Deploy the workload:</a></li>
+  </ul></li>
+  <li><a href="#monitoring-and-troubleshooting" id="toc-monitoring-and-troubleshooting" class="nav-link" data-scroll-target="#monitoring-and-troubleshooting">Monitoring and Troubleshooting</a>
+  <ul class="collapse">
+  <li><a href="#monitor-gpu-usage" id="toc-monitor-gpu-usage" class="nav-link" data-scroll-target="#monitor-gpu-usage">Monitor GPU Usage</a></li>
+  <li><a href="#common-troubleshooting-steps" id="toc-common-troubleshooting-steps" class="nav-link" data-scroll-target="#common-troubleshooting-steps">Common Troubleshooting Steps</a></li>
+  </ul></li>
+  <li><a href="#best-practices-and-advanced-considerations" id="toc-best-practices-and-advanced-considerations" class="nav-link" data-scroll-target="#best-practices-and-advanced-considerations">Best Practices and Advanced Considerations</a>
+  <ul class="collapse">
+  <li><a href="#resource-management-strategy" id="toc-resource-management-strategy" class="nav-link" data-scroll-target="#resource-management-strategy">1. Resource Management Strategy</a></li>
+  <li><a href="#container-optimization" id="toc-container-optimization" class="nav-link" data-scroll-target="#container-optimization">2. Container Optimization</a></li>
+  <li><a href="#performance-monitoring-and-optimization" id="toc-performance-monitoring-and-optimization" class="nav-link" data-scroll-target="#performance-monitoring-and-optimization">3. Performance Monitoring and Optimization</a></li>
+  <li><a href="#cost-management" id="toc-cost-management" class="nav-link" data-scroll-target="#cost-management">4. Cost Management</a></li>
+  <li><a href="#security-implementation" id="toc-security-implementation" class="nav-link" data-scroll-target="#security-implementation">5. Security Implementation</a></li>
+  <li><a href="#advanced-scenarios" id="toc-advanced-scenarios" class="nav-link" data-scroll-target="#advanced-scenarios">6. Advanced Scenarios</a></li>
+  <li><a href="#finishing-points" id="toc-finishing-points" class="nav-link" data-scroll-target="#finishing-points">Finishing Points</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Comprehensive Guide: Running GPU Workloads on Kubernetes</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">Kubernetes</div>
+    <div class="quarto-category">GPU</div>
+    <div class="quarto-category">Cloud Computing</div>
+    <div class="quarto-category">DevOps</div>
+  </div>
+  </div>
+
+<div>
+  <div class="description">
+    Deep dive into running and managing GPU workloads on Kubernetes clusters, including setup, optimization, and best practices
+  </div>
+</div>
+
+
+<div class="quarto-title-meta">
+
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">December 6, 2024</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://miro.medium.com/v2/resize:fill:44:44/1*kfaefcgQPHrPsNobjuiiSg.jpeg" class="img-fluid figure-img"></p>
+<figcaption>Kunal Das, Author</figcaption>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./media/Running GPU Workloads on Kubernetes_thumbnail.jpg" class="img-fluid figure-img"></p>
+<figcaption>Image</figcaption>
+</figure>
+</div>
+<section id="understanding-gpu-computing-in-kubernetes" class="level2">
+<h2 class="anchored" data-anchor-id="understanding-gpu-computing-in-kubernetes">Understanding GPU Computing in Kubernetes</h2>
+<section id="architectural-overview" class="level3">
+<h3 class="anchored" data-anchor-id="architectural-overview">Architectural Overview</h3>
+<p>GPU (Graphics Processing Unit) computing leverages specialized processors originally designed for rendering graphics to perform parallel computations. Unlike CPUs which are optimized for sequential processing with few cores, GPUs contain thousands of smaller cores optimized for handling multiple tasks simultaneously.</p>
+<section id="key-components-in-kubernetes-gpu-architecture" class="level4">
+<h4 class="anchored" data-anchor-id="key-components-in-kubernetes-gpu-architecture">Key Components in Kubernetes GPU Architecture:</h4>
+<ol type="1">
+<li><strong>Hardware Layer</strong>
+<ul>
+<li>Physical GPU cards (e.g., NVIDIA Tesla, V100, A100)</li>
+<li>PCIe interface connection</li>
+<li>GPU memory (VRAM)</li>
+<li>CUDA cores for parallel processing</li>
+</ul></li>
+<li><strong>Driver Layer</strong>
+<ul>
+<li>NVIDIA drivers: Interface between hardware and software</li>
+<li>CUDA toolkit: Programming interface for GPU computing</li>
+<li>Container runtime hooks: Enable GPU access from containers</li>
+</ul></li>
+<li><strong>Container Runtime Layer</strong>
+<ul>
+<li>NVIDIA Container Toolkit (nvidia-docker2)</li>
+<li>Container runtime (containerd/Docker)</li>
+<li>Device plugin interface</li>
+</ul></li>
+<li><strong>Kubernetes Layer</strong>
+<ul>
+<li>NVIDIA Device Plugin</li>
+<li>Kubernetes scheduler</li>
+<li>Resource allocation system</li>
+</ul></li>
+</ol>
+</section>
+</section>
+<section id="how-gpu-scheduling-works-in-kubernetes" class="level3">
+<h3 class="anchored" data-anchor-id="how-gpu-scheduling-works-in-kubernetes">How GPU Scheduling Works in Kubernetes</h3>
+<ol type="1">
+<li><p><strong>Resource Advertisement</strong></p>
+<ul>
+<li>The NVIDIA Device Plugin runs as a DaemonSet</li>
+<li>Discovers GPUs on each node</li>
+<li>Advertises GPU resources to Kubernetes API server</li>
+<li>Updates node capacity with <code>nvidia.com/gpu</code> resource</li>
+</ul></li>
+<li><p><strong>Resource Scheduling Process</strong></p>
+<pre><code>Pod Request → Scheduler → Device Plugin → GPU Allocation</code></pre>
+<ol type="a">
+<li>Pod makes GPU request through resource limits</li>
+<li>Kubernetes scheduler finds eligible nodes</li>
+<li>Device Plugin handles GPU assignment</li>
+<li>Container runtime configures GPU access</li>
+</ol></li>
+<li><p><strong>GPU Resource Isolation</strong></p>
+<ul>
+<li>Each container gets exclusive access to assigned GPUs</li>
+<li>GPU memory is not oversubscribed</li>
+<li>NVIDIA driver enforces hardware-level isolation</li>
+</ul></li>
+</ol>
+</section>
+<section id="deep-dive-nvidia-device-plugin-workflow" class="level3">
+<h3 class="anchored" data-anchor-id="deep-dive-nvidia-device-plugin-workflow">Deep Dive: NVIDIA Device Plugin Workflow</h3>
+<ol type="1">
+<li><p><strong>Initialization Phase</strong></p>
+<pre><code>Device Plugin Start → GPU Discovery → Resource Registration</code></pre>
+<ul>
+<li>Scans system for NVIDIA GPUs</li>
+<li>Creates socket for Kubernetes communication</li>
+<li>Registers as device plugin with kubelet</li>
+</ul></li>
+<li><p><strong>Operation Phase</strong></p>
+<pre><code>List GPUs → Monitor Health → Handle Allocation</code></pre>
+<ul>
+<li>Maintains list of available GPUs</li>
+<li>Monitors GPU health and status</li>
+<li>Handles allocation requests from kubelet</li>
+</ul></li>
+<li><p><strong>Resource Management</strong></p>
+<pre><code>Pod Request → Allocation → Environment Setup → Container Start</code></pre>
+<ul>
+<li>Maps GPU devices to containers</li>
+<li>Sets up NVIDIA runtime environment</li>
+<li>Configures container GPU access</li>
+</ul></li>
+</ol>
+</section>
+<section id="multi-instance-gpu-mig-technology" class="level3">
+<h3 class="anchored" data-anchor-id="multi-instance-gpu-mig-technology">Multi-Instance GPU (MIG) Technology</h3>
+<p>For NVIDIA A100 GPUs, MIG allows: 1. <strong>Partitioning</strong> - Single GPU split into up to 7 instances - Each instance has dedicated: * Compute resources * Memory * Memory bandwidth * Cache</p>
+<ol start="2" type="1">
+<li><strong>Isolation Levels</strong>
+<ul>
+<li>Hardware-level isolation</li>
+<li>Memory protection</li>
+<li>Error containment</li>
+<li>QoS guarantee</li>
+</ul></li>
+</ol>
+</section>
+<section id="gpu-memory-management" class="level3">
+<h3 class="anchored" data-anchor-id="gpu-memory-management">GPU Memory Management</h3>
+<ol type="1">
+<li><p><strong>Allocation Modes</strong></p>
+<ul>
+<li>Exclusive process mode</li>
+<li>Time-slicing mode (shared)</li>
+<li>MIG mode (for A100)</li>
+</ul></li>
+<li><p><strong>Memory Hierarchy</strong></p>
+<pre><code>Global Memory → L2 Cache → L1 Cache → CUDA Cores</code></pre></li>
+<li><p><strong>Resource Limits</strong></p>
+<ul>
+<li>GPU memory is not oversubscribed</li>
+<li>Containers see full GPU memory</li>
+<li>Memory limits enforced by NVIDIA driver</li>
+</ul></li>
+</ol>
+</section>
+</section>
+<section id="understanding-the-gpu-workflow-in-kubernetes" class="level2">
+<h2 class="anchored" data-anchor-id="understanding-the-gpu-workflow-in-kubernetes">Understanding the GPU Workflow in Kubernetes</h2>
+<section id="pod-scheduling-flow" class="level3">
+<h3 class="anchored" data-anchor-id="pod-scheduling-flow">1. Pod Scheduling Flow</h3>
+<pre><code>Pod Creation → Resource Check → Node Selection → GPU Binding → Container Start</code></pre>
+<ol type="1">
+<li><strong>Pod Creation</strong>
+<ul>
+<li>User creates pod with GPU requirements</li>
+<li>Scheduler receives pod specification</li>
+</ul></li>
+<li><strong>Resource Check</strong>
+<ul>
+<li>Scheduler checks GPU availability</li>
+<li>Validates node constraints and taints</li>
+<li>Considers topology requirements</li>
+</ul></li>
+<li><strong>Node Selection</strong>
+<ul>
+<li>Scheduler selects optimal node</li>
+<li>Considers GPU availability and type</li>
+<li>Evaluates other scheduling constraints</li>
+</ul></li>
+<li><strong>GPU Binding</strong>
+<ul>
+<li>Device plugin assigns specific GPUs</li>
+<li>Sets up environment variables</li>
+<li>Configures container runtime</li>
+</ul></li>
+<li><strong>Container Start</strong>
+<ul>
+<li>Container runtime initializes with GPU access</li>
+<li>NVIDIA driver provides GPU interface</li>
+<li>Application gains GPU access</li>
+</ul></li>
+</ol>
+</section>
+<section id="data-flow-in-gpu-computing" class="level3">
+<h3 class="anchored" data-anchor-id="data-flow-in-gpu-computing">2. Data Flow in GPU Computing</h3>
+<pre><code>Application → CUDA API → Driver → GPU → Memory → Results</code></pre>
+<ol type="1">
+<li><strong>Application Layer</strong>
+<ul>
+<li>Makes CUDA API calls</li>
+<li>Manages data transfers</li>
+<li>Orchestrates computations</li>
+</ul></li>
+<li><strong>CUDA Layer</strong>
+<ul>
+<li>Translates API calls to driver commands</li>
+<li>Manages memory transfers</li>
+<li>Handles kernel execution</li>
+</ul></li>
+<li><strong>Driver Layer</strong>
+<ul>
+<li>Controls GPU hardware</li>
+<li>Manages memory allocation</li>
+<li>Schedules operations</li>
+</ul></li>
+<li><strong>Hardware Layer</strong>
+<ul>
+<li>Executes CUDA kernels</li>
+<li>Performs memory operations</li>
+<li>Returns results</li>
+</ul></li>
+</ol>
+</section>
+<section id="resource-lifecycle" class="level3">
+<h3 class="anchored" data-anchor-id="resource-lifecycle">3. Resource Lifecycle</h3>
+<pre><code>Allocation → Usage → Release → Cleanup</code></pre>
+<ol type="1">
+<li><strong>Resource Allocation</strong>
+<ul>
+<li>Kubernetes reserves GPU</li>
+<li>Device plugin configures access</li>
+<li>Container gets exclusive use</li>
+</ul></li>
+<li><strong>Resource Usage</strong>
+<ul>
+<li>Application uses GPU</li>
+<li>Monitoring tracks utilization</li>
+<li>Resource limits enforced</li>
+</ul></li>
+<li><strong>Resource Release</strong>
+<ul>
+<li>Pod termination triggers release</li>
+<li>GPU returned to pool</li>
+<li>Resources cleaned up</li>
+</ul></li>
+<li><strong>Cleanup Process</strong>
+<ul>
+<li>Memory cleared</li>
+<li>GPU state reset</li>
+<li>Resources marked available</li>
+</ul></li>
+</ol>
+</section>
+</section>
+<section id="best-practices-and-guidelines" class="level2">
+<h2 class="anchored" data-anchor-id="best-practices-and-guidelines">Best Practices and Guidelines</h2>
+<section id="resource-optimization" class="level3">
+<h3 class="anchored" data-anchor-id="resource-optimization">Resource Optimization</h3>
+<ol type="1">
+<li><strong>Batch Processing</strong>
+<ul>
+<li>Group similar workloads</li>
+<li>Use job queues effectively</li>
+<li>Implement proper backoff strategies</li>
+</ul></li>
+<li><strong>Memory Management</strong>
+<ul>
+<li>Monitor GPU memory usage</li>
+<li>Implement proper cleanup</li>
+<li>Use appropriate batch sizes</li>
+</ul></li>
+<li><strong>Compute Optimization</strong>
+<ul>
+<li>Use optimal CUDA algorithms</li>
+<li>Balance CPU and GPU work</li>
+<li>Minimize data transfers</li>
+</ul></li>
+</ol>
+</section>
+</section>
+<section id="enough-talk-lets-dig-in" class="level2">
+<h2 class="anchored" data-anchor-id="enough-talk-lets-dig-in">Enough talk, let’s dig in</h2>
+</section>
+<section id="prerequisites" class="level2">
+<h2 class="anchored" data-anchor-id="prerequisites">Prerequisites</h2>
+<p>Before starting, ensure you have: - An active Kubernetes cluster (e.g., AKS cluster) - <code>kubectl</code> command-line tool installed and configured - Access to create or modify node pools - Helm v3 installed (for NVIDIA device plugin installation)</p>
+</section>
+<section id="gpu-node-pool-setup" class="level2">
+<h2 class="anchored" data-anchor-id="gpu-node-pool-setup">GPU Node Pool Setup</h2>
+<section id="select-appropriate-gpu-vm-size" class="level3">
+<h3 class="anchored" data-anchor-id="select-appropriate-gpu-vm-size">1. Select appropriate GPU VM size</h3>
+<p>Choose a GPU-enabled VM size based on your workload requirements. Common options include: - Standard_NC6s_v3 (1 NVIDIA Tesla V100) - Standard_NC24rs_v3 (4 NVIDIA Tesla V100 with RDMA) - Standard_ND96asr_v4 (8 NVIDIA A100)</p>
+</section>
+<section id="create-gpu-node-pool" class="level3">
+<h3 class="anchored" data-anchor-id="create-gpu-node-pool">2. Create GPU node pool</h3>
+<div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">az</span> aks nodepool add <span class="dt">\</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">--resource-group</span> myResourceGroup <span class="dt">\</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">--cluster-name</span> myAKSCluster <span class="dt">\</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">--name</span> gpunodepool <span class="dt">\</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">--node-count</span> 1 <span class="dt">\</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">--node-vm-size</span> Standard_NC6s_v3 <span class="dt">\</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">--node-taints</span> sku=gpu:NoSchedule <span class="dt">\</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">--enable-cluster-autoscaler</span> <span class="dt">\</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">--min-count</span> 1 <span class="dt">\</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">--max-count</span> 3</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Key parameters explained: - <code>--node-taints</code>: Ensures only GPU workloads are scheduled on these expensive nodes - <code>--enable-cluster-autoscaler</code>: Automatically scales nodes based on demand - <code>--min-count</code> and <code>--max-count</code>: Define scaling boundaries</p>
+</section>
+</section>
+<section id="nvidia-driver-installation" class="level2">
+<h2 class="anchored" data-anchor-id="nvidia-driver-installation">NVIDIA Driver Installation</h2>
+<section id="option-1-default-aks-installation" class="level3">
+<h3 class="anchored" data-anchor-id="option-1-default-aks-installation">Option 1: Default AKS Installation</h3>
+<p>By default, AKS automatically installs NVIDIA drivers on GPU-capable nodes. This is the recommended approach for most users.</p>
+</section>
+<section id="option-2-manual-installation-if-needed" class="level3">
+<h3 class="anchored" data-anchor-id="option-2-manual-installation-if-needed">Option 2: Manual Installation (if needed)</h3>
+<p>If you need to manually install or update drivers:</p>
+<ol type="1">
+<li>Connect to the node:</li>
+</ol>
+<div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Get node name</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="ex">kubectl</span> get nodes</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Connect to node (requires SSH access)</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> username@node-ip</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ol start="2" type="1">
+<li>Install NVIDIA drivers:</li>
+</ol>
+<div class="sourceCode" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Update package list</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt update</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Install ubuntu-drivers utility</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt install <span class="at">-y</span> ubuntu-drivers-common</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Install recommended NVIDIA drivers</span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> ubuntu-drivers install</span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Reboot node</span></span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> reboot</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+</section>
+<section id="nvidia-device-plugin-installation" class="level2">
+<h2 class="anchored" data-anchor-id="nvidia-device-plugin-installation">NVIDIA Device Plugin Installation</h2>
+<p>The NVIDIA device plugin is required for Kubernetes to recognize and schedule GPU resources.</p>
+<section id="using-helm-recommended-method" class="level3">
+<h3 class="anchored" data-anchor-id="using-helm-recommended-method">Using Helm (Recommended Method)</h3>
+<ol type="1">
+<li>Add NVIDIA Helm repository:</li>
+</ol>
+<div class="sourceCode" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="ex">helm</span> repo add nvdp https://nvidia.github.io/k8s-device-plugin</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="ex">helm</span> repo update</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ol start="2" type="1">
+<li>Install the device plugin:</li>
+</ol>
+<div class="sourceCode" id="cb13"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="ex">helm</span> install nvdp nvdp/nvidia-device-plugin <span class="dt">\</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">--version</span><span class="op">=</span>0.15.0 <span class="dt">\</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">--namespace</span> nvidia-device-plugin <span class="dt">\</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">--create-namespace</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+</section>
+<section id="verification-steps" class="level2">
+<h2 class="anchored" data-anchor-id="verification-steps">Verification Steps</h2>
+<ol type="1">
+<li>Verify node GPU capability:</li>
+</ol>
+<div class="sourceCode" id="cb14"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="ex">kubectl</span> get nodes <span class="at">-o</span> wide</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="ex">kubectl</span> describe node <span class="op">&lt;</span>gpu-node-name<span class="op">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Look for the following in the output:</p>
+<pre><code>Capacity:
+  nvidia.com/gpu: 1
+Allocatable:
+  nvidia.com/gpu: 1</code></pre>
+<ol start="2" type="1">
+<li>Test GPU detection:</li>
+</ol>
+<div class="sourceCode" id="cb16"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a test pod</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="ex">kubectl</span> run nvidia-smi <span class="at">--rm</span> <span class="at">-it</span> <span class="dt">\</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">--image</span><span class="op">=</span>nvidia/cuda:11.8.0-base-ubuntu22.04 <span class="dt">\</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">--limits</span><span class="op">=</span>nvidia.com/gpu=1 <span class="dt">\</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">--command</span> <span class="at">--</span> nvidia-smi</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="running-gpu-workloads" class="level2">
+<h2 class="anchored" data-anchor-id="running-gpu-workloads">Running GPU Workloads</h2>
+<section id="example-gpu-workload-yaml" class="level3">
+<h3 class="anchored" data-anchor-id="example-gpu-workload-yaml">Example GPU Workload YAML</h3>
+<div class="sourceCode" id="cb17"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">apiVersion</span><span class="kw">:</span><span class="at"> v1</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">kind</span><span class="kw">:</span><span class="at"> Pod</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="fu">metadata</span><span class="kw">:</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">name</span><span class="kw">:</span><span class="at"> gpu-pod</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="fu">spec</span><span class="kw">:</span></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">containers</span><span class="kw">:</span></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> gpu-container</span></span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">image</span><span class="kw">:</span><span class="at"> nvidia/cuda:11.8.0-base-ubuntu22.04</span></span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">command</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="st">"nvidia-smi"</span><span class="kw">,</span><span class="at"> </span><span class="st">"-l"</span><span class="kw">,</span><span class="at"> </span><span class="st">"30"</span><span class="kw">]</span></span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">resources</span><span class="kw">:</span></span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">limits</span><span class="kw">:</span></span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">nvidia.com/gpu</span><span class="kw">:</span><span class="at"> </span><span class="dv">1</span></span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">tolerations</span><span class="kw">:</span></span>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">key</span><span class="kw">:</span><span class="at"> </span><span class="st">"sku"</span></span>
+<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">operator</span><span class="kw">:</span><span class="at"> </span><span class="st">"Equal"</span></span>
+<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">value</span><span class="kw">:</span><span class="at"> </span><span class="st">"gpu"</span></span>
+<span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">effect</span><span class="kw">:</span><span class="at"> </span><span class="st">"NoSchedule"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Key components explained: - <code>resources.limits.nvidia.com/gpu</code>: Specifies GPU requirement - <code>tolerations</code>: Matches node taints to allow scheduling - <code>image</code>: Use CUDA-compatible container image</p>
+</section>
+<section id="deploy-the-workload" class="level3">
+<h3 class="anchored" data-anchor-id="deploy-the-workload">Deploy the workload:</h3>
+<div class="sourceCode" id="cb18"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="ex">kubectl</span> apply <span class="at">-f</span> gpu-workload.yaml</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+</section>
+<section id="monitoring-and-troubleshooting" class="level2">
+<h2 class="anchored" data-anchor-id="monitoring-and-troubleshooting">Monitoring and Troubleshooting</h2>
+<section id="monitor-gpu-usage" class="level3">
+<h3 class="anchored" data-anchor-id="monitor-gpu-usage">Monitor GPU Usage</h3>
+<p>Using Container Insights, you can monitor: - GPU duty cycle - GPU memory usage - Number of GPUs allocated/available</p>
+<p>Key metrics: - <code>containerGpuDutyCycle</code> - <code>containerGpumemoryUsedBytes</code> - <code>nodeGpuAllocatable</code></p>
+</section>
+<section id="common-troubleshooting-steps" class="level3">
+<h3 class="anchored" data-anchor-id="common-troubleshooting-steps">Common Troubleshooting Steps</h3>
+<ol type="1">
+<li>Check GPU driver status:</li>
+</ol>
+<div class="sourceCode" id="cb19"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="ex">kubectl</span> exec <span class="at">-it</span> <span class="op">&lt;</span>pod-name<span class="op">&gt;</span> -- nvidia-smi</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ol start="2" type="1">
+<li>Verify NVIDIA device plugin:</li>
+</ol>
+<div class="sourceCode" id="cb20"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="ex">kubectl</span> get pods <span class="at">-n</span> nvidia-device-plugin</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ol start="3" type="1">
+<li>Check pod events:</li>
+</ol>
+<div class="sourceCode" id="cb21"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="ex">kubectl</span> describe pod <span class="op">&lt;</span>pod-name<span class="op">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+</section>
+<section id="best-practices-and-advanced-considerations" class="level2">
+<h2 class="anchored" data-anchor-id="best-practices-and-advanced-considerations">Best Practices and Advanced Considerations</h2>
+<section id="resource-management-strategy" class="level3">
+<h3 class="anchored" data-anchor-id="resource-management-strategy">1. Resource Management Strategy</h3>
+<section id="optimal-resource-allocation" class="level4">
+<h4 class="anchored" data-anchor-id="optimal-resource-allocation">Optimal Resource Allocation</h4>
+<ul>
+<li>Define explicit GPU resource requests and limits in pod specifications</li>
+<li>Implement resource quotas at namespace level to control GPU allocation</li>
+<li>Use pod priority classes for critical GPU workloads</li>
+</ul>
+<div class="sourceCode" id="cb22"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">apiVersion</span><span class="kw">:</span><span class="at"> v1</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="fu">kind</span><span class="kw">:</span><span class="at"> Pod</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="fu">metadata</span><span class="kw">:</span></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">name</span><span class="kw">:</span><span class="at"> gpu-workload</span></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a><span class="fu">spec</span><span class="kw">:</span></span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">priorityClassName</span><span class="kw">:</span><span class="at"> high-priority-gpu</span></span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">containers</span><span class="kw">:</span></span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> gpu-container</span></span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">resources</span><span class="kw">:</span></span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">limits</span><span class="kw">:</span></span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">nvidia.com/gpu</span><span class="kw">:</span><span class="at"> </span><span class="dv">1</span></span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">requests</span><span class="kw">:</span></span>
+<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">nvidia.com/gpu</span><span class="kw">:</span><span class="at"> </span><span class="dv">1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="node-management" class="level4">
+<h4 class="anchored" data-anchor-id="node-management">Node Management</h4>
+<ul>
+<li>Implement node taints and tolerations for GPU nodes</li>
+</ul>
+<div class="sourceCode" id="cb23"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Node taint example</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="at">kubectl taint nodes gpu-node-1 gpu=true:NoSchedule</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Pod toleration example</span></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a><span class="fu">tolerations</span><span class="kw">:</span></span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a><span class="kw">-</span><span class="at"> </span><span class="fu">key</span><span class="kw">:</span><span class="at"> </span><span class="st">"gpu"</span></span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">operator</span><span class="kw">:</span><span class="at"> </span><span class="st">"Equal"</span></span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">value</span><span class="kw">:</span><span class="at"> </span><span class="st">"true"</span></span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">effect</span><span class="kw">:</span><span class="at"> </span><span class="st">"NoSchedule"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>Use node labels for GPU-specific workload targeting</li>
+<li>Configure node affinity rules for specialized GPU workloads</li>
+</ul>
+</section>
+</section>
+<section id="container-optimization" class="level3">
+<h3 class="anchored" data-anchor-id="container-optimization">2. Container Optimization</h3>
+<section id="image-management" class="level4">
+<h4 class="anchored" data-anchor-id="image-management">Image Management</h4>
+<ul>
+<li>Base image selection:
+<ul>
+<li>Use official NVIDIA CUDA images as base</li>
+<li>Choose appropriate CUDA version for your workload</li>
+<li>Consider slim variants for reduced image size</li>
+</ul></li>
+</ul>
+</section>
+<section id="build-optimization" class="level4">
+<h4 class="anchored" data-anchor-id="build-optimization">Build Optimization</h4>
+<ul>
+<li>Implement multi-stage builds to minimize image size</li>
+<li>Include only necessary CUDA libraries</li>
+<li>Cache commonly used data in persistent volumes</li>
+</ul>
+<div class="sourceCode" id="cb24"><pre class="sourceCode dockerfile code-with-copy"><code class="sourceCode dockerfile"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Example multi-stage build</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> nvidia/cuda:11.8.0-base-ubuntu22.04 as builder</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Build steps...</span></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> nvidia/cuda:11.8.0-runtime-ubuntu22.04</span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a><span class="kw">COPY</span> <span class="op">--from=builder</span> /app/binary /app/</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+</section>
+<section id="performance-monitoring-and-optimization" class="level3">
+<h3 class="anchored" data-anchor-id="performance-monitoring-and-optimization">3. Performance Monitoring and Optimization</h3>
+<section id="metrics-collection" class="level4">
+<h4 class="anchored" data-anchor-id="metrics-collection">Metrics Collection</h4>
+<ul>
+<li>Implement comprehensive monitoring:
+<ul>
+<li>GPU utilization percentage</li>
+<li>Memory usage patterns</li>
+<li>Temperature and power consumption</li>
+<li>Error rates and throttling events</li>
+</ul></li>
+</ul>
+</section>
+<section id="alert-configuration" class="level4">
+<h4 class="anchored" data-anchor-id="alert-configuration">Alert Configuration</h4>
+<div class="sourceCode" id="cb25"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Example PrometheusRule for GPU alerts</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="fu">apiVersion</span><span class="kw">:</span><span class="at"> monitoring.coreos.com/v1</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="fu">kind</span><span class="kw">:</span><span class="at"> PrometheusRule</span></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a><span class="fu">metadata</span><span class="kw">:</span></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">name</span><span class="kw">:</span><span class="at"> gpu-alerts</span></span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a><span class="fu">spec</span><span class="kw">:</span></span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">groups</span><span class="kw">:</span></span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> gpu.rules</span></span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">rules</span><span class="kw">:</span></span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="fu">alert</span><span class="kw">:</span><span class="at"> HighGPUUsage</span></span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">expr</span><span class="kw">:</span><span class="at"> nvidia_gpu_duty_cycle &gt; 90</span></span>
+<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">for</span><span class="kw">:</span><span class="at"> 10m</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+</section>
+<section id="cost-management" class="level3">
+<h3 class="anchored" data-anchor-id="cost-management">4. Cost Management</h3>
+<section id="resource-scheduling" class="level4">
+<h4 class="anchored" data-anchor-id="resource-scheduling">Resource Scheduling</h4>
+<ul>
+<li>Implement spot instances for fault-tolerant workloads</li>
+<li>Use node auto-scaling based on GPU demand</li>
+<li>Configure pod disruption budgets for critical workloads</li>
+</ul>
+</section>
+<section id="workload-optimization" class="level4">
+<h4 class="anchored" data-anchor-id="workload-optimization">Workload Optimization</h4>
+<div class="sourceCode" id="cb26"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Example CronJob for off-peak processing</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="fu">apiVersion</span><span class="kw">:</span><span class="at"> batch/v1</span></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="fu">kind</span><span class="kw">:</span><span class="at"> CronJob</span></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="fu">metadata</span><span class="kw">:</span></span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">name</span><span class="kw">:</span><span class="at"> gpu-batch-job</span></span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a><span class="fu">spec</span><span class="kw">:</span></span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">schedule</span><span class="kw">:</span><span class="at"> </span><span class="st">"0 2 * * *"</span><span class="co">  # Run at 2 AM</span></span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">jobTemplate</span><span class="kw">:</span></span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">spec</span><span class="kw">:</span></span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">template</span><span class="kw">:</span></span>
+<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">spec</span><span class="kw">:</span></span>
+<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a><span class="at">          </span><span class="fu">containers</span><span class="kw">:</span></span>
+<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a><span class="at">          </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> gpu-processor</span></span>
+<span id="cb26-14"><a href="#cb26-14" aria-hidden="true" tabindex="-1"></a><span class="at">            </span><span class="fu">resources</span><span class="kw">:</span></span>
+<span id="cb26-15"><a href="#cb26-15" aria-hidden="true" tabindex="-1"></a><span class="at">              </span><span class="fu">limits</span><span class="kw">:</span></span>
+<span id="cb26-16"><a href="#cb26-16" aria-hidden="true" tabindex="-1"></a><span class="at">                </span><span class="fu">nvidia.com/gpu</span><span class="kw">:</span><span class="at"> </span><span class="dv">1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+</section>
+<section id="security-implementation" class="level3">
+<h3 class="anchored" data-anchor-id="security-implementation">5. Security Implementation</h3>
+<section id="access-control" class="level4">
+<h4 class="anchored" data-anchor-id="access-control">Access Control</h4>
+<ul>
+<li>Implement RBAC for GPU resource access</li>
+</ul>
+<div class="sourceCode" id="cb27"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">apiVersion</span><span class="kw">:</span><span class="at"> rbac.authorization.k8s.io/v1</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="fu">kind</span><span class="kw">:</span><span class="at"> Role</span></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="fu">metadata</span><span class="kw">:</span></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">name</span><span class="kw">:</span><span class="at"> gpu-user</span></span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a><span class="fu">rules</span><span class="kw">:</span></span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a><span class="kw">-</span><span class="at"> </span><span class="fu">apiGroups</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="st">""</span><span class="kw">]</span></span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">resources</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="st">"pods"</span><span class="kw">]</span></span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">verbs</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="st">"create"</span><span class="kw">]</span></span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">resourceNames</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="st">"nvidia.com/gpu"</span><span class="kw">]</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="runtime-security" class="level4">
+<h4 class="anchored" data-anchor-id="runtime-security">Runtime Security</h4>
+<ul>
+<li>Enable SecurityContext for GPU containers</li>
+<li>Implement network policies for GPU workloads</li>
+<li>Regular security scanning of GPU container images</li>
+</ul>
+</section>
+</section>
+<section id="advanced-scenarios" class="level3">
+<h3 class="anchored" data-anchor-id="advanced-scenarios">6. Advanced Scenarios</h3>
+<section id="multi-instance-gpu-mig-configuration" class="level4">
+<h4 class="anchored" data-anchor-id="multi-instance-gpu-mig-configuration">Multi-Instance GPU (MIG) Configuration</h4>
+<div class="sourceCode" id="cb28"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Example MIG profile configuration</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="fu">apiVersion</span><span class="kw">:</span><span class="at"> v1</span></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="fu">kind</span><span class="kw">:</span><span class="at"> Pod</span></span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a><span class="fu">metadata</span><span class="kw">:</span></span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">name</span><span class="kw">:</span><span class="at"> mig-workload</span></span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a><span class="fu">spec</span><span class="kw">:</span></span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">containers</span><span class="kw">:</span></span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> gpu-container</span></span>
+<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">resources</span><span class="kw">:</span></span>
+<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">limits</span><span class="kw">:</span></span>
+<span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">nvidia.com/mig-1g.5gb</span><span class="kw">:</span><span class="at"> </span><span class="dv">1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="rdma-for-high-performance-computing" class="level4">
+<h4 class="anchored" data-anchor-id="rdma-for-high-performance-computing">RDMA for High-Performance Computing</h4>
+<ul>
+<li>Configure RDMA-capable networks</li>
+<li>Optimize for low-latency communication</li>
+<li>Implement proper RDMA security controls</li>
+</ul>
+</section>
+<section id="development-environment-optimization" class="level4">
+<h4 class="anchored" data-anchor-id="development-environment-optimization">Development Environment Optimization</h4>
+<ul>
+<li>Set up GPU sharing for development teams</li>
+<li>Implement resource quotas per development namespace</li>
+<li>Create development-specific GPU profiles</li>
+</ul>
+</section>
+</section>
+<section id="finishing-points" class="level3">
+<h3 class="anchored" data-anchor-id="finishing-points">Finishing Points</h3>
+<ol type="1">
+<li><strong>Regular Maintenance Checklist</strong>
+<ul>
+<li>Weekly driver updates verification</li>
+<li>Monthly performance baseline checking</li>
+<li>Quarterly capacity planning review</li>
+</ul></li>
+<li><strong>Documentation Requirements</strong>
+<ul>
+<li>Maintain GPU allocation policies</li>
+<li>Document troubleshooting procedures</li>
+<li>Keep upgrade procedures updated</li>
+</ul></li>
+<li><strong>Future Considerations</strong>
+<ul>
+<li>Plan for GPU architecture upgrades</li>
+<li>Evaluate emerging GPU technologies</li>
+<li>Monitor Kubernetes GPU feature development</li>
+</ul></li>
+<li><strong>Emergency Procedures</strong>
+<ul>
+<li>GPU failure handling protocol</li>
+<li>Workload failover procedures</li>
+<li>Emergency contact information</li>
+</ul></li>
+</ol>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+    let newTheme = '';
+    if(darkModeDefault) {
+      newTheme = isAlternate ? baseTheme : alternateTheme;
+    } else {
+      newTheme = isAlternate ? alternateTheme : baseTheme;
+    }
+    const changeGiscusTheme = () => {
+      // From: https://github.com/giscus/giscus/issues/336
+      const sendMessage = (message) => {
+        const iframe = document.querySelector('iframe.giscus-frame');
+        if (!iframe) return;
+        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+      }
+      sendMessage({
+        setConfig: {
+          theme: newTheme
+        }
+      });
+    }
+    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+    if (isGiscussLoaded) {
+      changeGiscusTheme();
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  const darkModeDefault = false;
+  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+    toggleGiscusIfUsed(toAlternate, darkModeDefault);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/kunaldas\.dev");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<script src="https://giscus.app/client.js" data-repo="kunalworldwide/kunalworldwide.github.io" data-repo-id="R_kgDOLCIa1w" data-category="General" data-category-id="DIC_kwDOLCIa184ClGQR" data-mapping="pathname" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="bottom" data-theme="preferred_color_scheme" data-lang="en" crossorigin="anonymous" async="">
+</script>
+<input type="hidden" id="giscus-base-theme" value="preferred_color_scheme">
+<input type="hidden" id="giscus-alt-theme" value="preferred_color_scheme">
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/kunalworldwide">
+      <i class="bi bi-github" role="img">
+</i> 
+    </a>
+  </li>  
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://twitter.com/kunald_official">
+      <i class="bi bi-twitter" role="img">
+</i> 
+    </a>
+  </li>  
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://linkedin.com/in/kunaldaskd">
+      <i class="bi bi-linkedin" role="img">
+</i> 
+    </a>
+  </li>  
+</ul>
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

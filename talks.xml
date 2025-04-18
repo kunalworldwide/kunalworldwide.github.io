@@ -1,0 +1,387 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss  xmlns:atom="http://www.w3.org/2005/Atom" 
+      xmlns:media="http://search.yahoo.com/mrss/" 
+      xmlns:content="http://purl.org/rss/1.0/modules/content/" 
+      xmlns:dc="http://purl.org/dc/elements/1.1/" 
+      version="2.0">
+<channel>
+<title>Kunal Das</title>
+<link>https://kunaldas.dev/talks.html</link>
+<atom:link href="https://kunaldas.dev/talks.xml" rel="self" type="application/rss+xml"/>
+<description>DevOps &amp; Cloud Technology Blog</description>
+<generator>quarto-1.6.39</generator>
+<lastBuildDate>Sat, 24 Aug 2024 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>Policy Based Control for Cloud Native Environment with OPA</title>
+  <link>https://kunaldas.dev/talks/2024-08-24-policy-control-opa.html</link>
+  <description><![CDATA[ 
+
+
+
+
+<p>This presentation focuses on policy-based control for cloud-native environments using Open Policy Agent (OPA) and Gatekeeper, introducing OPA as a general-purpose policy engine and Gatekeeper as its Kubernetes-native implementation.</p>
+<section id="agenda" class="level2">
+<h2 class="anchored" data-anchor-id="agenda">Agenda</h2>
+<ol type="1">
+<li>Introduction to Policy Enforcement Challenges
+<ul>
+<li>Traditional vs.&nbsp;cloud-native environments</li>
+</ul></li>
+<li>Overview of OPA and Gatekeeper
+<ul>
+<li>Explanation of Open Policy Agent (OPA)</li>
+<li>Introduction to Gatekeeper and its relationship with OPA</li>
+<li>Custom Resource Definitions (CRDs) in Gatekeeper</li>
+</ul></li>
+<li>Usage Scenarios
+<ul>
+<li>Resource constraints</li>
+<li>Security enforcement</li>
+<li>Compliance requirements</li>
+<li>Cost optimization</li>
+<li>Multi-tenancy</li>
+<li>Best practices enforcement</li>
+</ul></li>
+<li>Challenges
+<ul>
+<li>Learning curve</li>
+<li>Performance impact</li>
+<li>Policy management</li>
+<li>Integration complexity</li>
+</ul></li>
+</ol>
+</section>
+<section id="resources" class="level2">
+<h2 class="anchored" data-anchor-id="resources">Resources</h2>
+<ul>
+<li><a href="https://github.com/kunalworldwide/opa_gk_demo/blob/main/slides/OPA.pdf">Presentation Slides</a></li>
+<li><a href="https://github.com/kunalworldwide/opa_gk_demo">Demo Repository</a></li>
+<li><a href="https://www.meetup.com/collabnix/events/301991994/">Event Details</a></li>
+</ul>
+
+
+</section>
+
+ ]]></description>
+  <category>Kubernetes</category>
+  <category>Security</category>
+  <category>OPA</category>
+  <category>Cloud Native</category>
+  <guid>https://kunaldas.dev/talks/2024-08-24-policy-control-opa.html</guid>
+  <pubDate>Sat, 24 Aug 2024 00:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Introduction to KEDA</title>
+  <link>https://kunaldas.dev/talks/2024-05-18-introduction-to-keda.html</link>
+  <description><![CDATA[ 
+
+
+
+
+<p>The presentation provided a comprehensive overview of Kubernetes Event-Driven Autoscaling (KEDA). It covered the core concepts and advanced features of KEDA, emphasizing its role in dynamic resource scaling based on event-driven metrics.</p>
+<section id="agenda" class="level2">
+<h2 class="anchored" data-anchor-id="agenda">Agenda</h2>
+<ol type="1">
+<li>Overview of KEDA</li>
+<li>Key Features of KEDA</li>
+<li>How KEDA Works</li>
+<li>Use Cases</li>
+<li>Hands-on Demo</li>
+<li>Challenges &amp; Future</li>
+<li>Q&amp;A Session</li>
+</ol>
+</section>
+<section id="resources" class="level2">
+<h2 class="anchored" data-anchor-id="resources">Resources</h2>
+<ul>
+<li><a href="https://github.com/kunalworldwide/introductiontokeda/blob/main/Introduction%20to%20KEDA.pdf">Presentation Slides</a></li>
+<li><a href="https://lnkd.in/du2NFM7F">Demo Code</a></li>
+<li><a href="https://lnkd.in/deKraEQb">Recording</a></li>
+<li><a href="https://www.meetup.com/collabnix/events/300163572/">Event Details</a></li>
+</ul>
+
+
+</section>
+
+ ]]></description>
+  <category>Kubernetes</category>
+  <category>KEDA</category>
+  <category>Autoscaling</category>
+  <category>Cloud Native</category>
+  <guid>https://kunaldas.dev/talks/2024-05-18-introduction-to-keda.html</guid>
+  <pubDate>Sat, 18 May 2024 00:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Containerization at Scale: Kubernetes Deep Dive</title>
+  <link>https://kunaldas.dev/talks/2024-05-11-containerization-kubernetes.html</link>
+  <description><![CDATA[ 
+
+
+
+
+<p>Get the <a href="https://github.com/kunalworldwide/kedaredisakssampledeployment/blob/main/Containerization%20at%20Scale.pdf">Slides here</a></p>
+<p>🔗 Demo Link: You can check out the demo on</p>
+<p><a href="https://lnkd.in/du2NFM7F">GitHub</a> 📦</p>
+<p><a href="https://lnkd.in/deKraEQb">Youtube</a> ▶️</p>
+<p><a href="https://community.cncf.io/events/details/cncf-cloud-native-bangalore-presents-kubernetes-bangalore-may-meetup/">Event Link</a></p>
+<p>Kubernetes has democratized the deployment and management of containerized applications, making it accessible even at smaller scales with minimal complexity. However, scaling Kubernetes to manage millions of workloads introduces a new set of challenges that go far beyond the capabilities of basic Horizontal Pod Autoscaler (HPA) and Vertical Pod Autoscaler (VPA). This presentation explores advanced strategies for scaling Kubernetes efficiently and effectively while maintaining a keen eye on cost optimization.</p>
+
+
+
+ ]]></description>
+  <category>Kubernetes</category>
+  <category>Containers</category>
+  <category>Scaling</category>
+  <category>Cost Optimization</category>
+  <guid>https://kunaldas.dev/talks/2024-05-11-containerization-kubernetes.html</guid>
+  <pubDate>Sat, 11 May 2024 00:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Containerization at Scale: Challenges and Solutions</title>
+  <link>https://kunaldas.dev/talks/2024-05-04-containerization-scale.html</link>
+  <description><![CDATA[ 
+
+
+
+
+<p>Get the <a href="https://1drv.ms/p/s!AlRMfvfPCoEoskB-9Dc19c9ubDR0?e=NNmZpJg">Slides here</a></p>
+<p>Let’s look at scaling microservices at large scale which may involve many problems, involving cost optimization. This talk will also look at many new technologies which can help us scaling efficiently and beyound the usage of HPA or VPA.</p>
+
+
+
+ ]]></description>
+  <category>Containers</category>
+  <category>Microservices</category>
+  <category>SRE</category>
+  <category>Scaling</category>
+  <guid>https://kunaldas.dev/talks/2024-05-04-containerization-scale.html</guid>
+  <pubDate>Sat, 04 May 2024 00:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Importance of DevOps in Modern Software Development Lifecycle</title>
+  <link>https://kunaldas.dev/talks/2023-12-22-devops-importance.html</link>
+  <description><![CDATA[ 
+
+
+
+
+<p>Get the <a href="https://docs.google.com/presentation/d/1S9fVJeADSnkDMEZUIiMN5YjkkRimAPkJWISasAmcwz8/edit?usp=sharing">Slides here</a></p>
+<p>Code used in Demo <a href="https://github.com/kunalworldwide/python-deployment-demo">here</a></p>
+<p>In the presentation “Importance of DevOps in Modern Software Development Lifecycle” by Kunal Das, the focus is on the critical role of DevOps in contemporary software development. The presentation elaborates on the definition and core principles of DevOps, highlighting its significance in integrating development and operations for efficient workflow. It also provides an insightful look into DevSecOps tools, underscoring the importance of security in the DevOps process. Furthermore, it covers aspects of Continuous Integration and Deployment, discussing the benefits and challenges of DevOps implementation. The session concludes with a demonstration and a Q&amp;A segment, emphasizing its practical application in the industry.</p>
+
+
+
+ ]]></description>
+  <category>DevOps</category>
+  <category>Software Development</category>
+  <category>Best Practices</category>
+  <guid>https://kunaldas.dev/talks/2023-12-22-devops-importance.html</guid>
+  <pubDate>Fri, 22 Dec 2023 00:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Telecom Churn Prediction</title>
+  <link>https://kunaldas.dev/talks/2023-07-11-telecom-churn-prediction.html</link>
+  <description><![CDATA[ 
+
+
+
+
+<section id="telecom-churn-prediction-project" class="level1">
+<h1>Telecom Churn Prediction Project</h1>
+<p>In the competitive telecom industry, understanding and predicting customer churn is crucial for maintaining profitability. This project focuses on analyzing customer-level data from a leading telecom firm to build predictive models for identifying high-risk churn customers, particularly in the high-value segment. The goal is to provide actionable insights and strategies to reduce customer churn.</p>
+<section id="table-of-contents" class="level2">
+<h2 class="anchored" data-anchor-id="table-of-contents">Table of Contents</h2>
+<ul>
+<li>Project Overview</li>
+<li>Dataset Description</li>
+<li>Churn Definition</li>
+<li>High-Value Churn</li>
+<li>Project Goals</li>
+<li>Contents</li>
+<li>Usage</li>
+<li>Conclusion</li>
+<li>Repository Link</li>
+<li>Authors</li>
+</ul>
+</section>
+<section id="project-overview" class="level2">
+<h2 class="anchored" data-anchor-id="project-overview">Project Overview</h2>
+<p>The telecom industry faces a significant challenge with customer churn. Acquiring new customers is often more expensive than retaining existing ones. This project aims to analyze customer data to identify key indicators of churn and develop predictive models to target retention efforts effectively.</p>
+</section>
+<section id="dataset-description" class="level2">
+<h2 class="anchored" data-anchor-id="dataset-description">Dataset Description</h2>
+<p>The dataset includes customer-level information focusing on usage, revenue, and other relevant factors in the Indian and Southeast Asian telecom markets.</p>
+</section>
+<section id="churn-definition" class="level2">
+<h2 class="anchored" data-anchor-id="churn-definition">Churn Definition</h2>
+<p>Churn is identified as customers who have not used any services (like outgoing calls, internet, SMS, etc.) for a certain period, which is particularly relevant for prepaid customers.</p>
+</section>
+<section id="high-value-churn" class="level2">
+<h2 class="anchored" data-anchor-id="high-value-churn">High-Value Churn</h2>
+<p>Focusing on the top 20% of customers, who contribute to approximately 80% of the telecom industry’s revenue, this project aims to reduce churn in this high-value customer segment.</p>
+</section>
+<section id="project-goals" class="level2">
+<h2 class="anchored" data-anchor-id="project-goals">Project Goals</h2>
+<ol type="1">
+<li>Analyze customer behavior and patterns in the telecom dataset.</li>
+<li>Identify key indicators of churn among high-value customers.</li>
+<li>Develop predictive models for accurate churn prediction.</li>
+<li>Evaluate model performance and select the most effective one.</li>
+<li>Provide business insights and recommendations based on the analysis.</li>
+</ol>
+</section>
+<section id="contents" class="level2">
+<h2 class="anchored" data-anchor-id="contents">Contents</h2>
+<ul>
+<li><code>telecom_churn_data.csv</code>: Dataset with customer-level data.</li>
+<li><code>telecom_churn.ipynb</code>: Jupyter Notebook for data preprocessing, feature engineering, model building, and evaluation.</li>
+<li><code>README.md</code>: Overview of the project.</li>
+</ul>
+</section>
+<section id="usage" class="level2">
+<h2 class="anchored" data-anchor-id="usage">Usage</h2>
+<ol type="1">
+<li>Download <code>telecom_churn_data.csv</code> and place it in the same directory as the Jupyter Notebooks.</li>
+<li>Open <code>telecom_churn.ipynb</code> and execute the cells for data processing and model evaluation.</li>
+<li>Review the results, insights, and recommendations.</li>
+</ol>
+</section>
+<section id="conclusion" class="level2">
+<h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
+<p>This project assists telecom companies in predicting and reducing churn among high-value customers, thereby minimizing revenue loss and enhancing customer retention.</p>
+</section>
+<section id="repository-link" class="level2">
+<h2 class="anchored" data-anchor-id="repository-link">Repository Link</h2>
+<p>For a detailed analysis, code implementation, and model evaluation, visit the <a href="https://github.com/kunalworldwide/Telecom-churn-case-study">GitHub Repository</a>.</p>
+</section>
+<section id="authors" class="level2">
+<h2 class="anchored" data-anchor-id="authors">Authors</h2>
+<ul>
+<li>Kunal</li>
+<li>Co-Author: Yogesh Kumar Pati</li>
+</ul>
+
+
+</section>
+</section>
+
+ ]]></description>
+  <category>Machine Learning</category>
+  <category>Telecom</category>
+  <category>Analytics</category>
+  <guid>https://kunaldas.dev/talks/2023-07-11-telecom-churn-prediction.html</guid>
+  <pubDate>Tue, 11 Jul 2023 00:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Lead Scoring Model for Education Institute</title>
+  <link>https://kunaldas.dev/talks/2023-05-23-lead-scoring-model.html</link>
+  <description><![CDATA[ 
+
+
+
+
+<section id="table-of-contents" class="level1">
+<h1>Table of Contents</h1>
+<ol type="1">
+<li>Project Overview</li>
+<li>Approach
+<ol type="1">
+<li>Data Understanding and Cleaning</li>
+<li>Exploratory Data Analysis (EDA)</li>
+<li>Feature Engineering</li>
+<li>Model Building and Evaluation</li>
+</ol></li>
+<li>Key Learnings</li>
+<li>Conclusion</li>
+<li>Further Reading</li>
+<li>Co-Authors</li>
+</ol>
+<section id="project-overview" class="level2">
+<h2 class="anchored" data-anchor-id="project-overview">Project Overview</h2>
+<p>This project involves developing a lead scoring model for X Education to identify potential customers with a higher likelihood of conversion. The goal is to achieve a lead conversion rate of around 80%.</p>
+</section>
+<section id="approach" class="level2">
+<h2 class="anchored" data-anchor-id="approach">Approach</h2>
+<p>The approach was divided into four key stages:</p>
+<ol type="1">
+<li><strong>Data Understanding and Cleaning</strong></li>
+<li><strong>Exploratory Data Analysis (EDA)</strong></li>
+<li><strong>Feature Engineering</strong></li>
+<li><strong>Model Building and Evaluation</strong></li>
+</ol>
+<section id="part-1-data-understanding-and-cleaning" class="level3">
+<h3 class="anchored" data-anchor-id="part-1-data-understanding-and-cleaning">Part 1: Data Understanding and Cleaning</h3>
+<ul>
+<li><strong>Objective</strong>: Understanding the dataset’s structure and cleaning the data.</li>
+<li><strong>Tasks Performed</strong>:
+<ul>
+<li>Handling missing values.</li>
+<li>Dropping irrelevant columns.</li>
+<li>Addressing data inconsistencies.</li>
+</ul></li>
+</ul>
+</section>
+<section id="part-2-exploratory-data-analysis-eda" class="level3">
+<h3 class="anchored" data-anchor-id="part-2-exploratory-data-analysis-eda">Part 2: Exploratory Data Analysis (EDA)</h3>
+<ul>
+<li><strong>Objective</strong>: Gaining insights through visualizations and statistical summaries.</li>
+<li><strong>Key Findings</strong>:
+<ul>
+<li>Importance of features like total visits, time spent on the website, and page views in predicting conversion.</li>
+</ul></li>
+</ul>
+</section>
+<section id="part-3-feature-engineering" class="level3">
+<h3 class="anchored" data-anchor-id="part-3-feature-engineering">Part 3: Feature Engineering</h3>
+<ul>
+<li><strong>Objective</strong>: Enhancing the model’s predictive power through feature transformation and creation.</li>
+<li><strong>Tasks Performed</strong>:
+<ul>
+<li>Encoding categorical variables.</li>
+<li>Scaling numerical features.</li>
+<li>Handling outliers.</li>
+<li>Splitting the dataset into training and testing sets.</li>
+</ul></li>
+</ul>
+</section>
+<section id="part-4-model-building-and-evaluation" class="level3">
+<h3 class="anchored" data-anchor-id="part-4-model-building-and-evaluation">Part 4: Model Building and Evaluation</h3>
+<ul>
+<li><strong>Model Used</strong>: Logistic Regression.</li>
+<li><strong>Performance</strong>:
+<ul>
+<li>Achieved an accuracy of approximately 79.05% on the test set.</li>
+<li>Evaluated using sensitivity, specificity, precision, and the precision-recall curve.</li>
+<li>Identified areas for improvement in recall.</li>
+</ul></li>
+</ul>
+</section>
+</section>
+<section id="key-learnings" class="level2">
+<h2 class="anchored" data-anchor-id="key-learnings">Key Learnings</h2>
+<ul>
+<li><strong>Data Preprocessing</strong>: Essential for accurate modeling.</li>
+<li><strong>Exploratory Data Analysis (EDA)</strong>: Crucial for understanding the dataset and feature selection.</li>
+<li><strong>Feature Engineering</strong>: Significantly impacts model performance.</li>
+<li><strong>Model Selection and Evaluation</strong>: Vital for achieving desired outcomes.</li>
+<li><strong>Interpretability and Explainability</strong>: Important for providing actionable insights.</li>
+<li><strong>Precision-Recall Trade-off</strong>: Aids in selecting an optimal threshold for the model.</li>
+</ul>
+</section>
+<section id="conclusion" class="level2">
+<h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
+<p>The project successfully developed a lead scoring model for X Education, employing a systematic approach and best practices in data preprocessing and modeling.</p>
+
+
+</section>
+</section>
+
+ ]]></description>
+  <category>Machine Learning</category>
+  <category>Education</category>
+  <category>Case Study</category>
+  <guid>https://kunaldas.dev/talks/2023-05-23-lead-scoring-model.html</guid>
+  <pubDate>Tue, 23 May 2023 00:00:00 GMT</pubDate>
+</item>
+</channel>
+</rss>
