@@ -1,0 +1,52 @@
+# Quarto build artifacts
+/_site/
+/.quarto/
+*_files/
+*.html
+
+# R specific
+.Rproj.user
+.Rhistory
+.RData
+.Ruserdata
+.Rapp.history
+.Rprofile
+*.Rproj
+
+# System specific
+.DS_Store
+Thumbs.db
+.directory
+*.swp
+*.swo
+*~
+
+# IDE specific
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Temp files
+*.log
+*.tmp
+*.temp
+
+# Environment variables
+.env
+.env.local
+
+# Node modules (if you're using any JavaScript tools)
+node_modules/
+
+# Python (if you're using any Python tools)
+__pycache__/
+*.py[cod]
+*.so
+.Python
+.python-version
+*.egg
+*.egg-info/
+
+# Jupyter Notebook
+.ipynb_checkpoints
