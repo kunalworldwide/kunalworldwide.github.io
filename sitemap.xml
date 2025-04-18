@@ -2,106 +2,106 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://kunaldas.dev/posts.html</loc>
-    <lastmod>2025-04-18T11:13:08.359Z</lastmod>
+    <lastmod>2025-04-18T11:16:11.763Z</lastmod>
   </url>
   <url>
     <loc>https://kunaldas.dev/talks.html</loc>
-    <lastmod>2025-04-18T11:13:08.375Z</lastmod>
+    <lastmod>2025-04-18T11:16:11.780Z</lastmod>
   </url>
   <url>
     <loc>https://kunaldas.dev/posts/2024-01-19-exploring-azure-storage-services.html</loc>
-    <lastmod>2025-04-18T11:13:08.360Z</lastmod>
+    <lastmod>2025-04-18T11:16:11.765Z</lastmod>
   </url>
   <url>
     <loc>https://kunaldas.dev/posts/2022-12-03-azure-best-practices.html</loc>
-    <lastmod>2025-04-18T11:13:08.359Z</lastmod>
+    <lastmod>2025-04-18T11:16:11.763Z</lastmod>
   </url>
   <url>
     <loc>https://kunaldas.dev/posts/2024-10-03-python-build-validation-pipeline.html</loc>
-    <lastmod>2025-04-18T11:13:08.360Z</lastmod>
+    <lastmod>2025-04-18T11:16:11.765Z</lastmod>
   </url>
   <url>
     <loc>https://kunaldas.dev/posts/2022-11-18-azure-devops-agent-trick.html</loc>
-    <lastmod>2025-04-18T11:13:08.359Z</lastmod>
+    <lastmod>2025-04-18T11:16:11.763Z</lastmod>
   </url>
   <url>
     <loc>https://kunaldas.dev/posts/2022-12-26-publishing-from-azure-devops-release-pipeline.html</loc>
-    <lastmod>2025-04-18T11:13:08.359Z</lastmod>
+    <lastmod>2025-04-18T11:16:11.764Z</lastmod>
   </url>
   <url>
     <loc>https://kunaldas.dev/posts/2023-11-03-seamless-data-factory-deployment.html</loc>
-    <lastmod>2025-04-18T11:13:08.360Z</lastmod>
+    <lastmod>2025-04-18T11:16:11.764Z</lastmod>
   </url>
   <url>
     <loc>https://kunaldas.dev/about.html</loc>
-    <lastmod>2025-04-18T11:13:08.358Z</lastmod>
+    <lastmod>2025-04-18T11:16:11.762Z</lastmod>
   </url>
   <url>
     <loc>https://kunaldas.dev/talks/2024-05-11-containerization-kubernetes.html</loc>
-    <lastmod>2025-04-18T11:13:08.375Z</lastmod>
+    <lastmod>2025-04-18T11:16:11.780Z</lastmod>
   </url>
   <url>
     <loc>https://kunaldas.dev/talks/2025-04-04-building-intelligent-assistants-mcp.html</loc>
-    <lastmod>2025-04-18T11:13:08.376Z</lastmod>
+    <lastmod>2025-04-18T11:16:11.780Z</lastmod>
   </url>
   <url>
     <loc>https://kunaldas.dev/talks/2024-08-24-policy-control-opa.html</loc>
-    <lastmod>2025-04-18T11:13:08.376Z</lastmod>
+    <lastmod>2025-04-18T11:16:11.780Z</lastmod>
   </url>
   <url>
     <loc>https://kunaldas.dev/talks/2024-05-04-containerization-scale.html</loc>
-    <lastmod>2025-04-18T11:13:08.375Z</lastmod>
+    <lastmod>2025-04-18T11:16:11.780Z</lastmod>
   </url>
   <url>
     <loc>https://kunaldas.dev/talks/2023-05-23-lead-scoring-model.html</loc>
-    <lastmod>2025-04-18T11:13:08.375Z</lastmod>
+    <lastmod>2025-04-18T11:16:11.780Z</lastmod>
   </url>
   <url>
     <loc>https://kunaldas.dev/talks/2023-07-11-telecom-churn-prediction.html</loc>
-    <lastmod>2025-04-18T11:13:08.375Z</lastmod>
+    <lastmod>2025-04-18T11:16:11.780Z</lastmod>
   </url>
   <url>
     <loc>https://kunaldas.dev/talks/2023-12-22-devops-importance.html</loc>
-    <lastmod>2025-04-18T11:13:08.375Z</lastmod>
+    <lastmod>2025-04-18T11:16:11.780Z</lastmod>
   </url>
   <url>
     <loc>https://kunaldas.dev/talks/2024-05-18-introduction-to-keda.html</loc>
-    <lastmod>2025-04-18T11:13:08.375Z</lastmod>
+    <lastmod>2025-04-18T11:16:11.780Z</lastmod>
   </url>
   <url>
     <loc>https://kunaldas.dev/index.html</loc>
-    <lastmod>2025-04-18T11:13:08.359Z</lastmod>
+    <lastmod>2025-04-18T11:16:11.763Z</lastmod>
   </url>
   <url>
     <loc>https://kunaldas.dev/posts/2023-07-19-mastering-github-private-repos.html</loc>
-    <lastmod>2025-04-18T11:13:08.360Z</lastmod>
+    <lastmod>2025-04-18T11:16:11.764Z</lastmod>
   </url>
   <url>
     <loc>https://kunaldas.dev/posts/2022-10-12-deploying-azure-services-with-terraform.html</loc>
-    <lastmod>2025-04-18T11:13:08.359Z</lastmod>
+    <lastmod>2025-04-18T11:16:11.763Z</lastmod>
   </url>
   <url>
     <loc>https://kunaldas.dev/posts/2024-12-06-gpu-workloads-kubernetes.html</loc>
-    <lastmod>2025-04-18T11:13:08.360Z</lastmod>
+    <lastmod>2025-04-18T11:16:11.765Z</lastmod>
   </url>
   <url>
     <loc>https://kunaldas.dev/posts/2023-03-07-infrastructure-cost-estimation.html</loc>
-    <lastmod>2025-04-18T11:13:08.360Z</lastmod>
+    <lastmod>2025-04-18T11:16:11.764Z</lastmod>
   </url>
   <url>
     <loc>https://kunaldas.dev/posts/2023-08-25-kubernetes-cluster-management-tools.html</loc>
-    <lastmod>2025-04-18T11:13:08.360Z</lastmod>
+    <lastmod>2025-04-18T11:16:11.764Z</lastmod>
   </url>
   <url>
     <loc>https://kunaldas.dev/posts/2023-07-07-azure-webapp-cicd-terraform.html</loc>
-    <lastmod>2025-04-18T11:13:08.360Z</lastmod>
+    <lastmod>2025-04-18T11:16:11.764Z</lastmod>
   </url>
   <url>
     <loc>https://kunaldas.dev/posts/2023-02-23-streamlining-synapse-cicd.html</loc>
-    <lastmod>2025-04-18T11:13:08.359Z</lastmod>
+    <lastmod>2025-04-18T11:16:11.764Z</lastmod>
   </url>
   <url>
     <loc>https://kunaldas.dev/contact.html</loc>
-    <lastmod>2025-04-18T11:13:08.358Z</lastmod>
+    <lastmod>2025-04-18T11:16:11.763Z</lastmod>
   </url>
 </urlset>
