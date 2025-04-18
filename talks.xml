@@ -10,7 +10,72 @@
 <atom:link href="https://kunaldas.dev/talks.xml" rel="self" type="application/rss+xml"/>
 <description>DevOps &amp; Cloud Technology Blog</description>
 <generator>quarto-1.6.39</generator>
-<lastBuildDate>Sat, 24 Aug 2024 00:00:00 GMT</lastBuildDate>
+<lastBuildDate>Fri, 04 Apr 2025 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>Building Intelligent Assistants with Model Context Protocol</title>
+  <link>https://kunaldas.dev/talks/2025-04-04-building-intelligent-assistants-mcp.html</link>
+  <description><![CDATA[ 
+
+
+
+
+<p>This workshop focuses on building intelligent assistants using the Model Context Protocol (MCP), going beyond traditional chat interfaces to create more powerful AI-powered applications.</p>
+<section id="agenda" class="level2">
+<h2 class="anchored" data-anchor-id="agenda">Agenda</h2>
+<ol type="1">
+<li>Introduction to Model Context Protocol
+<ul>
+<li>Understanding the limitations of current chat interfaces</li>
+<li>How MCP extends AI capabilities</li>
+<li>Architecture and design principles</li>
+</ul></li>
+<li>Implementing MCP Servers
+<ul>
+<li>Core components of an MCP server</li>
+<li>Building context-aware AI assistants</li>
+<li>Integration with different AI models and services</li>
+</ul></li>
+<li>Building Applications with MCP
+<ul>
+<li>Extending AI capabilities into various applications</li>
+<li>Creating domain-specific assistants</li>
+<li>Custom tools and function calling</li>
+</ul></li>
+<li>Hands-on Workshop
+<ul>
+<li>Setting up an MCP server</li>
+<li>Implementing context providers</li>
+<li>Building and testing intelligent assistants</li>
+<li>Extending functionality with custom tools</li>
+</ul></li>
+<li>Best Practices and Future Directions
+<ul>
+<li>Performance optimization</li>
+<li>Security considerations</li>
+<li>Emerging trends in AI assistants</li>
+<li>Integration with enterprise systems</li>
+</ul></li>
+</ol>
+</section>
+<section id="resources" class="level2">
+<h2 class="anchored" data-anchor-id="resources">Resources</h2>
+<ul>
+<li><a href="https://1drv.ms/b/c/28810acff77e4c54/ESGGE0xmJ8JAqOCqQJW3vXcBUrO5RovwhxZ0D3MQh25T2g?e=w2IbDU">Presentation Slides</a></li>
+<li><a href="https://github.com/kunalworldwide/mcp_server_demo">Demo Repository</a></li>
+<li><a href="https://gdg.community.dev/events/details/google-gdg-on-campus-amity-university-bengaluru-india-presents-build-with-ai-2025-04-04/">Event Details</a></li>
+</ul>
+
+
+</section>
+
+ ]]></description>
+  <category>AI</category>
+  <category>Model Context Protocol</category>
+  <category>Intelligent Assistants</category>
+  <category>MCP</category>
+  <guid>https://kunaldas.dev/talks/2025-04-04-building-intelligent-assistants-mcp.html</guid>
+  <pubDate>Fri, 04 Apr 2025 00:00:00 GMT</pubDate>
+</item>
 <item>
   <title>Policy Based Control for Cloud Native Environment with OPA</title>
   <link>https://kunaldas.dev/talks/2024-08-24-policy-control-opa.html</link>

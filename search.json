@@ -11,7 +11,7 @@
     "href": "talks.html",
     "title": "Talks & Presentations",
     "section": "",
-    "text": "I regularly speak at tech conferences and meetups about Cloud Computing, DevOps, and Data Engineering. Here are some of my recent talks and presentations.\n\n\n\n\n\n\n   \n     \n     \n       Order By\n       Default\n         \n          Title\n        \n         \n          Date - Oldest\n        \n         \n          Date - Newest\n        \n     \n  \n    \n      \n      \n    \n\n\n\n\n\n\n\nPolicy Based Control for Cloud Native Environment with OPA\n\n\n\nKubernetes\n\n\nSecurity\n\n\nOPA\n\n\nCloud Native\n\n\n\nExploring policy-based control using Open Policy Agent and Gatekeeper in Kubernetes environments\n\n\n\nAugust 24, 2024\n\n\n\n\n\nlocation\n\n\nBengaluru, India\n\n\n\n\nvenue\n\n\nDocker DevTools Day 3.0 at Wissen Infotech\n\n\n\n\n\n\n\n\n\n\n\n\nIntroduction to KEDA\n\n\n\nKubernetes\n\n\nKEDA\n\n\nAutoscaling\n\n\nCloud Native\n\n\n\nA comprehensive overview of Kubernetes Event-Driven Autoscaling, covering architecture, implementation, and real-world use cases\n\n\n\nMay 18, 2024\n\n\n\n\n\nlocation\n\n\nBengaluru, India\n\n\n\n\nvenue\n\n\nKubetools Day 2.0 at Guidewire Software\n\n\n\n\n\n\n\n\n\n\n\n\nContainerization at Scale: Kubernetes Deep Dive\n\n\n\nKubernetes\n\n\nContainers\n\n\nScaling\n\n\nCost Optimization\n\n\n\nAdvanced strategies for scaling Kubernetes beyond basic autoscaling with cost optimization\n\n\n\nMay 11, 2024\n\n\n\n\n\nlocation\n\n\nBengaluru, India\n\n\n\n\nvenue\n\n\nRed Hat India Pvt. Ltd, Kubernetes Bangalore May Meetup\n\n\n\n\n\n\n\n\n\n\n\n\nContainerization at Scale: Challenges and Solutions\n\n\n\nContainers\n\n\nMicroservices\n\n\nSRE\n\n\nScaling\n\n\n\nDeep dive into scaling microservices efficiently with cost optimization strategies\n\n\n\nMay 4, 2024\n\n\n\n\n\nlocation\n\n\nBengaluru, India\n\n\n\n\nvenue\n\n\nTata 1mg Tech center, Union St, Bangalore SRE May Meetup\n\n\n\n\n\n\n\n\n\n\n\n\nImportance of DevOps in Modern Software Development Lifecycle\n\n\n\nDevOps\n\n\nSoftware Development\n\n\nBest Practices\n\n\n\nUnderstanding the critical role of DevOps in contemporary software development with practical demonstrations\n\n\n\nDecember 22, 2023\n\n\n\n\n\nlocation\n\n\nKolkata, India\n\n\n\n\nvenue\n\n\nGoogle DevFest Kolkata 2023\n\n\n\n\n\n\n\n\n\n\n\n\nTelecom Churn Prediction\n\n\n\nMachine Learning\n\n\nTelecom\n\n\nAnalytics\n\n\n\nAnalyzing customer-level data to predict and reduce churn in high-value telecom customers\n\n\n\nJuly 11, 2023\n\n\n\n\n\nlocation\n\n\nLondon, UK\n\n\n\n\nvenue\n\n\nInternational Institute of Information Technology\n\n\n\n\n\n\n\n\n\n\n\n\nLead Scoring Model for Education Institute\n\n\n\nMachine Learning\n\n\nEducation\n\n\nCase Study\n\n\n\nA comprehensive approach to developing a lead scoring model achieving 80% conversion rate for educational institutions\n\n\n\nMay 23, 2023\n\n\n\n\n\nlocation\n\n\nBangalore, India\n\n\n\n\nvenue\n\n\nInternational Institute of Information Technology\n\n\n\n\n\n\n\n\n\nNo matching items"
+    "text": "I regularly speak at tech conferences and meetups about Cloud Computing, DevOps, and Data Engineering. Here are some of my recent talks and presentations.\n\n\n\n\n\n\n   \n     \n     \n       Order By\n       Default\n         \n          Title\n        \n         \n          Date - Oldest\n        \n         \n          Date - Newest\n        \n     \n  \n    \n      \n      \n    \n\n\n\n\n\n\n\nBuilding Intelligent Assistants with Model Context Protocol\n\n\n\nAI\n\n\nModel Context Protocol\n\n\nIntelligent Assistants\n\n\nMCP\n\n\n\nExtending AI Capabilities Beyond Chat Interfaces through Model Context Protocol\n\n\n\nApril 4, 2025\n\n\n\n\n\nlocation\n\n\nBengaluru, India\n\n\n\n\nvenue\n\n\nBuild with AI Workshop Series at Amity University Bengaluru\n\n\n\n\n\n\n\n\n\n\n\n\nPolicy Based Control for Cloud Native Environment with OPA\n\n\n\nKubernetes\n\n\nSecurity\n\n\nOPA\n\n\nCloud Native\n\n\n\nExploring policy-based control using Open Policy Agent and Gatekeeper in Kubernetes environments\n\n\n\nAugust 24, 2024\n\n\n\n\n\nlocation\n\n\nBengaluru, India\n\n\n\n\nvenue\n\n\nDocker DevTools Day 3.0 at Wissen Infotech\n\n\n\n\n\n\n\n\n\n\n\n\nIntroduction to KEDA\n\n\n\nKubernetes\n\n\nKEDA\n\n\nAutoscaling\n\n\nCloud Native\n\n\n\nA comprehensive overview of Kubernetes Event-Driven Autoscaling, covering architecture, implementation, and real-world use cases\n\n\n\nMay 18, 2024\n\n\n\n\n\nlocation\n\n\nBengaluru, India\n\n\n\n\nvenue\n\n\nKubetools Day 2.0 at Guidewire Software\n\n\n\n\n\n\n\n\n\n\n\n\nContainerization at Scale: Kubernetes Deep Dive\n\n\n\nKubernetes\n\n\nContainers\n\n\nScaling\n\n\nCost Optimization\n\n\n\nAdvanced strategies for scaling Kubernetes beyond basic autoscaling with cost optimization\n\n\n\nMay 11, 2024\n\n\n\n\n\nlocation\n\n\nBengaluru, India\n\n\n\n\nvenue\n\n\nRed Hat India Pvt. Ltd, Kubernetes Bangalore May Meetup\n\n\n\n\n\n\n\n\n\n\n\n\nContainerization at Scale: Challenges and Solutions\n\n\n\nContainers\n\n\nMicroservices\n\n\nSRE\n\n\nScaling\n\n\n\nDeep dive into scaling microservices efficiently with cost optimization strategies\n\n\n\nMay 4, 2024\n\n\n\n\n\nlocation\n\n\nBengaluru, India\n\n\n\n\nvenue\n\n\nTata 1mg Tech center, Union St, Bangalore SRE May Meetup\n\n\n\n\n\n\n\n\n\n\n\n\nImportance of DevOps in Modern Software Development Lifecycle\n\n\n\nDevOps\n\n\nSoftware Development\n\n\nBest Practices\n\n\n\nUnderstanding the critical role of DevOps in contemporary software development with practical demonstrations\n\n\n\nDecember 22, 2023\n\n\n\n\n\nlocation\n\n\nKolkata, India\n\n\n\n\nvenue\n\n\nGoogle DevFest Kolkata 2023\n\n\n\n\n\n\n\n\n\n\n\n\nTelecom Churn Prediction\n\n\n\nMachine Learning\n\n\nTelecom\n\n\nAnalytics\n\n\n\nAnalyzing customer-level data to predict and reduce churn in high-value telecom customers\n\n\n\nJuly 11, 2023\n\n\n\n\n\nlocation\n\n\nLondon, UK\n\n\n\n\nvenue\n\n\nInternational Institute of Information Technology\n\n\n\n\n\n\n\n\n\n\n\n\nLead Scoring Model for Education Institute\n\n\n\nMachine Learning\n\n\nEducation\n\n\nCase Study\n\n\n\nA comprehensive approach to developing a lead scoring model achieving 80% conversion rate for educational institutions\n\n\n\nMay 23, 2023\n\n\n\n\n\nlocation\n\n\nBangalore, India\n\n\n\n\nvenue\n\n\nInternational Institute of Information Technology\n\n\n\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "posts/2024-01-19-exploring-azure-storage-services.html",
@@ -448,11 +448,88 @@
     "text": "Get the Slides here\n🔗 Demo Link: You can check out the demo on\nGitHub 📦\nYoutube ▶️\nEvent Link\nKubernetes has democratized the deployment and management of containerized applications, making it accessible even at smaller scales with minimal complexity. However, scaling Kubernetes to manage millions of workloads introduces a new set of challenges that go far beyond the capabilities of basic Horizontal Pod Autoscaler (HPA) and Vertical Pod Autoscaler (VPA). This presentation explores advanced strategies for scaling Kubernetes efficiently and effectively while maintaining a keen eye on cost optimization."
   },
   {
-    "objectID": "talks/2023-12-22-devops-importance.html",
-    "href": "talks/2023-12-22-devops-importance.html",
-    "title": "Importance of DevOps in Modern Software Development Lifecycle",
+    "objectID": "talks/2025-04-04-building-intelligent-assistants-mcp.html",
+    "href": "talks/2025-04-04-building-intelligent-assistants-mcp.html",
+    "title": "Building Intelligent Assistants with Model Context Protocol",
     "section": "",
-    "text": "Get the Slides here\nCode used in Demo here\nIn the presentation “Importance of DevOps in Modern Software Development Lifecycle” by Kunal Das, the focus is on the critical role of DevOps in contemporary software development. The presentation elaborates on the definition and core principles of DevOps, highlighting its significance in integrating development and operations for efficient workflow. It also provides an insightful look into DevSecOps tools, underscoring the importance of security in the DevOps process. Furthermore, it covers aspects of Continuous Integration and Deployment, discussing the benefits and challenges of DevOps implementation. The session concludes with a demonstration and a Q&A segment, emphasizing its practical application in the industry."
+    "text": "This workshop focuses on building intelligent assistants using the Model Context Protocol (MCP), going beyond traditional chat interfaces to create more powerful AI-powered applications."
+  },
+  {
+    "objectID": "talks/2025-04-04-building-intelligent-assistants-mcp.html#agenda",
+    "href": "talks/2025-04-04-building-intelligent-assistants-mcp.html#agenda",
+    "title": "Building Intelligent Assistants with Model Context Protocol",
+    "section": "Agenda",
+    "text": "Agenda\n\nIntroduction to Model Context Protocol\n\nUnderstanding the limitations of current chat interfaces\nHow MCP extends AI capabilities\nArchitecture and design principles\n\nImplementing MCP Servers\n\nCore components of an MCP server\nBuilding context-aware AI assistants\nIntegration with different AI models and services\n\nBuilding Applications with MCP\n\nExtending AI capabilities into various applications\nCreating domain-specific assistants\nCustom tools and function calling\n\nHands-on Workshop\n\nSetting up an MCP server\nImplementing context providers\nBuilding and testing intelligent assistants\nExtending functionality with custom tools\n\nBest Practices and Future Directions\n\nPerformance optimization\nSecurity considerations\nEmerging trends in AI assistants\nIntegration with enterprise systems"
+  },
+  {
+    "objectID": "talks/2025-04-04-building-intelligent-assistants-mcp.html#resources",
+    "href": "talks/2025-04-04-building-intelligent-assistants-mcp.html#resources",
+    "title": "Building Intelligent Assistants with Model Context Protocol",
+    "section": "Resources",
+    "text": "Resources\n\nPresentation Slides\nDemo Repository\nEvent Details"
+  },
+  {
+    "objectID": "talks/2024-08-24-policy-control-opa.html",
+    "href": "talks/2024-08-24-policy-control-opa.html",
+    "title": "Policy Based Control for Cloud Native Environment with OPA",
+    "section": "",
+    "text": "This presentation focuses on policy-based control for cloud-native environments using Open Policy Agent (OPA) and Gatekeeper, introducing OPA as a general-purpose policy engine and Gatekeeper as its Kubernetes-native implementation."
+  },
+  {
+    "objectID": "talks/2024-08-24-policy-control-opa.html#agenda",
+    "href": "talks/2024-08-24-policy-control-opa.html#agenda",
+    "title": "Policy Based Control for Cloud Native Environment with OPA",
+    "section": "Agenda",
+    "text": "Agenda\n\nIntroduction to Policy Enforcement Challenges\n\nTraditional vs. cloud-native environments\n\nOverview of OPA and Gatekeeper\n\nExplanation of Open Policy Agent (OPA)\nIntroduction to Gatekeeper and its relationship with OPA\nCustom Resource Definitions (CRDs) in Gatekeeper\n\nUsage Scenarios\n\nResource constraints\nSecurity enforcement\nCompliance requirements\nCost optimization\nMulti-tenancy\nBest practices enforcement\n\nChallenges\n\nLearning curve\nPerformance impact\nPolicy management\nIntegration complexity"
+  },
+  {
+    "objectID": "talks/2024-08-24-policy-control-opa.html#resources",
+    "href": "talks/2024-08-24-policy-control-opa.html#resources",
+    "title": "Policy Based Control for Cloud Native Environment with OPA",
+    "section": "Resources",
+    "text": "Resources\n\nPresentation Slides\nDemo Repository\nEvent Details"
+  },
+  {
+    "objectID": "talks/2024-05-04-containerization-scale.html",
+    "href": "talks/2024-05-04-containerization-scale.html",
+    "title": "Containerization at Scale: Challenges and Solutions",
+    "section": "",
+    "text": "Get the Slides here\nLet’s look at scaling microservices at large scale which may involve many problems, involving cost optimization. This talk will also look at many new technologies which can help us scaling efficiently and beyound the usage of HPA or VPA."
+  },
+  {
+    "objectID": "talks/2023-05-23-lead-scoring-model.html",
+    "href": "talks/2023-05-23-lead-scoring-model.html",
+    "title": "Lead Scoring Model for Education Institute",
+    "section": "",
+    "text": "Project Overview\nApproach\n\nData Understanding and Cleaning\nExploratory Data Analysis (EDA)\nFeature Engineering\nModel Building and Evaluation\n\nKey Learnings\nConclusion\nFurther Reading\nCo-Authors\n\n\n\nThis project involves developing a lead scoring model for X Education to identify potential customers with a higher likelihood of conversion. The goal is to achieve a lead conversion rate of around 80%.\n\n\n\nThe approach was divided into four key stages:\n\nData Understanding and Cleaning\nExploratory Data Analysis (EDA)\nFeature Engineering\nModel Building and Evaluation\n\n\n\n\nObjective: Understanding the dataset’s structure and cleaning the data.\nTasks Performed:\n\nHandling missing values.\nDropping irrelevant columns.\nAddressing data inconsistencies.\n\n\n\n\n\n\nObjective: Gaining insights through visualizations and statistical summaries.\nKey Findings:\n\nImportance of features like total visits, time spent on the website, and page views in predicting conversion.\n\n\n\n\n\n\nObjective: Enhancing the model’s predictive power through feature transformation and creation.\nTasks Performed:\n\nEncoding categorical variables.\nScaling numerical features.\nHandling outliers.\nSplitting the dataset into training and testing sets.\n\n\n\n\n\n\nModel Used: Logistic Regression.\nPerformance:\n\nAchieved an accuracy of approximately 79.05% on the test set.\nEvaluated using sensitivity, specificity, precision, and the precision-recall curve.\nIdentified areas for improvement in recall.\n\n\n\n\n\n\n\nData Preprocessing: Essential for accurate modeling.\nExploratory Data Analysis (EDA): Crucial for understanding the dataset and feature selection.\nFeature Engineering: Significantly impacts model performance.\nModel Selection and Evaluation: Vital for achieving desired outcomes.\nInterpretability and Explainability: Important for providing actionable insights.\nPrecision-Recall Trade-off: Aids in selecting an optimal threshold for the model.\n\n\n\n\nThe project successfully developed a lead scoring model for X Education, employing a systematic approach and best practices in data preprocessing and modeling."
+  },
+  {
+    "objectID": "talks/2023-05-23-lead-scoring-model.html#project-overview",
+    "href": "talks/2023-05-23-lead-scoring-model.html#project-overview",
+    "title": "Lead Scoring Model for Education Institute",
+    "section": "",
+    "text": "This project involves developing a lead scoring model for X Education to identify potential customers with a higher likelihood of conversion. The goal is to achieve a lead conversion rate of around 80%."
+  },
+  {
+    "objectID": "talks/2023-05-23-lead-scoring-model.html#approach",
+    "href": "talks/2023-05-23-lead-scoring-model.html#approach",
+    "title": "Lead Scoring Model for Education Institute",
+    "section": "",
+    "text": "The approach was divided into four key stages:\n\nData Understanding and Cleaning\nExploratory Data Analysis (EDA)\nFeature Engineering\nModel Building and Evaluation\n\n\n\n\nObjective: Understanding the dataset’s structure and cleaning the data.\nTasks Performed:\n\nHandling missing values.\nDropping irrelevant columns.\nAddressing data inconsistencies.\n\n\n\n\n\n\nObjective: Gaining insights through visualizations and statistical summaries.\nKey Findings:\n\nImportance of features like total visits, time spent on the website, and page views in predicting conversion.\n\n\n\n\n\n\nObjective: Enhancing the model’s predictive power through feature transformation and creation.\nTasks Performed:\n\nEncoding categorical variables.\nScaling numerical features.\nHandling outliers.\nSplitting the dataset into training and testing sets.\n\n\n\n\n\n\nModel Used: Logistic Regression.\nPerformance:\n\nAchieved an accuracy of approximately 79.05% on the test set.\nEvaluated using sensitivity, specificity, precision, and the precision-recall curve.\nIdentified areas for improvement in recall."
+  },
+  {
+    "objectID": "talks/2023-05-23-lead-scoring-model.html#key-learnings",
+    "href": "talks/2023-05-23-lead-scoring-model.html#key-learnings",
+    "title": "Lead Scoring Model for Education Institute",
+    "section": "",
+    "text": "Data Preprocessing: Essential for accurate modeling.\nExploratory Data Analysis (EDA): Crucial for understanding the dataset and feature selection.\nFeature Engineering: Significantly impacts model performance.\nModel Selection and Evaluation: Vital for achieving desired outcomes.\nInterpretability and Explainability: Important for providing actionable insights.\nPrecision-Recall Trade-off: Aids in selecting an optimal threshold for the model."
+  },
+  {
+    "objectID": "talks/2023-05-23-lead-scoring-model.html#conclusion",
+    "href": "talks/2023-05-23-lead-scoring-model.html#conclusion",
+    "title": "Lead Scoring Model for Education Institute",
+    "section": "",
+    "text": "The project successfully developed a lead scoring model for X Education, employing a systematic approach and best practices in data preprocessing and modeling."
   },
   {
     "objectID": "talks/2023-07-11-telecom-churn-prediction.html",
@@ -539,67 +616,11 @@
     "text": "Kunal\nCo-Author: Yogesh Kumar Pati"
   },
   {
-    "objectID": "talks/2023-05-23-lead-scoring-model.html",
-    "href": "talks/2023-05-23-lead-scoring-model.html",
-    "title": "Lead Scoring Model for Education Institute",
+    "objectID": "talks/2023-12-22-devops-importance.html",
+    "href": "talks/2023-12-22-devops-importance.html",
+    "title": "Importance of DevOps in Modern Software Development Lifecycle",
     "section": "",
-    "text": "Project Overview\nApproach\n\nData Understanding and Cleaning\nExploratory Data Analysis (EDA)\nFeature Engineering\nModel Building and Evaluation\n\nKey Learnings\nConclusion\nFurther Reading\nCo-Authors\n\n\n\nThis project involves developing a lead scoring model for X Education to identify potential customers with a higher likelihood of conversion. The goal is to achieve a lead conversion rate of around 80%.\n\n\n\nThe approach was divided into four key stages:\n\nData Understanding and Cleaning\nExploratory Data Analysis (EDA)\nFeature Engineering\nModel Building and Evaluation\n\n\n\n\nObjective: Understanding the dataset’s structure and cleaning the data.\nTasks Performed:\n\nHandling missing values.\nDropping irrelevant columns.\nAddressing data inconsistencies.\n\n\n\n\n\n\nObjective: Gaining insights through visualizations and statistical summaries.\nKey Findings:\n\nImportance of features like total visits, time spent on the website, and page views in predicting conversion.\n\n\n\n\n\n\nObjective: Enhancing the model’s predictive power through feature transformation and creation.\nTasks Performed:\n\nEncoding categorical variables.\nScaling numerical features.\nHandling outliers.\nSplitting the dataset into training and testing sets.\n\n\n\n\n\n\nModel Used: Logistic Regression.\nPerformance:\n\nAchieved an accuracy of approximately 79.05% on the test set.\nEvaluated using sensitivity, specificity, precision, and the precision-recall curve.\nIdentified areas for improvement in recall.\n\n\n\n\n\n\n\nData Preprocessing: Essential for accurate modeling.\nExploratory Data Analysis (EDA): Crucial for understanding the dataset and feature selection.\nFeature Engineering: Significantly impacts model performance.\nModel Selection and Evaluation: Vital for achieving desired outcomes.\nInterpretability and Explainability: Important for providing actionable insights.\nPrecision-Recall Trade-off: Aids in selecting an optimal threshold for the model.\n\n\n\n\nThe project successfully developed a lead scoring model for X Education, employing a systematic approach and best practices in data preprocessing and modeling."
-  },
-  {
-    "objectID": "talks/2023-05-23-lead-scoring-model.html#project-overview",
-    "href": "talks/2023-05-23-lead-scoring-model.html#project-overview",
-    "title": "Lead Scoring Model for Education Institute",
-    "section": "",
-    "text": "This project involves developing a lead scoring model for X Education to identify potential customers with a higher likelihood of conversion. The goal is to achieve a lead conversion rate of around 80%."
-  },
-  {
-    "objectID": "talks/2023-05-23-lead-scoring-model.html#approach",
-    "href": "talks/2023-05-23-lead-scoring-model.html#approach",
-    "title": "Lead Scoring Model for Education Institute",
-    "section": "",
-    "text": "The approach was divided into four key stages:\n\nData Understanding and Cleaning\nExploratory Data Analysis (EDA)\nFeature Engineering\nModel Building and Evaluation\n\n\n\n\nObjective: Understanding the dataset’s structure and cleaning the data.\nTasks Performed:\n\nHandling missing values.\nDropping irrelevant columns.\nAddressing data inconsistencies.\n\n\n\n\n\n\nObjective: Gaining insights through visualizations and statistical summaries.\nKey Findings:\n\nImportance of features like total visits, time spent on the website, and page views in predicting conversion.\n\n\n\n\n\n\nObjective: Enhancing the model’s predictive power through feature transformation and creation.\nTasks Performed:\n\nEncoding categorical variables.\nScaling numerical features.\nHandling outliers.\nSplitting the dataset into training and testing sets.\n\n\n\n\n\n\nModel Used: Logistic Regression.\nPerformance:\n\nAchieved an accuracy of approximately 79.05% on the test set.\nEvaluated using sensitivity, specificity, precision, and the precision-recall curve.\nIdentified areas for improvement in recall."
-  },
-  {
-    "objectID": "talks/2023-05-23-lead-scoring-model.html#key-learnings",
-    "href": "talks/2023-05-23-lead-scoring-model.html#key-learnings",
-    "title": "Lead Scoring Model for Education Institute",
-    "section": "",
-    "text": "Data Preprocessing: Essential for accurate modeling.\nExploratory Data Analysis (EDA): Crucial for understanding the dataset and feature selection.\nFeature Engineering: Significantly impacts model performance.\nModel Selection and Evaluation: Vital for achieving desired outcomes.\nInterpretability and Explainability: Important for providing actionable insights.\nPrecision-Recall Trade-off: Aids in selecting an optimal threshold for the model."
-  },
-  {
-    "objectID": "talks/2023-05-23-lead-scoring-model.html#conclusion",
-    "href": "talks/2023-05-23-lead-scoring-model.html#conclusion",
-    "title": "Lead Scoring Model for Education Institute",
-    "section": "",
-    "text": "The project successfully developed a lead scoring model for X Education, employing a systematic approach and best practices in data preprocessing and modeling."
-  },
-  {
-    "objectID": "talks/2024-05-04-containerization-scale.html",
-    "href": "talks/2024-05-04-containerization-scale.html",
-    "title": "Containerization at Scale: Challenges and Solutions",
-    "section": "",
-    "text": "Get the Slides here\nLet’s look at scaling microservices at large scale which may involve many problems, involving cost optimization. This talk will also look at many new technologies which can help us scaling efficiently and beyound the usage of HPA or VPA."
-  },
-  {
-    "objectID": "talks/2024-08-24-policy-control-opa.html",
-    "href": "talks/2024-08-24-policy-control-opa.html",
-    "title": "Policy Based Control for Cloud Native Environment with OPA",
-    "section": "",
-    "text": "This presentation focuses on policy-based control for cloud-native environments using Open Policy Agent (OPA) and Gatekeeper, introducing OPA as a general-purpose policy engine and Gatekeeper as its Kubernetes-native implementation."
-  },
-  {
-    "objectID": "talks/2024-08-24-policy-control-opa.html#agenda",
-    "href": "talks/2024-08-24-policy-control-opa.html#agenda",
-    "title": "Policy Based Control for Cloud Native Environment with OPA",
-    "section": "Agenda",
-    "text": "Agenda\n\nIntroduction to Policy Enforcement Challenges\n\nTraditional vs. cloud-native environments\n\nOverview of OPA and Gatekeeper\n\nExplanation of Open Policy Agent (OPA)\nIntroduction to Gatekeeper and its relationship with OPA\nCustom Resource Definitions (CRDs) in Gatekeeper\n\nUsage Scenarios\n\nResource constraints\nSecurity enforcement\nCompliance requirements\nCost optimization\nMulti-tenancy\nBest practices enforcement\n\nChallenges\n\nLearning curve\nPerformance impact\nPolicy management\nIntegration complexity"
-  },
-  {
-    "objectID": "talks/2024-08-24-policy-control-opa.html#resources",
-    "href": "talks/2024-08-24-policy-control-opa.html#resources",
-    "title": "Policy Based Control for Cloud Native Environment with OPA",
-    "section": "Resources",
-    "text": "Resources\n\nPresentation Slides\nDemo Repository\nEvent Details"
+    "text": "Get the Slides here\nCode used in Demo here\nIn the presentation “Importance of DevOps in Modern Software Development Lifecycle” by Kunal Das, the focus is on the critical role of DevOps in contemporary software development. The presentation elaborates on the definition and core principles of DevOps, highlighting its significance in integrating development and operations for efficient workflow. It also provides an insightful look into DevSecOps tools, underscoring the importance of security in the DevOps process. Furthermore, it covers aspects of Continuous Integration and Deployment, discussing the benefits and challenges of DevOps implementation. The session concludes with a demonstration and a Q&A segment, emphasizing its practical application in the industry."
   },
   {
     "objectID": "talks/2024-05-18-introduction-to-keda.html",
