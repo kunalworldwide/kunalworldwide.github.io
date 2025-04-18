@@ -10,7 +10,81 @@
 <atom:link href="https://kunaldas.dev/talks.xml" rel="self" type="application/rss+xml"/>
 <description>DevOps &amp; Cloud Technology Blog</description>
 <generator>quarto-1.6.39</generator>
-<lastBuildDate>Fri, 04 Apr 2025 00:00:00 GMT</lastBuildDate>
+<lastBuildDate>Sat, 12 Apr 2025 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>Kubernetes-Free Microservices: The Azure Container Apps Advantage</title>
+  <link>https://kunaldas.dev/talks/2025-04-12-kubernetes-free-microservices.html</link>
+  <description><![CDATA[ 
+
+
+
+
+<p>This talk explores how Azure Container Apps enables developers to build and deploy microservices without the operational complexity of managing Kubernetes clusters.</p>
+<section id="agenda" class="level2">
+<h2 class="anchored" data-anchor-id="agenda">Agenda</h2>
+<ol type="1">
+<li>Challenges with Traditional Kubernetes Deployments
+<ul>
+<li>Infrastructure overhead</li>
+<li>Management complexity</li>
+<li>Learning curve challenges</li>
+<li>Cost considerations</li>
+</ul></li>
+<li>Introduction to Azure Container Apps
+<ul>
+<li>Architecture and design principles</li>
+<li>Relationship to Kubernetes and KEDA</li>
+<li>Built-in features and capabilities</li>
+</ul></li>
+<li>Key Features and Benefits
+<ul>
+<li>Serverless containers with auto-scaling</li>
+<li>Traffic management with revisions and ingress</li>
+<li>Microservice patterns support</li>
+<li>Built-in service discovery</li>
+<li>Event-driven architecture support</li>
+</ul></li>
+<li>Use Cases and Scenarios
+<ul>
+<li>API backends</li>
+<li>Background processing</li>
+<li>Event-driven microservices</li>
+<li>Migration paths from Kubernetes</li>
+</ul></li>
+<li>Deployment and Operations
+<ul>
+<li>CI/CD integration</li>
+<li>Monitoring and observability</li>
+<li>Security best practices</li>
+<li>Cost optimization strategies</li>
+</ul></li>
+<li>Live Demo: Building and Deploying Microservices
+<ul>
+<li>Setting up a multi-container application</li>
+<li>Implementing auto-scaling</li>
+<li>Managing traffic and revisions</li>
+<li>Integration with other Azure services</li>
+</ul></li>
+</ol>
+</section>
+<section id="resources" class="level2">
+<h2 class="anchored" data-anchor-id="resources">Resources</h2>
+<ul>
+<li><a href="https://youtu.be/Nom9JtjZ8Js">Presentation Recording</a></li>
+<li><a href="https://www.meetup.com/microsoft-reactor-bengaluru/events/307121032/">Event Details</a></li>
+</ul>
+
+
+</section>
+
+ ]]></description>
+  <category>Azure</category>
+  <category>Container Apps</category>
+  <category>Microservices</category>
+  <category>Cloud Native</category>
+  <guid>https://kunaldas.dev/talks/2025-04-12-kubernetes-free-microservices.html</guid>
+  <pubDate>Sat, 12 Apr 2025 00:00:00 GMT</pubDate>
+</item>
 <item>
   <title>Building Intelligent Assistants with Model Context Protocol</title>
   <link>https://kunaldas.dev/talks/2025-04-04-building-intelligent-assistants-mcp.html</link>
