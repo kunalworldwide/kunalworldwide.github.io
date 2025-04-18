@@ -73,10 +73,6 @@ jobs:
         if: github.event_name != 'pull_request'
         uses: actions/configure-pages@v3
 
-      # Add the required artifact action first (v3)
-      - name: Set up artifact tools
-        uses: actions/upload-artifact@v3
-
       - name: Upload pages artifact
         if: github.event_name != 'pull_request'
         uses: actions/upload-pages-artifact@v2
@@ -84,7 +80,7 @@ jobs:
           path: mywebsite/_site  
 
       - name: Upload build artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v2
         if: always()
         with:
           name: website-build-artifacts
