@@ -79,6 +79,16 @@ jobs:
         with:
           path: mywebsite/_site  
 
+      # Adding explicit reference to upload-artifact action that might be used by other steps
+      - name: Upload general artifacts
+        uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: website-build-artifacts
+          path: mywebsite/_site
+          retention-days: 5
+          if-no-files-found: ignore
+
       - name: Deploy to GitHub Pages
         if: github.event_name != 'pull_request'
         uses: actions/deploy-pages@v2
