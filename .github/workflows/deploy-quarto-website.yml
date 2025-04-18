@@ -2,9 +2,9 @@ name: Deploy Quarto Website
 
 on:
   push:
-    branches: [ gh-pages ]
+    branches: [ main ]  # Changed from gh-pages to main
   pull_request:
-    branches: [ gh-pages ]
+    branches: [ main ]  # Changed from gh-pages to main
   workflow_dispatch:
 
 # You need these permissions to publish to GitHub pages
