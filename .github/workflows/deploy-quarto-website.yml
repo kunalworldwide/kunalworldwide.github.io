@@ -7,23 +7,27 @@ on:
     branches: [ gh-pages ]
   workflow_dispatch:
 
+# You need these permissions to publish to GitHub pages
+permissions: 
+  contents: write
+  pages: write
+
 jobs:
   build-deploy:
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      pages: write
-      id-token: write
     steps:
       - name: Check out repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Set up Quarto
         uses: quarto-dev/quarto-actions/setup@v2
         with:
           version: '1.6.39'
+          # To install LaTeX if needed
+          # tinytex: true
 
-      # - name: Install R
+      # Uncomment if you need R
+      # - name: Setup R
       #   uses: r-lib/actions/setup-r@v2
       #   with:
       #     r-version: '4.2.0'
@@ -31,20 +35,6 @@ jobs:
       # - name: Install R Dependencies
       #   run: |
       #     install.packages(c(
-      #       # 'base64enc',
-      #       # 'bslib',
-      #       # 'cachem',
-      #       # 'cli',
-      #       # 'digest',
-      #       # 'evaluate',
-      #       # 'fastmap',
-      #       # 'fontawesome',
-      #       # 'fs',
-      #       # 'glue',
-      #       # 'highr',
-      #       # 'htmltools',
-      #       # 'jquerylib',
-      #       # 'jsonlite',
       #       'knitr',
       #       'lifecycle',
       #       'magrittr',
@@ -67,27 +57,12 @@ jobs:
       - name: Render Quarto Project
         uses: quarto-dev/quarto-actions/render@v2
         with:
-          path: mywebsite/ 
+          path: mywebsite/
 
-      - name: Setup Pages
-        if: github.event_name != 'pull_request'
-        uses: actions/configure-pages@v3
-
-      - name: Upload pages artifact
-        if: github.event_name != 'pull_request'
-        uses: actions/upload-pages-artifact@v2
+      - name: Publish to GitHub Pages (and render)
+        uses: quarto-dev/quarto-actions/publish@v2
         with:
-          path: mywebsite/_site  
-
-      - name: Upload build artifacts
-        uses: actions/upload-artifact@v2
-        if: always()
-        with:
-          name: website-build-artifacts
-          path: mywebsite/_site
-          retention-days: 5
-          if-no-files-found: ignore
-
-      - name: Deploy to GitHub Pages
-        if: github.event_name != 'pull_request'
-        uses: actions/deploy-pages@v2
+          target: gh-pages
+          path: mywebsite/
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # this secret is always available for github actions
