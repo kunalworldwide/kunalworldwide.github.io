@@ -1,7 +1,8 @@
 [
   {
-    "listing": "/index.html",
+    "listing": "/posts.html",
     "items": [
+      "/posts/2025-06-07-azure-containerapps-handson.html",
       "/posts/2024-12-06-gpu-workloads-kubernetes.html",
       "/posts/2024-10-03-python-build-validation-pipeline.html",
       "/posts/2024-01-19-exploring-azure-storage-services.html",
@@ -32,8 +33,9 @@
     ]
   },
   {
-    "listing": "/posts.html",
+    "listing": "/index.html",
     "items": [
+      "/posts/2025-06-07-azure-containerapps-handson.html",
       "/posts/2024-12-06-gpu-workloads-kubernetes.html",
       "/posts/2024-10-03-python-build-validation-pipeline.html",
       "/posts/2024-01-19-exploring-azure-storage-services.html",
