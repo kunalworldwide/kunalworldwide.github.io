@@ -3,6 +3,7 @@ title: "Azure Container Apps: Your Complete 2025 Guide to Serverless Container D
 description: "A comprehensive, hands-on guide to Azure Container Apps, including production best practices, migration strategies, and a real-world demo."
 date: "2025-06-07"
 categories: [Azure, Container Apps, Serverless, Cloud]
+image: "https://miro.medium.com/v2/resize:fit:1400/format:webp/1*0gtLX28EGPnAMoiX1qfSvQ.png" 
 toc: true
 reading-time: true
 ---
@@ -10,7 +11,12 @@ reading-time: true
 
 # Azure Container Apps: Your Complete 2025 Guide to Serverless Container Deployment
 
-*By Kunal Das*
+
+![Kunal Das, Author](https://miro.medium.com/v2/resize:fill:44:44/1*kfaefcgQPHrPsNobjuiiSg.jpeg)
+
+
+
+[image](https://miro.medium.com/v2/resize:fit:1400/format:webp/1*0gtLX28EGPnAMoiX1qfSvQ.png)
 
 
 - [Introduction: Why I'm Excited About Azure Container Apps ](#introduction-why-im-excited-about-azure-container-apps)
@@ -62,6 +68,9 @@ The KEDA integration deserves special mention because it's something I use exten
 The scale-to-zero default configuration represents something I consider a paradigm shift in container economics. Traditional platforms charge you for idle resources - those containers sitting around waiting for traffic. With ACA, when there's no traffic, there's no cost. I've seen this feature reduce hosting costs by 60-80% for applications with variable traffic patterns, and that's not marketing hype - those are real numbers from production workloads I manage.
 
 ## Revolutionary Features I've Been Testing in 2025 
+
+[image](https://miro.medium.com/v2/resize:fit:1400/format:webp/1*kYppHhWjG8WQBOa8T6_B_Q.png)
+
 
 This year has been particularly exciting for Azure Container Apps, and I've had the opportunity to test several groundbreaking features that fundamentally change what's possible with serverless containers.
 
@@ -149,6 +158,9 @@ Migration success factors I've identified through experience include thorough de
 Now let's get practical. I want to walk you through deploying a real application that demonstrates Azure Container Apps capabilities in action. We'll use the Beautiful Quotes App, which I built specifically to showcase modern web application patterns including dynamic content, API integration, and responsive design.
 
 The complete source code and deployment instructions are available in my [Azure Container Apps Demo repository](https://github.com/kunalworldwide/AzureContainerAppsDemo), and I encourage you to follow along. If you prefer visual learning, check out my [detailed video walkthrough](https://www.youtube.com/watch?v=Nom9JtjZ8Js) where I demonstrate these concepts step by step.
+
+[image](https://miro.medium.com/v2/resize:fit:1200/format:webp/0*9Ms4HObMzP1gyhsc)
+
 
 ### Understanding What We're Building
 
