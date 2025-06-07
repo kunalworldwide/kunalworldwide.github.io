@@ -16,7 +16,7 @@ reading-time: true
 
 
 
-[image](https://miro.medium.com/v2/resize:fit:1400/format:webp/1*0gtLX28EGPnAMoiX1qfSvQ.png)
+![image](https://miro.medium.com/v2/resize:fit:1400/format:webp/1*0gtLX28EGPnAMoiX1qfSvQ.png)
 
 
 - [Introduction: Why I'm Excited About Azure Container Apps ](#introduction-why-im-excited-about-azure-container-apps)
@@ -69,7 +69,7 @@ The scale-to-zero default configuration represents something I consider a paradi
 
 ## Revolutionary Features I've Been Testing in 2025 
 
-[image](https://miro.medium.com/v2/resize:fit:1400/format:webp/1*kYppHhWjG8WQBOa8T6_B_Q.png)
+![image](https://miro.medium.com/v2/resize:fit:1400/format:webp/1*kYppHhWjG8WQBOa8T6_B_Q.png)
 
 
 This year has been particularly exciting for Azure Container Apps, and I've had the opportunity to test several groundbreaking features that fundamentally change what's possible with serverless containers.
@@ -159,7 +159,7 @@ Now let's get practical. I want to walk you through deploying a real application
 
 The complete source code and deployment instructions are available in my [Azure Container Apps Demo repository](https://github.com/kunalworldwide/AzureContainerAppsDemo), and I encourage you to follow along. If you prefer visual learning, check out my [detailed video walkthrough](https://www.youtube.com/watch?v=Nom9JtjZ8Js) where I demonstrate these concepts step by step.
 
-[image](https://miro.medium.com/v2/resize:fit:1200/format:webp/0*9Ms4HObMzP1gyhsc)
+![image](https://miro.medium.com/v2/resize:fit:1200/format:webp/0*9Ms4HObMzP1gyhsc)
 
 
 ### Understanding What We're Building
