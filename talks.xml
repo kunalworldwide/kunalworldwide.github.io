@@ -10,7 +10,27 @@
 <atom:link href="https://kunaldas.dev/talks.xml" rel="self" type="application/rss+xml"/>
 <description>DevOps &amp; Cloud Technology Blog</description>
 <generator>quarto-1.6.39</generator>
-<lastBuildDate>Sun, 27 Jul 2025 00:00:00 GMT</lastBuildDate>
+<lastBuildDate>Sat, 23 Aug 2025 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>The Future of Kubernetes: AI-Driven Management</title>
+  <link>https://kunaldas.dev/talks/2025-08-23-future-of-kubernetes-ai-driven-management.html</link>
+  <description><![CDATA[ 
+
+
+
+
+
+
+
+ ]]></description>
+  <category>Kubernetes</category>
+  <category>AI</category>
+  <category>Cloud Infrastructure</category>
+  <category>Automation</category>
+  <category>DevOps</category>
+  <guid>https://kunaldas.dev/talks/2025-08-23-future-of-kubernetes-ai-driven-management.html</guid>
+  <pubDate>Sat, 23 Aug 2025 00:00:00 GMT</pubDate>
+</item>
 <item>
   <title>The Future of Kubernetes: AI-Driven Management</title>
   <link>https://kunaldas.dev/talks/2025-07-27-future-of-kubernetes-ai-driven-management.html</link>
