@@ -3,7 +3,7 @@ title: "The Future of Kubernetes: AI-Driven Management"
 description: "Explore how AI is redefining Kubernetes management for scalability and efficiency."
 date: "2025-07-27"
 location: "Bengaluru, India"
-venue: "Cloud & Compute - AI"
+venue: "Couchbase Office, Bengaluru"
 categories: [Kubernetes, AI, "Cloud Infrastructure", Automation, DevOps]
 slides: "https://1drv.ms/b/c/28810acff77e4c54/EUYuj40R9M1MlKQPgpx4fwIBqNzOhcfqyAefvVZNSytqDg?e=e7SNcY"
 event: "https://lu.ma/izmtx4lj"
