@@ -1,6 +1,6 @@
 [
   {
-    "listing": "/posts.html",
+    "listing": "/index.html",
     "items": [
       "/posts/2025-06-07-azure-containerapps-handson.html",
       "/posts/2024-12-06-gpu-workloads-kubernetes.html",
@@ -21,6 +21,7 @@
   {
     "listing": "/talks.html",
     "items": [
+      "/talks/2025-07-27-future-of-kubernetes-ai-driven-management.html",
       "/talks/2025-04-16-kubernetes-free-microservices.html",
       "/talks/2025-04-04-building-intelligent-assistants-mcp.html",
       "/talks/2024-08-24-policy-control-opa.html",
@@ -33,7 +34,7 @@
     ]
   },
   {
-    "listing": "/index.html",
+    "listing": "/posts.html",
     "items": [
       "/posts/2025-06-07-azure-containerapps-handson.html",
       "/posts/2024-12-06-gpu-workloads-kubernetes.html",

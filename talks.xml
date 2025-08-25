@@ -10,7 +10,34 @@
 <atom:link href="https://kunaldas.dev/talks.xml" rel="self" type="application/rss+xml"/>
 <description>DevOps &amp; Cloud Technology Blog</description>
 <generator>quarto-1.6.39</generator>
-<lastBuildDate>Wed, 16 Apr 2025 00:00:00 GMT</lastBuildDate>
+<lastBuildDate>Sun, 27 Jul 2025 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>The Future of Kubernetes: AI-Driven Management</title>
+  <link>https://kunaldas.dev/talks/2025-07-27-future-of-kubernetes-ai-driven-management.html</link>
+  <description><![CDATA[ 
+
+
+
+
+<p>Get the <a href="https://1drv.ms/b/c/28810acff77e4c54/EUYuj40R9M1MlKQPgpx4fwIBqNzOhcfqyAefvVZNSytqDg?e=e7SNcY">Slides here</a></p>
+<p><a href="https://lu.ma/izmtx4lj">Event Link</a></p>
+<p>Speakers: Kunal Das (Developer Advocate APAC, CAST AI)</p>
+<p>Co-presenter: Santanu Kumar Das (Sr DevOps Engineer, Optym)</p>
+<p>In today’s rapidly evolving cloud landscape, Kubernetes has become the backbone of modern infrastructure. This keynote explores how artificial intelligence is transforming Kubernetes management, enabling organizations to achieve unprecedented levels of automation, optimization, and resilience.</p>
+<p>Attendees will discover state-of-the-art AI-driven approaches to cluster monitoring, resource allocation, and automated troubleshooting. Through real-world examples, the session highlights how AI can predict workloads, reduce operational overhead, and keep mission-critical applications running smoothly.</p>
+<p>The talk will also discuss challenges such as ensuring trust, scalability, and integration with existing DevOps practices. By the end, participants will gain a strategic view of where Kubernetes and AI are headed—empowering them to architect future-ready cloud platforms.</p>
+
+
+
+ ]]></description>
+  <category>Kubernetes</category>
+  <category>AI</category>
+  <category>Cloud Infrastructure</category>
+  <category>Automation</category>
+  <category>DevOps</category>
+  <guid>https://kunaldas.dev/talks/2025-07-27-future-of-kubernetes-ai-driven-management.html</guid>
+  <pubDate>Sun, 27 Jul 2025 00:00:00 GMT</pubDate>
+</item>
 <item>
   <title>Kubernetes-Free Microservices: The Azure Container Apps Advantage</title>
   <link>https://kunaldas.dev/talks/2025-04-16-kubernetes-free-microservices.html</link>
