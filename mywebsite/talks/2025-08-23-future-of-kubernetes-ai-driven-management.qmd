@@ -7,7 +7,6 @@ categories: [Kubernetes, AI, Cloud Infrastructure, Automation, DevOps]
 slides_url: https://1drv.ms/b/c/28810acff77e4c54/EUvpdMYDijpGq8QT4otohv8BGt3C5Oa59XlDd2ewFRwlpQ?e=ePM5Ev
 event_url:
   - https://konfhub.com/ccdblr25
-  - https://gdg.community.dev/events/details/google-gdg-cloud-bengaluru-presents-google-cloud-community-day-bengaluru-2025/
 description: |
   Explore how AI is redefining Kubernetes management for scalability and efficiency.
 
