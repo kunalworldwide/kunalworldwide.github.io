@@ -1,0 +1,1123 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.6.39">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="dcterms.date" content="2025-06-07">
+<meta name="description" content="A comprehensive, hands-on guide to Azure Container Apps, including production best practices, migration strategies, and a real-world demo.">
+
+<title>Azure Container Apps: Your Complete 2025 Guide to Serverless Container Deployment – Kunal Das</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../assets/icon.png" rel="icon" type="image/png">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-0626ff4d7a71b55c8707dcae1d04a9b6.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-e25cc82807363e79c52e96bc8b7855f1.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-db99aa9d7eb641a422f03e251c00f14f.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-d9d71c5880893e0e44f43f1b7838fb78.min.css" rel="prefetch" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-X8X02516LE"></script>
+
+<script type="text/javascript">
+
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-X8X02516LE', { 'anonymize_ip': true});
+</script>
+
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">Kunal Das</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../about.html"> 
+<span class="menu-text">About Me</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../posts.html"> 
+<span class="menu-text">Blog</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../talks.html"> 
+<span class="menu-text">Talks</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../contact.html"> 
+<span class="menu-text">Contact</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://twitter.com/kunald_official"> <i class="bi bi-twitter" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/kunalworldwide"> <i class="bi bi-github" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://linkedin.com/in/kunaldaskd"> <i class="bi bi-linkedin" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#azure-container-apps-your-complete-2025-guide-to-serverless-container-deployment" id="toc-azure-container-apps-your-complete-2025-guide-to-serverless-container-deployment" class="nav-link active" data-scroll-target="#azure-container-apps-your-complete-2025-guide-to-serverless-container-deployment">Azure Container Apps: Your Complete 2025 Guide to Serverless Container Deployment</a>
+  <ul class="collapse">
+  <li><a href="#introduction-why-im-excited-about-azure-container-apps" id="toc-introduction-why-im-excited-about-azure-container-apps" class="nav-link" data-scroll-target="#introduction-why-im-excited-about-azure-container-apps">Introduction: Why I’m Excited About Azure Container Apps</a></li>
+  <li><a href="#what-makes-azure-container-apps-different-from-everything-else" id="toc-what-makes-azure-container-apps-different-from-everything-else" class="nav-link" data-scroll-target="#what-makes-azure-container-apps-different-from-everything-else">What Makes Azure Container Apps Different From Everything Else</a></li>
+  <li><a href="#revolutionary-features-ive-been-testing-in-2025" id="toc-revolutionary-features-ive-been-testing-in-2025" class="nav-link" data-scroll-target="#revolutionary-features-ive-been-testing-in-2025">Revolutionary Features I’ve Been Testing in 2025</a></li>
+  <li><a href="#real-success-stories-ive-witnessed" id="toc-real-success-stories-ive-witnessed" class="nav-link" data-scroll-target="#real-success-stories-ive-witnessed">Real Success Stories I’ve Witnessed</a></li>
+  <li><a href="#how-aca-stacks-against-the-competition" id="toc-how-aca-stacks-against-the-competition" class="nav-link" data-scroll-target="#how-aca-stacks-against-the-competition">How ACA Stacks Against the Competition</a></li>
+  <li><a href="#understanding-the-pricing-the-good-news" id="toc-understanding-the-pricing-the-good-news" class="nav-link" data-scroll-target="#understanding-the-pricing-the-good-news">Understanding the Pricing (The Good News!)</a></li>
+  <li><a href="#enterprise-integration-that-actually-works" id="toc-enterprise-integration-that-actually-works" class="nav-link" data-scroll-target="#enterprise-integration-that-actually-works">Enterprise Integration That Actually Works</a></li>
+  <li><a href="#migration-strategies-that-wont-break-your-team" id="toc-migration-strategies-that-wont-break-your-team" class="nav-link" data-scroll-target="#migration-strategies-that-wont-break-your-team">Migration Strategies That Won’t Break Your Team</a></li>
+  <li><a href="#hands-on-demo-lets-build-something-together" id="toc-hands-on-demo-lets-build-something-together" class="nav-link" data-scroll-target="#hands-on-demo-lets-build-something-together">Hands-On Demo: Let’s Build Something Together</a>
+  <ul class="collapse">
+  <li><a href="#understanding-what-were-building" id="toc-understanding-what-were-building" class="nav-link" data-scroll-target="#understanding-what-were-building">Understanding What We’re Building</a></li>
+  <li><a href="#setting-up-your-environment" id="toc-setting-up-your-environment" class="nav-link" data-scroll-target="#setting-up-your-environment">Setting Up Your Environment</a></li>
+  <li><a href="#creating-the-foundation" id="toc-creating-the-foundation" class="nav-link" data-scroll-target="#creating-the-foundation">Creating the Foundation</a></li>
+  <li><a href="#deploying-your-first-container-app" id="toc-deploying-your-first-container-app" class="nav-link" data-scroll-target="#deploying-your-first-container-app">Deploying Your First Container App</a></li>
+  <li><a href="#implementing-advanced-scaling" id="toc-implementing-advanced-scaling" class="nav-link" data-scroll-target="#implementing-advanced-scaling">Implementing Advanced Scaling</a></li>
+  <li><a href="#monitoring-and-troubleshooting" id="toc-monitoring-and-troubleshooting" class="nav-link" data-scroll-target="#monitoring-and-troubleshooting">Monitoring and Troubleshooting</a></li>
+  <li><a href="#building-your-custom-version" id="toc-building-your-custom-version" class="nav-link" data-scroll-target="#building-your-custom-version">Building Your Custom Version</a></li>
+  <li><a href="#understanding-cost-implications" id="toc-understanding-cost-implications" class="nav-link" data-scroll-target="#understanding-cost-implications">Understanding Cost Implications</a></li>
+  </ul></li>
+  <li><a href="#production-best-practices-from-the-trenches" id="toc-production-best-practices-from-the-trenches" class="nav-link" data-scroll-target="#production-best-practices-from-the-trenches">Production Best Practices from the Trenches</a></li>
+  <li><a href="#whats-next-for-container-orchestration" id="toc-whats-next-for-container-orchestration" class="nav-link" data-scroll-target="#whats-next-for-container-orchestration">What’s Next for Container Orchestration</a></li>
+  <li><a href="#resources-and-credits" id="toc-resources-and-credits" class="nav-link" data-scroll-target="#resources-and-credits">Resources and Credits</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Azure Container Apps: Your Complete 2025 Guide to Serverless Container Deployment</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">Azure</div>
+    <div class="quarto-category">Container Apps</div>
+    <div class="quarto-category">Serverless</div>
+    <div class="quarto-category">Cloud</div>
+  </div>
+  </div>
+
+<div>
+  <div class="description">
+    A comprehensive, hands-on guide to Azure Container Apps, including production best practices, migration strategies, and a real-world demo.
+  </div>
+</div>
+
+
+<div class="quarto-title-meta">
+
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">June 7, 2025</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="azure-container-apps-your-complete-2025-guide-to-serverless-container-deployment" class="level1">
+<h1>Azure Container Apps: Your Complete 2025 Guide to Serverless Container Deployment</h1>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://miro.medium.com/v2/resize:fill:44:44/1*kfaefcgQPHrPsNobjuiiSg.jpeg" class="img-fluid figure-img"></p>
+<figcaption>Kunal Das, Author</figcaption>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://miro.medium.com/v2/resize:fit:1400/format:webp/1*0gtLX28EGPnAMoiX1qfSvQ.png" class="img-fluid figure-img"></p>
+<figcaption>image</figcaption>
+</figure>
+</div>
+<ul>
+<li><a href="#introduction-why-im-excited-about-azure-container-apps">Introduction: Why I’m Excited About Azure Container Apps</a></li>
+<li><a href="#what-makes-azure-container-apps-different-from-everything-else">What Makes Azure Container Apps Different From Everything Else</a></li>
+<li><a href="#revolutionary-features-ive-been-testing-in-2025">Revolutionary Features I’ve Been Testing in 2025</a></li>
+<li><a href="#real-success-stories-ive-witnessed">Real Success Stories I’ve Witnessed</a></li>
+<li><a href="#how-aca-stacks-against-the-competition">How ACA Stacks Against the Competition</a></li>
+<li><a href="#understanding-the-pricing-the-good-news">Understanding the Pricing (The Good News!)</a></li>
+<li><a href="#enterprise-integration-that-actually-works">Enterprise Integration That Actually Works</a></li>
+<li><a href="#migration-strategies-that-wont-break-your-team">Migration Strategies That Won’t Break Your Team</a></li>
+<li><a href="#hands-on-demo-lets-build-something-together">Hands-On Demo: Let’s Build Something Together</a>
+<ul>
+<li><a href="#understanding-what-were-building">Understanding What We’re Building</a></li>
+<li><a href="#setting-up-your-environment">Setting Up Your Environment</a></li>
+<li><a href="#creating-the-foundation">Creating the Foundation</a></li>
+<li><a href="#deploying-your-first-container-app">Deploying Your First Container App</a></li>
+<li><a href="#implementing-advanced-scaling">Implementing Advanced Scaling</a></li>
+<li><a href="#monitoring-and-troubleshooting">Monitoring and Troubleshooting</a></li>
+<li><a href="#building-your-custom-version">Building Your Custom Version</a></li>
+<li><a href="#understanding-cost-implications">Understanding Cost Implications</a></li>
+</ul></li>
+<li><a href="#production-best-practices-from-the-trenches">Production Best Practices from the Trenches</a></li>
+<li><a href="#whats-next-for-container-orchestration">What’s Next for Container Orchestration</a></li>
+<li><a href="#resources-and-credits">Resources and Credits</a></li>
+</ul>
+<!-- TOC end -->
+<section id="introduction-why-im-excited-about-azure-container-apps" class="level2">
+<h2 class="anchored" data-anchor-id="introduction-why-im-excited-about-azure-container-apps">Introduction: Why I’m Excited About Azure Container Apps</h2>
+<p>Hey there! I’m Kunal Das, and I’ve been working with containers and cloud platforms for years , I’ve seen countless teams struggle with Kubernetes complexity while just wanting to deploy their applications reliably and cost-effectively.</p>
+<p>That’s exactly why I’m so passionate about Azure Container Apps. It’s Microsoft’s answer to a problem I see every day - teams who need the power of containers without the operational nightmare of managing Kubernetes clusters. With serverless GPU support now generally available and adoption surging 48% year-over-year, I’ve watched Azure Container Apps transform from an interesting option to a game-changing platform.</p>
+<p>Throughout this guide, I’ll share real experiences from my work, practical insights from production deployments, and a hands-on demo using an application I built specifically to showcase ACA’s capabilities. Whether you’re a developer tired of YAML complexity or an architect evaluating container platforms, I want to help you understand why companies like Fujitsu are reporting “unparalleled cost savings” and how you can achieve similar results.</p>
+<p>If you prefer learning by watching, I’ve also created a <a href="https://www.youtube.com/watch?v=Nom9JtjZ8Js">comprehensive video walkthrough</a> that demonstrates these concepts in action.</p>
+</section>
+<section id="what-makes-azure-container-apps-different-from-everything-else" class="level2">
+<h2 class="anchored" data-anchor-id="what-makes-azure-container-apps-different-from-everything-else">What Makes Azure Container Apps Different From Everything Else</h2>
+<p>After working with AWS Fargate, Google Cloud Run, and traditional Kubernetes, I can tell you that Azure Container Apps occupies a unique position that I haven’t seen elsewhere. It’s the only platform I’ve used that truly focuses on microservices from the ground up, rather than treating them as an afterthought.</p>
+<p>Let me explain what I mean by walking through a real scenario. When I deploy applications on AWS Fargate, I typically end up configuring over twenty different AWS resources just to get a basic setup running. The complexity grows exponentially when you need service discovery, load balancing, and auto-scaling. Google Cloud Run, while incredibly fast to deploy, limits you to single-container applications, which becomes restrictive when building actual microservices architectures.</p>
+<p>Azure Container Apps takes a fundamentally different approach. The platform provides built-in DAPR integration, which means service discovery, state management, and pub/sub messaging work out of the box. No additional configuration, no separate service mesh deployment, no complex networking setup. When I first experienced this, it felt like magic - but it’s actually just thoughtful platform design.</p>
+<p>The KEDA integration deserves special mention because it’s something I use extensively in production. While other platforms offer basic CPU and memory scaling, ACA provides event-driven autoscaling based on external metrics. I can scale applications based on queue depth, database connections, or even custom business metrics. This capability alone has saved my teams countless hours of custom scaling logic development.</p>
+<p>The scale-to-zero default configuration represents something I consider a paradigm shift in container economics. Traditional platforms charge you for idle resources - those containers sitting around waiting for traffic. With ACA, when there’s no traffic, there’s no cost. I’ve seen this feature reduce hosting costs by 60-80% for applications with variable traffic patterns, and that’s not marketing hype - those are real numbers from production workloads I manage.</p>
+</section>
+<section id="revolutionary-features-ive-been-testing-in-2025" class="level2">
+<h2 class="anchored" data-anchor-id="revolutionary-features-ive-been-testing-in-2025">Revolutionary Features I’ve Been Testing in 2025</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://miro.medium.com/v2/resize:fit:1400/format:webp/1*kYppHhWjG8WQBOa8T6_B_Q.png" class="img-fluid figure-img"></p>
+<figcaption>image</figcaption>
+</figure>
+</div>
+<p>This year has been particularly exciting for Azure Container Apps, and I’ve had the opportunity to test several groundbreaking features that fundamentally change what’s possible with serverless containers.</p>
+<p>The serverless GPUs feature became generally available early this year, and I can honestly say it’s transformed how I think about AI workload deployment. Having access to NVIDIA A100 and T4 GPUs with scale-to-zero capabilities means I can deploy machine learning models without the traditional infrastructure concerns. The per-second billing model makes experimentation affordable, while the scale-to-zero capability ensures I’m not burning money when models aren’t being used.</p>
+<p>I’ve been testing this in West US 3, and the cold start performance has been impressive. The team at Microsoft has clearly invested significant effort in optimizing the startup sequence for GPU workloads. What used to require dedicated GPU clusters and complex scheduling can now be deployed with a simple container image and scaling configuration.</p>
+<p>The dedicated GPUs option, launched at Build 2025, fills a crucial gap for production AI applications that need consistent availability. While serverless GPUs excel for inference workloads with variable demand, dedicated GPUs provide the reliability needed for training workloads or applications requiring guaranteed response times.</p>
+<p>The premium ingress capabilities currently in public preview address something I’ve wanted for years - environment-level traffic management without deploying separate reverse proxy infrastructure. The rule-based routing enables sophisticated deployment patterns including A/B testing and blue-green deployments that previously required additional tooling and complexity.</p>
+<p>Private endpoints achieving general availability represents a major step forward for enterprise adoption. Many of the organizations I work with have strict network security requirements, and the ability to deploy Container Apps within Azure Virtual Networks with private connectivity addresses these concerns while maintaining the simplicity that makes ACA attractive.</p>
+</section>
+<section id="real-success-stories-ive-witnessed" class="level2">
+<h2 class="anchored" data-anchor-id="real-success-stories-ive-witnessed">Real Success Stories I’ve Witnessed</h2>
+<p>Let me share some real-world examples that demonstrate the practical impact of Azure Container Apps, starting with one that particularly impressed me.</p>
+<p>Fujitsu Japan Limited implemented Azure Container Apps for their Master Data Management system using Java microservices. What caught my attention wasn’t just their reported “unparalleled cost savings” - it was how they achieved these results. Their implementation scales from zero to hundreds of instances automatically while eliminating the operational burden that typically comes with Kubernetes management. The development team can focus entirely on business logic rather than infrastructure concerns.</p>
+<p>I’ve personally worked on a cost analysis that revealed some striking numbers. A small-load production web application handling 1,000 to 5,000 requests per hour during business hours and 10,000 to 20,000 requests during peak periods cost approximately 19 euros per month on Azure Container Apps compared to 101 euros per month on Azure App Service. That’s an 80% cost reduction while actually improving scalability and performance characteristics.</p>
+<p>The team at endjin consulting documented their migration from Azure Functions to Azure Container Apps, which resonated with challenges I’ve seen in my own work. They successfully migrated ASP.NET Core .NET 6.0 APIs while eliminating cold start issues and achieving significantly lower costs than Azure Functions Premium plan. This migration maintained their existing Azure infrastructure while delivering better cost-performance ratios for HTTP API workloads.</p>
+<p>From my experience managing production workloads, the performance benchmarks consistently show container scaling ranges from zero to one thousand replicas with KEDA-powered autoscaling. The scaling triggers work reliably across HTTP requests, TCP connections, CPU and memory thresholds, and custom metrics. Teams I work with report approximately 30% reduction in development time through simplified deployment processes and integrated monitoring capabilities.</p>
+</section>
+<section id="how-aca-stacks-against-the-competition" class="level2">
+<h2 class="anchored" data-anchor-id="how-aca-stacks-against-the-competition">How ACA Stacks Against the Competition</h2>
+<p>Having worked extensively with all major serverless container platforms, I want to give you an honest comparison based on real-world experience rather than marketing materials.</p>
+<p>The serverless container market has experienced explosive growth, with adoption increasing from 31% to 46% of container organizations in just two years according to Datadog’s research. This 48% growth rate indicates rapid technology maturation, and the serverless architecture market projecting 21.1 billion dollars by 2025 shows this isn’t a temporary trend.</p>
+<p>Azure Container Apps provides the only platform I’ve used with native DAPR integration. This isn’t just a nice-to-have feature - it fundamentally changes how you build and deploy microservices. Service discovery, state management, and pub/sub messaging work without additional configuration or complexity. The built-in KEDA integration offers superior event-driven scaling based on external metrics, capabilities that competitors require significant additional configuration to achieve.</p>
+<p>AWS Fargate maintains the lowest compute costs across regions, but the setup complexity is substantial. You typically need to configure over twenty AWS resources and the deployment process lacks true serverless characteristics since you still need underlying ECS or EKS clusters. Deployment times can extend up to twenty minutes compared to competitors, which impacts development velocity.</p>
+<p>Google Cloud Run offers the best developer experience I’ve encountered, with deployment times measured in seconds rather than minutes. However, the platform limits you to single-container deployments and doesn’t support full Kubernetes pod definitions. This becomes restrictive when building actual microservices architectures or applications requiring sidecar containers.</p>
+<p>Traditional Kubernetes remains appropriate for applications requiring direct API access, complex multi-service orchestration, or multi-cloud portability requirements. However, the operational overhead is significant, and unless you have specific requirements that mandate Kubernetes, the complexity rarely justifies the benefits for most applications.</p>
+</section>
+<section id="understanding-the-pricing-the-good-news" class="level2">
+<h2 class="anchored" data-anchor-id="understanding-the-pricing-the-good-news">Understanding the Pricing (The Good News!)</h2>
+<p>One of the aspects I appreciate most about Azure Container Apps is the transparent and developer-friendly pricing model. Let me walk you through the details based on my experience managing costs across multiple production environments.</p>
+<p>The consumption plan offers genuinely generous free monthly allowances that cover substantial development and testing workloads. You get 180,000 vCPU-seconds, 360,000 GiB-seconds, and 2 million HTTP requests per subscription each month at no cost. To put this in perspective, the vCPU allowance supports approximately fifty hours of continuous single-vCPU operation, while the request allowance accommodates significant development and testing activity.</p>
+<p>Beyond the free tiers, the platform uses per-second billing for both active and idle usage, with reduced rates during inactive periods. This granular billing model means you pay only for actual resource consumption rather than provisioned capacity, a fundamental shift from traditional hosting models.</p>
+<p>The serverless GPU pricing represents something I consider revolutionary in AI workload economics. Both NC T4 v3 and NC A100 v4 options support scale-to-zero capability, which eliminates costs during idle periods. Previously, deploying expensive GPU resources meant constant billing regardless of utilization. Now you can deploy sophisticated AI workloads without worrying about idle resource costs.</p>
+<p>Azure Savings Plans provide up to 17% savings with one to three year commitments applicable to both Consumption and Dedicated plans. The dedicated plan model becomes cost-effective for higher scale deployments with steady throughput, offering workload profile sharing across multiple applications.</p>
+<p>From my cost optimization work, I recommend implementing scale-to-zero configurations wherever possible, right-sizing resource allocations through regular Azure Monitor analysis, and leveraging workload profiles efficiently. Organizations should maximize free tier usage during development and consider GPU workload patterns when choosing between serverless and dedicated GPU options.</p>
+</section>
+<section id="enterprise-integration-that-actually-works" class="level2">
+<h2 class="anchored" data-anchor-id="enterprise-integration-that-actually-works">Enterprise Integration That Actually Works</h2>
+<p>Having implemented Azure Container Apps in enterprise environments, I can speak to the integration capabilities that matter in production deployments. The platform provides comprehensive integration with the Azure ecosystem through native support that works reliably without complex configuration.</p>
+<p>Identity and access management includes built-in Azure Active Directory integration with Easy Auth for zero-code authentication supporting multiple identity providers. The managed identity support offers both system-assigned and user-assigned options for password-less access to Azure services. This eliminates the security risk and operational overhead of managing connection strings and API keys.</p>
+<p>Database integration spans the services I use most frequently in production deployments. Azure Cosmos DB supports NoSQL, MongoDB, and PostgreSQL APIs with seamless connectivity. Azure SQL Database works with managed identity authentication, eliminating connection string management. Azure Storage services integrate naturally for both structured and unstructured data requirements.</p>
+<p>Key Vault integration provides secure secret management with automatic retrieval using managed identities. This addresses one of the most common security anti-patterns I see - storing secrets in environment variables or configuration files. The integration works transparently, retrieving secrets at runtime without requiring application code changes.</p>
+<p>Networking security features include Virtual Network integration, private endpoints through Azure Private Link, and peer-to-peer TLS encryption within environments. The compliance certifications include SOC 1/2/3, ISO 27001, HIPAA, and PCI DSS standards with built-in Microsoft Cloud Security Benchmark compliance, addressing enterprise governance requirements I encounter regularly.</p>
+<p>CI/CD integration offers native support for Azure DevOps pipelines and GitHub Actions with automatic workflow generation. The platform includes comprehensive monitoring through Azure Monitor integration with CPU, memory, and network metrics, plus Application Insights for distributed tracing across microservices architectures.</p>
+</section>
+<section id="migration-strategies-that-wont-break-your-team" class="level2">
+<h2 class="anchored" data-anchor-id="migration-strategies-that-wont-break-your-team">Migration Strategies That Won’t Break Your Team</h2>
+<p>After helping several teams migrate from Kubernetes to Azure Container Apps, I’ve developed approaches that minimize disruption while maximizing the benefits of the platform transition.</p>
+<p>Organizations I’ve worked with report significant operational simplification while maintaining container benefits. Microsoft’s official migration approach includes the Azure Migrate App Containerization Tool supporting ASP.NET and Java web applications with automated discovery and deployment capabilities.</p>
+<p>The key migration considerations I always discuss include networking requirements, since consumption plans require a minimum /23 network size, configuration mapping from Kubernetes Services to Container Apps, and persistent storage migration to Azure Files or Blob Storage. These aren’t blockers, but they require planning and coordination.</p>
+<p>Common challenges I help teams navigate include applications with Kubernetes API dependencies requiring refactoring, Helm chart incompatibility necessitating conversion to ACA deployment specifications, and custom monitoring solutions needing migration to Azure Monitor. These challenges are manageable with proper planning and staged approaches.</p>
+<p>The developer experience improvements consistently impress teams making the transition. Reduced learning curves mean team members don’t need extensive Kubernetes knowledge, faster onboarding helps new team members contribute quickly, and the approximately 30% reduction in development time comes from eliminating infrastructure complexity.</p>
+<p>Migration success factors I’ve identified through experience include thorough dependency assessment before beginning the transition, gradual phased approaches that allow learning and adjustment, team training investment to build confidence with new tools, and proper observability establishment from deployment initiation to maintain visibility during the transition.</p>
+</section>
+<section id="hands-on-demo-lets-build-something-together" class="level2">
+<h2 class="anchored" data-anchor-id="hands-on-demo-lets-build-something-together">Hands-On Demo: Let’s Build Something Together</h2>
+<p>Now let’s get practical. I want to walk you through deploying a real application that demonstrates Azure Container Apps capabilities in action. We’ll use the Beautiful Quotes App, which I built specifically to showcase modern web application patterns including dynamic content, API integration, and responsive design.</p>
+<p>The complete source code and deployment instructions are available in my <a href="https://github.com/kunalworldwide/AzureContainerAppsDemo">Azure Container Apps Demo repository</a>, and I encourage you to follow along. If you prefer visual learning, check out my <a href="https://www.youtube.com/watch?v=Nom9JtjZ8Js">detailed video walkthrough</a> where I demonstrate these concepts step by step.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://miro.medium.com/v2/resize:fit:1200/format:webp/0*9Ms4HObMzP1gyhsc.png" class="img-fluid figure-img"></p>
+<figcaption>image</figcaption>
+</figure>
+</div>
+<section id="understanding-what-were-building" class="level3">
+<h3 class="anchored" data-anchor-id="understanding-what-were-building">Understanding What We’re Building</h3>
+<p>The Beautiful Quotes App represents a typical modern web application built with containerization principles. I chose this example because it demonstrates several important architectural patterns that translate well to enterprise scenarios.</p>
+<p>The frontend consists of a single-page application built with vanilla HTML, CSS, and JavaScript. I made this choice deliberately to emphasize that Azure Container Apps works with any containerized application, regardless of technology stack. The application features dynamic background animations using HTML5 Canvas, theme customization, and social sharing capabilities representing common modern web application requirements.</p>
+<p>The backend integration connects to the QuoteHub API for dynamic content, demonstrating how containerized applications typically consume external services. This pattern mirrors enterprise applications that integrate with multiple APIs, databases, and microservices in production environments.</p>
+<p>The containerization strategy uses nginx Alpine as the base image, which I selected for its production-ready characteristics that minimize attack surface while providing excellent performance. The simple Dockerfile demonstrates best practices for static content serving that can be extended for more complex applications.</p>
+</section>
+<section id="setting-up-your-environment" class="level3">
+<h3 class="anchored" data-anchor-id="setting-up-your-environment">Setting Up Your Environment</h3>
+<p>Let’s start with the prerequisites. You’ll need Azure CLI with the Container Apps extension, which provides specialized commands for Container Apps management that aren’t available in the core Azure CLI. The extension handles the complexity of underlying Kubernetes operations while exposing simplified, developer-friendly commands.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Install the Container Apps extension with debug output for troubleshooting</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">az</span> extension add <span class="at">--name</span> containerapp <span class="at">--debug</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>I always recommend using the debug flag because it provides valuable troubleshooting information if installation encounters issues, particularly in corporate environments with proxy configurations.</p>
+<p>Next, we’ll establish your deployment context through authentication and subscription management. The device code flow works reliably across different environments, including cloud shells and restricted networks.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Authenticate using device code flow</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="ex">az</span> login <span class="at">--use-device-code</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Set your specific subscription context</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="ex">az</span> account set <span class="at">--subscription</span> <span class="st">"&lt;your-subscription-id&gt;"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Understanding subscription context is crucial because Azure Container Apps resources are subscription-scoped, and pricing varies by region and subscription type.</p>
+</section>
+<section id="creating-the-foundation" class="level3">
+<h3 class="anchored" data-anchor-id="creating-the-foundation">Creating the Foundation</h3>
+<p>Resource group creation establishes the logical container for all related resources. I’m using the Central India region for this demo, which demonstrates global availability while potentially offering cost advantages for certain workloads.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create resource group in Central India region</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="ex">az</span> group create <span class="at">--name</span> quotes-app-rg <span class="at">--location</span> centralindia</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Resource groups provide lifecycle management, access control boundaries, and cost tracking capabilities. All our demo resources will be contained within this group for easy cleanup when we’re finished.</p>
+<p>Provider registration ensures the Azure subscription has access to required services. The OperationalInsights provider enables logging and monitoring capabilities that integrate with Container Apps environments.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Register the required provider for logging</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="ex">az</span> provider register <span class="at">-n</span> Microsoft.OperationalInsights <span class="at">--wait</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The wait flag ensures the registration completes before proceeding, which is essential for subsequent commands that depend on these services.</p>
+<p>Container Apps environment creation establishes the deployment boundary for your applications. Environments provide shared infrastructure including networking, logging, and scaling capabilities.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the Container Apps environment</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="ex">az</span> containerapp env create <span class="at">--name</span> quotes-app-env <span class="at">--resource-group</span> quotes-app-rg <span class="at">--location</span> centralindia</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Environments abstract away underlying Kubernetes complexity while providing enterprise features like Virtual Network integration, private endpoints, and workload profiles. Multiple applications can share a single environment, optimizing costs through resource sharing.</p>
+</section>
+<section id="deploying-your-first-container-app" class="level3">
+<h3 class="anchored" data-anchor-id="deploying-your-first-container-app">Deploying Your First Container App</h3>
+<p>The basic deployment demonstrates core Container Apps functionality with minimal configuration complexity.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Deploy with basic configuration</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="ex">az</span> containerapp create <span class="dt">\</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">--name</span> beautiful-quotes-app <span class="dt">\</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">--resource-group</span> quotes-app-rg <span class="dt">\</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">--environment</span> quotes-app-env <span class="dt">\</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">--image</span> kunalondock/beautiful-quotes-app:v1 <span class="dt">\</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">--target-port</span> 80 <span class="dt">\</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">--ingress</span> external <span class="dt">\</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">--query</span> properties.configuration.ingress.fqdn</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>This command creates a Container App with external ingress, meaning it’s accessible from the internet. The target-port 80 specification matches the nginx configuration in the Dockerfile. The query parameter extracts the fully qualified domain name for immediate access to your deployed application.</p>
+<p>The deployment uses the pre-built container image from Docker Hub, eliminating the need for local Docker builds during initial testing. This pattern accelerates development workflows and simplifies CI/CD pipeline integration.</p>
+</section>
+<section id="implementing-advanced-scaling" class="level3">
+<h3 class="anchored" data-anchor-id="implementing-advanced-scaling">Implementing Advanced Scaling</h3>
+<p>Now let’s explore Azure Container Apps’ sophisticated scaling capabilities that distinguish it from traditional hosting solutions.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Deploy with auto-scaling configuration</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="ex">az</span> containerapp create <span class="dt">\</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">--name</span> beautiful-quotes-app <span class="dt">\</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">--resource-group</span> quotes-app-rg <span class="dt">\</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">--environment</span> quotes-app-env <span class="dt">\</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">--image</span> kunalondock/beautiful-quotes-app:v1 <span class="dt">\</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">--min-replicas</span> 0 <span class="dt">\</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">--max-replicas</span> 5 <span class="dt">\</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">--scale-rule-name</span> azure-http-rule <span class="dt">\</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">--scale-rule-type</span> http <span class="dt">\</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">--scale-rule-http-concurrency</span> 3 <span class="dt">\</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">--target-port</span> 80 <span class="dt">\</span></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">--ingress</span> external <span class="dt">\</span></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">--query</span> properties.configuration.ingress.fqdn</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The scale-to-zero configuration represents a fundamental shift from traditional hosting models. When no requests are active, the application consumes zero compute resources and incurs no charges. This capability alone can reduce hosting costs by 60% to 80% for applications with variable traffic patterns.</p>
+<p>The HTTP-based scaling rule with concurrency setting of 3 means new instances launch when existing instances handle more than three concurrent requests. This setting balances responsiveness with resource efficiency. Lower concurrency values provide better performance but higher costs, while higher values optimize costs but may impact response times.</p>
+<p>The maximum replica limit of 5 provides cost protection while allowing substantial traffic handling. Each replica can handle the configured concurrency, so this configuration supports 15 concurrent requests maximum before queuing occurs.</p>
+</section>
+<section id="monitoring-and-troubleshooting" class="level3">
+<h3 class="anchored" data-anchor-id="monitoring-and-troubleshooting">Monitoring and Troubleshooting</h3>
+<p>Log analysis provides insights into application behavior and performance characteristics that help you understand how your application performs in production.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># View application logs for troubleshooting</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="ex">az</span> containerapp logs show <span class="at">--name</span> beautiful-quotes-app <span class="at">--resource-group</span> quotes-app-rg</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Container Apps automatically aggregates logs from all replicas, providing unified visibility into application behavior. Logs include both application output and platform events like scaling decisions, making troubleshooting significantly easier than traditional container platforms.</p>
+<p>Monitoring integration occurs automatically through Azure Monitor, providing metrics for CPU utilization, memory consumption, request counts, and response times. This observability comes without additional configuration, which represents a significant advantage over self-managed container platforms.</p>
+</section>
+<section id="building-your-custom-version" class="level3">
+<h3 class="anchored" data-anchor-id="building-your-custom-version">Building Your Custom Version</h3>
+<p>Local development begins with the provided source code from my <a href="https://github.com/kunalworldwide/AzureContainerAppsDemo">Azure Container Apps Demo repository</a>, allowing complete customization of functionality, styling, and behavior.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Build your custom version locally</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> build <span class="at">-t</span> your-username/quotes-app:v1 .</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Test locally before deployment</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> run <span class="at">-d</span> <span class="at">-p</span> 8080:80 your-username/quotes-app:v1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The Dockerfile optimization uses nginx Alpine for minimal footprint and maximum security. The multi-stage build pattern can be extended for applications requiring compilation steps, asset processing, or dependency installation.</p>
+<p>Container registry publishing enables deployment from your customized image.</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Publish to Docker Hub or Azure Container Registry</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> login</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> push your-username/quotes-app:v1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Production considerations include implementing health checks, configuring startup probes for complex initialization sequences, and establishing proper logging patterns for observability in production environments.</p>
+</section>
+<section id="understanding-cost-implications" class="level3">
+<h3 class="anchored" data-anchor-id="understanding-cost-implications">Understanding Cost Implications</h3>
+<p>This demo deployment demonstrates cost optimization principles that apply to production workloads. The scale-to-zero configuration means the application costs nothing during inactive periods. During active periods, costs remain minimal due to efficient resource utilization.</p>
+<p>Free tier usage covers substantial testing and development workloads. The 180,000 vCPU-seconds monthly allowance supports approximately fifty hours of continuous single-vCPU operation, while the 2 million request allowance accommodates significant development activity without incurring charges.</p>
+<p>Production scaling from this demo foundation requires analyzing traffic patterns, adjusting concurrency settings, and potentially implementing more sophisticated scaling rules based on queue depth, database connections, or custom metrics that reflect your specific application requirements.</p>
+</section>
+</section>
+<section id="production-best-practices-from-the-trenches" class="level2">
+<h2 class="anchored" data-anchor-id="production-best-practices-from-the-trenches">Production Best Practices from the Trenches</h2>
+<p>Let me share the lessons I’ve learned from deploying and managing Azure Container Apps in production environments. These practices come from real-world experience rather than theoretical knowledge.</p>
+<p>Application architecture should follow stateless design principles optimized for horizontal scaling. I always recommend designing applications so that any instance can handle any request without depending on local state. Container image optimization includes using smaller base images, implementing multi-stage builds, and storing large files in Azure Storage rather than container images to reduce cold start latency.</p>
+<p>Scaling configuration requires careful analysis of traffic patterns to set appropriate minimum replicas, concurrent request thresholds, and cool-down periods. I typically start with conservative settings and adjust based on actual usage patterns rather than trying to optimize prematurely. Health probe configuration ensures proper application startup detection, which becomes particularly important for complex initialization processes.</p>
+<p>Security implementation involves configuring managed identities for service access, implementing Key Vault integration for secrets management, and establishing proper network security through Virtual Network integration where required. Never store secrets in environment variables or configuration files when managed identities and Key Vault provide secure alternatives.</p>
+<p>Monitoring and observability setup should include Azure Monitor metrics, Application Insights instrumentation, and Log Analytics workspace configuration. Cost monitoring through Azure Cost Management with budget alerts prevents unexpected charges and enables optimization opportunities before they become problematic.</p>
+<p>CI/CD pipeline design should leverage native GitHub Actions or Azure DevOps integration with automated testing, blue-green deployment strategies, and proper environment management across development, staging, and production environments.</p>
+</section>
+<section id="whats-next-for-container-orchestration" class="level2">
+<h2 class="anchored" data-anchor-id="whats-next-for-container-orchestration">What’s Next for Container Orchestration</h2>
+<p>As I look toward the future of container orchestration, Azure Container Apps represents what I consider a strategic inflection point in how we deploy and manage applications. The platform offers enterprise-grade capabilities without the operational complexity that has traditionally accompanied container orchestration.</p>
+<p>The unique microservices focus through built-in DAPR and KEDA integration, combined with revolutionary AI capabilities through serverless GPUs, positions Azure Container Apps as a compelling choice for modern application architectures. Organizations should consider Azure Container Apps when building microservices requiring service discovery, developing event-driven applications with external scaling triggers, or operating within Microsoft ecosystem environments.</p>
+<p>The platform particularly excels for variable workload applications benefiting from scale-to-zero cost optimization and teams seeking Kubernetes benefits without operational overhead. Cost analysis demonstrates substantial savings potential with documented cases showing 80% reductions compared to traditional hosting models. Combined with Azure Savings Plans offering up to 17% additional savings, the economic case becomes compelling for appropriate use cases.</p>
+<p>Migration from Kubernetes proves most successful with gradual approaches, proper team training, and realistic expectations about platform differences. While ACA doesn’t replace all Kubernetes use cases, it provides an attractive alternative for organizations prioritizing developer productivity and operational simplification.</p>
+<p>The convergence of serverless computing, AI integration, and microservices architecture positions Azure Container Apps at the center of cloud-native application development trends. Organizations evaluating container platforms should carefully assess their specific requirements against ACA’s capabilities, considering both current needs and future strategic direction in the rapidly evolving serverless landscape.</p>
+<hr>
+</section>
+<section id="resources-and-credits" class="level2">
+<h2 class="anchored" data-anchor-id="resources-and-credits">Resources and Credits</h2>
+<p>This guide incorporates insights and data from several valuable sources that helped shape my understanding and analysis:</p>
+<p><strong>Microsoft Official Documentation</strong> - <a href="https://learn.microsoft.com/en-us/azure/container-apps/overview">Azure Container Apps Overview</a> provided comprehensive technical specifications and feature details</p>
+<p><strong>Datadog Container Report 2024</strong> - <a href="https://www.datadoghq.com/container-report/">10 insights on real-world container use</a> offered crucial market adoption statistics and usage patterns</p>
+<p><strong>Grand View Research</strong> - <a href="https://www.grandviewresearch.com/industry-analysis/serverless-architecture-market">Serverless Architecture Market Analysis</a> provided market size projections and growth trends</p>
+<p><strong>Applied Information Sciences</strong> - <a href="https://www.ais.com/kubernetes-without-the-complexity-azure-container-apps/">Kubernetes Without the Complexity: Azure Container Apps</a> contributed practical insights on complexity reduction</p>
+<p><strong>Microsoft Tech Community</strong> - <a href="https://techcommunity.microsoft.com/blog/appsonazureblog/announcing-ga-for-azure-container-apps-serverless-gpus/4394302">Build 2025 Azure Container Apps Announcements</a> provided latest feature updates and roadmap information</p>
+<p><strong>Fujitsu Case Study</strong> - <a href="https://www.microsoft.com/en/customers/story/1650081367579868834-fujitsu-professional-services-azure-en-japan">Java on Azure Implementation</a> offered real-world success story validation</p>
+<p><em>Connect with me for more insights: <a href="https://heylink.me/kunaldas/">All my links and contact information</a></em></p>
+<p><em>Watch the hands-on demo: <a href="https://www.youtube.com/watch?v=Nom9JtjZ8Js">Azure Container Apps Tutorial on YouTube</a></em></p>
+<p><em>Get the source code: <a href="https://github.com/kunalworldwide/AzureContainerAppsDemo">Azure Container Apps Demo Repository</a></em></p>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+    let newTheme = '';
+    if(darkModeDefault) {
+      newTheme = isAlternate ? baseTheme : alternateTheme;
+    } else {
+      newTheme = isAlternate ? alternateTheme : baseTheme;
+    }
+    const changeGiscusTheme = () => {
+      // From: https://github.com/giscus/giscus/issues/336
+      const sendMessage = (message) => {
+        const iframe = document.querySelector('iframe.giscus-frame');
+        if (!iframe) return;
+        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+      }
+      sendMessage({
+        setConfig: {
+          theme: newTheme
+        }
+      });
+    }
+    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+    if (isGiscussLoaded) {
+      changeGiscusTheme();
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  const darkModeDefault = false;
+  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+    toggleGiscusIfUsed(toAlternate, darkModeDefault);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/kunaldas\.dev");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<script src="https://giscus.app/client.js" data-repo="kunalworldwide/kunalworldwide.github.io" data-repo-id="R_kgDOLCIa1w" data-category="General" data-category-id="DIC_kwDOLCIa184ClGQR" data-mapping="pathname" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="bottom" data-theme="preferred_color_scheme" data-lang="en" crossorigin="anonymous" async="">
+</script>
+<input type="hidden" id="giscus-base-theme" value="preferred_color_scheme">
+<input type="hidden" id="giscus-alt-theme" value="preferred_color_scheme">
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/kunalworldwide">
+      <i class="bi bi-github" role="img">
+</i> 
+    </a>
+  </li>  
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://twitter.com/kunald_official">
+      <i class="bi bi-twitter" role="img">
+</i> 
+    </a>
+  </li>  
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://linkedin.com/in/kunaldaskd">
+      <i class="bi bi-linkedin" role="img">
+</i> 
+    </a>
+  </li>  
+</ul>
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

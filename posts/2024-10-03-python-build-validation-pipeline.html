@@ -1,0 +1,1244 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.6.39">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="dcterms.date" content="2024-10-03">
+<meta name="description" content="A complete guide to implementing code quality checks, testing, and validation for Python projects using Azure DevOps">
+
+<title>Setting Up a Comprehensive Python Build Validation Pipeline in Azure DevOps – Kunal Das</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../assets/icon.png" rel="icon" type="image/png">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-0626ff4d7a71b55c8707dcae1d04a9b6.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-e25cc82807363e79c52e96bc8b7855f1.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-db99aa9d7eb641a422f03e251c00f14f.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-d9d71c5880893e0e44f43f1b7838fb78.min.css" rel="prefetch" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-X8X02516LE"></script>
+
+<script type="text/javascript">
+
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-X8X02516LE', { 'anonymize_ip': true});
+</script>
+
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">Kunal Das</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../about.html"> 
+<span class="menu-text">About Me</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../posts.html"> 
+<span class="menu-text">Blog</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../talks.html"> 
+<span class="menu-text">Talks</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../contact.html"> 
+<span class="menu-text">Contact</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://twitter.com/kunald_official"> <i class="bi bi-twitter" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/kunalworldwide"> <i class="bi bi-github" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://linkedin.com/in/kunaldaskd"> <i class="bi bi-linkedin" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#step-by-step-setup" id="toc-step-by-step-setup" class="nav-link active" data-scroll-target="#step-by-step-setup">Step-by-Step Setup</a>
+  <ul class="collapse">
+  <li><a href="#step-1-create-the-azure-pipeline-yaml-file" id="toc-step-1-create-the-azure-pipeline-yaml-file" class="nav-link" data-scroll-target="#step-1-create-the-azure-pipeline-yaml-file">Step 1: Create the Azure Pipeline YAML File</a></li>
+  <li><a href="#step-2-clone-the-pr-repository" id="toc-step-2-clone-the-pr-repository" class="nav-link" data-scroll-target="#step-2-clone-the-pr-repository">Step 2: Clone the PR Repository</a></li>
+  <li><a href="#step-3-install-dependencies" id="toc-step-3-install-dependencies" class="nav-link" data-scroll-target="#step-3-install-dependencies">Step 3: Install Dependencies</a></li>
+  <li><a href="#step-4-run-code-quality-checks" id="toc-step-4-run-code-quality-checks" class="nav-link" data-scroll-target="#step-4-run-code-quality-checks">Step 4: Run Code Quality Checks</a></li>
+  <li><a href="#step-5-run-tests-and-generate-coverage-report" id="toc-step-5-run-tests-and-generate-coverage-report" class="nav-link" data-scroll-target="#step-5-run-tests-and-generate-coverage-report">Step 5: Run Tests and Generate Coverage Report</a></li>
+  <li><a href="#step-6-check-code-coverage-threshold" id="toc-step-6-check-code-coverage-threshold" class="nav-link" data-scroll-target="#step-6-check-code-coverage-threshold">Step 6: Check Code Coverage Threshold</a></li>
+  <li><a href="#step-7-publish-coverage-report" id="toc-step-7-publish-coverage-report" class="nav-link" data-scroll-target="#step-7-publish-coverage-report">Step 7: Publish Coverage Report</a></li>
+  </ul></li>
+  <li><a href="#setting-up-local-development-environment" id="toc-setting-up-local-development-environment" class="nav-link" data-scroll-target="#setting-up-local-development-environment">Setting Up Local Development Environment</a>
+  <ul class="collapse">
+  <li><a href="#prerequisites" id="toc-prerequisites" class="nav-link" data-scroll-target="#prerequisites">Prerequisites</a></li>
+  <li><a href="#setting-up-your-environment" id="toc-setting-up-your-environment" class="nav-link" data-scroll-target="#setting-up-your-environment">Setting Up Your Environment</a></li>
+  <li><a href="#running-checks-locally" id="toc-running-checks-locally" class="nav-link" data-scroll-target="#running-checks-locally">Running Checks Locally</a></li>
+  </ul></li>
+  <li><a href="#setting-up-pre-commit-hooks" id="toc-setting-up-pre-commit-hooks" class="nav-link" data-scroll-target="#setting-up-pre-commit-hooks">Setting Up Pre-commit Hooks</a></li>
+  <li><a href="#configuring-isort" id="toc-configuring-isort" class="nav-link" data-scroll-target="#configuring-isort">Configuring isort</a></li>
+  <li><a href="#step-1-create-a-personal-access-token-pat" id="toc-step-1-create-a-personal-access-token-pat" class="nav-link" data-scroll-target="#step-1-create-a-personal-access-token-pat">Step 1: Create a Personal Access Token (PAT)</a></li>
+  <li><a href="#step-2-add-the-pat-as-a-pipeline-variable" id="toc-step-2-add-the-pat-as-a-pipeline-variable" class="nav-link" data-scroll-target="#step-2-add-the-pat-as-a-pipeline-variable">Step 2: Add the PAT as a Pipeline Variable</a></li>
+  <li><a href="#step-3-update-your-pipeline-yaml" id="toc-step-3-update-your-pipeline-yaml" class="nav-link" data-scroll-target="#step-3-update-your-pipeline-yaml">Step 3: Update Your Pipeline YAML</a></li>
+  <li><a href="#step-4-create-a-branch-policy" id="toc-step-4-create-a-branch-policy" class="nav-link" data-scroll-target="#step-4-create-a-branch-policy">Step 4: Create a Branch Policy</a></li>
+  <li><a href="#step-5-configure-branch-protection" id="toc-step-5-configure-branch-protection" class="nav-link" data-scroll-target="#step-5-configure-branch-protection">Step 5: Configure Branch Protection</a></li>
+  <li><a href="#step-6-update-repository-settings" id="toc-step-6-update-repository-settings" class="nav-link" data-scroll-target="#step-6-update-repository-settings">Step 6: Update Repository Settings</a></li>
+  <li><a href="#step-7-educate-your-team" id="toc-step-7-educate-your-team" class="nav-link" data-scroll-target="#step-7-educate-your-team">Step 7: Educate Your Team</a></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Setting Up a Comprehensive Python Build Validation Pipeline in Azure DevOps</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">Python</div>
+    <div class="quarto-category">DevOps</div>
+    <div class="quarto-category">Code Quality</div>
+    <div class="quarto-category">CI/CD</div>
+  </div>
+  </div>
+
+<div>
+  <div class="description">
+    A complete guide to implementing code quality checks, testing, and validation for Python projects using Azure DevOps
+  </div>
+</div>
+
+
+<div class="quarto-title-meta">
+
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">October 3, 2024</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://miro.medium.com/v2/resize:fit:720/format:webp/0*JyazbS5mBODLoH6n.png" class="img-fluid figure-img"></p>
+<figcaption>image</figcaption>
+</figure>
+</div>
+<p>Hey there, Almost everyone who deploys python code wants to have it thoroughly checked and follow proper standards but sometimes setting up a code quality pipeline in your CI-CD process can be cumbersome due to various reasons.</p>
+<p>Mainly, 1. You have to setup for each individual pipelines which can be an issue since many of us might have multiple repo multiple project and we need to have it standardize across projects to make sure it just works without tinkering in every other repo 2. There are plenty of tools and finding the right set of tools and also making sure a certain set of tools work together without giving any issues 3. Publishing a output also matters which will help the developers easily see what is lacking and they can start improving on the same.</p>
+<p>Python developers and DevOps enthusiasts! Today, we’re going to walk through setting up a robust build validation pipeline for your Python projects using Azure DevOps. This guide will help you ensure code quality, maintain consistency across multiple repositories, and streamline your development process - all without relying on external tools.</p>
+<p>I was tasked not long ago to find a FREE solution without any external tool which should have below features</p>
+<ol type="1">
+<li>Must work with multiple repo.</li>
+<li>Must provide meaningful output.</li>
+<li>Should improve the overall Code Quality</li>
+<li>Developers can run locally as well before publishing to the testing tool</li>
+<li>All code in the main branch must follow the best in class industry standards</li>
+</ol>
+<p>While I started developing the build validation pipeline ( Azure DevOps term basically means successful run of a pipeline to merge the pull request to a particular branch) I started looking for coding standards mainly for python I stumbled upon many articles and was in a bit of confusion which one to follow, but respecting the popularity and unanimous use of PEP-8 made the decision much easier.</p>
+<p>Ref :https://peps.python.org/pep-0008/</p>
+<p>Ok on top of a pep-8 validator I thought of adding isort which is another great tool to validate if your imports are correctly sorted and on top of this I added a few things extra like BLACK if we look at the black defination we see</p>
+<pre><code>"Black is the uncompromising Python code formatter. By using it, you agree to cede control over minutiae of hand-formatting. In return, Black gives you speed, determinism, and freedom from pycodestyle nagging about formatting. You will save time and mental energy for more important matters."</code></pre>
+<p>Ref : https://pypi.org/project/black/</p>
+<p>So from code quality part I ended up using three tools or validators 1. Black (code formatter) 2. isort (import sorter) 3. Flake8 (linter)</p>
+<p>I also added pytest and code coverage checks on this pipeline just to make sure developers are diligent to write unit test cases before they push the code to main branch</p>
+<ol start="4" type="1">
+<li>pytest (testing framework)</li>
+<li>Code coverage analysis</li>
+</ol>
+<p><code>The steps here are for Azure Devops Pipeline but it can be easily replicated to githuba ctions or any other ci-cd tools with very minimal to minor tweaking</code></p>
+<p>So let’s look at the pipeline that I have been telling till now</p>
+<section id="step-by-step-setup" class="level2">
+<h2 class="anchored" data-anchor-id="step-by-step-setup">Step-by-Step Setup</h2>
+<section id="step-1-create-the-azure-pipeline-yaml-file" class="level3">
+<h3 class="anchored" data-anchor-id="step-1-create-the-azure-pipeline-yaml-file">Step 1: Create the Azure Pipeline YAML File</h3>
+<p>First, create a file named <code>azure-pipelines.yml</code> in the root of your repository. This file will define our pipeline.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">trigger</span><span class="kw">:</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> none</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">variables</span><span class="kw">:</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> sourcePath</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">value</span><span class="kw">:</span><span class="at"> </span><span class="st">'sourcecode'</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> coverageThreshold</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">value</span><span class="kw">:</span><span class="at"> </span><span class="dv">80</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">group</span><span class="kw">:</span><span class="at"> Tokens</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> CodeDirectory</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">value</span><span class="kw">:</span><span class="at"> </span><span class="st">'$(System.DefaultWorkingDirectory)'</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="fu">pool</span><span class="kw">:</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">vmimage</span><span class="kw">:</span><span class="at"> </span><span class="st">'ubuntu-latest'</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="fu">jobs</span><span class="kw">:</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="kw">-</span><span class="at"> </span><span class="fu">job</span><span class="kw">:</span><span class="at"> BuildTestAndAnalyze</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">displayName</span><span class="kw">:</span><span class="at"> </span><span class="st">'🚀 Build, Test, and Analyze'</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">steps</span><span class="kw">:</span></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">task</span><span class="kw">:</span><span class="at"> UsePythonVersion@0</span></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">inputs</span><span class="kw">:</span></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">versionSpec</span><span class="kw">:</span><span class="at"> </span><span class="st">'3.9'</span></span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">displayName</span><span class="kw">:</span><span class="at"> </span><span class="st">'🐍 Use Python 3.9'</span></span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a><span class="co">  # More steps will be added here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>This sets up the basic structure of our pipeline, specifying the Python version and defining some variables we’ll use later.</p>
+<pre><code>Now if you see ths issue we need this build validation pipeline in multiple repositories which is a bit tricky since we all know if we add this yaml to a particular repo then it will only work on that and not any other repo instead I wanted it to be a seperate but clone the repo for which it get's triggered in the pull request.
+
+The solution? 
+look at he below step :)</code></pre>
+</section>
+<section id="step-2-clone-the-pr-repository" class="level3">
+<h3 class="anchored" data-anchor-id="step-2-clone-the-pr-repository">Step 2: Clone the PR Repository</h3>
+<p>Add this step to clone the PR repository:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">  - </span><span class="fu">bash</span><span class="kw">:</span><span class="at"> </span><span class="ch">|</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>      echo "🚀 Initiating repository clone process..."</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>      REPO_URL=$(System.PullRequest.SourceRepositoryURI)</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>      AUTH_URL=$(echo $REPO_URL | sed "s|cyncly-engineering@|$(Code_Read_PAT)@|")</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>      FULL_BRANCH=$(System.PullRequest.SourceBranch)</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>      BRANCH=$(echo $FULL_BRANCH | sed 's|^refs/heads/||')</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>      CLONE_DIR=$(System.DefaultWorkingDirectory)/cloned_repo</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>      git clone --branch "$BRANCH" "$AUTH_URL" "$CLONE_DIR"</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>      if [ $? -eq 0 ]; then</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>        echo "✅ Git clone successful"</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>        echo "##vso[task.setvariable variable=CodeDirectory]$CLONE_DIR"</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>      else</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>        echo "❌ Git clone failed"</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>        exit 1</span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>      fi</span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">displayName</span><span class="kw">:</span><span class="at"> </span><span class="st">'🔄 Clone PR Repository'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>This step clones the PR repository, allowing us to work with the latest code.</p>
+<p><code>this is a bit tricky spart and for other ci-cd tool we need to modify this the most</code></p>
+</section>
+<section id="step-3-install-dependencies" class="level3">
+<h3 class="anchored" data-anchor-id="step-3-install-dependencies">Step 3: Install Dependencies</h3>
+<p>Next, let’s install the project dependencies and our code quality tools:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">  - </span><span class="fu">script</span><span class="kw">:</span><span class="at"> </span><span class="ch">|</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>      echo "🔧 Setting up Python environment..."</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>      python -m pip install --upgrade pip</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>      if [ -f $(sourcePath)/requirements.txt ]; then</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>        pip install -r $(sourcePath)/requirements.txt</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>      fi</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">workingDirectory</span><span class="kw">:</span><span class="at"> $(CodeDirectory)</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">displayName</span><span class="kw">:</span><span class="at"> </span><span class="st">'📦 Install Project Dependencies'</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="kw">  - </span><span class="fu">script</span><span class="kw">:</span><span class="at"> </span><span class="ch">|</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>      echo "🛠️ Installing code quality and testing tools..."</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>      pip install black flake8 isort pytest pytest-cov httpx</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">displayName</span><span class="kw">:</span><span class="at"> </span><span class="st">'🛠️ Install Code Quality and Testing Tools'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="step-4-run-code-quality-checks" class="level3">
+<h3 class="anchored" data-anchor-id="step-4-run-code-quality-checks">Step 4: Run Code Quality Checks</h3>
+<p>Now, let’s add steps to run our code quality checks:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">  - </span><span class="fu">script</span><span class="kw">:</span><span class="at"> </span><span class="ch">|</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>      echo "🖌️ Running Black formatter check..."</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>      black --check --line-length 79 $(sourcePath) </span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">displayName</span><span class="kw">:</span><span class="at"> </span><span class="st">'🖌️ Run Black'</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">workingDirectory</span><span class="kw">:</span><span class="at"> $(CodeDirectory)</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="kw">  - </span><span class="fu">script</span><span class="kw">:</span><span class="at"> </span><span class="ch">|</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>      echo "🔀 Running isort import sorter check..."</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>      isort --check-only $(sourcePath)</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">displayName</span><span class="kw">:</span><span class="at"> </span><span class="st">'🔀 Run isort'</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">workingDirectory</span><span class="kw">:</span><span class="at"> $(CodeDirectory)</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="kw">  - </span><span class="fu">script</span><span class="kw">:</span><span class="at"> </span><span class="ch">|</span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>      echo "🔍 Running Flake8 linter..."</span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>      flake8 $(sourcePath)</span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">displayName</span><span class="kw">:</span><span class="at"> </span><span class="st">'🔍 Run Flake8'</span></span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">workingDirectory</span><span class="kw">:</span><span class="at"> $(CodeDirectory)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>These steps will check your code formatting, import sorting, and linting.</p>
+</section>
+<section id="step-5-run-tests-and-generate-coverage-report" class="level3">
+<h3 class="anchored" data-anchor-id="step-5-run-tests-and-generate-coverage-report">Step 5: Run Tests and Generate Coverage Report</h3>
+<p>Add this step to run tests and generate a coverage report:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">  - </span><span class="fu">script</span><span class="kw">:</span><span class="at"> </span><span class="ch">|</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>      echo "🧪 Running unit tests and generating coverage report..."</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>      pytest --cov=$(sourcePath) --cov-report=xml --cov-report=html ./tests</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">displayName</span><span class="kw">:</span><span class="at"> </span><span class="st">'🧪 Run Tests with pytest'</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">workingDirectory</span><span class="kw">:</span><span class="at"> $(CodeDirectory)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="step-6-check-code-coverage-threshold" class="level3">
+<h3 class="anchored" data-anchor-id="step-6-check-code-coverage-threshold">Step 6: Check Code Coverage Threshold</h3>
+<p>Let’s ensure our code meets a minimum coverage threshold:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">  - </span><span class="fu">script</span><span class="kw">:</span><span class="at"> </span><span class="ch">|</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>      echo "📊 Checking code coverage threshold..."</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>      coverage_percentage=$(python -c "import xml.etree.ElementTree as ET; tree = ET.parse('coverage.xml'); root = tree.getroot(); print(float(root.attrib['line-rate']) * 100)")</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>      echo "Current code coverage: $coverage_percentage%"</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>      echo "Coverage threshold: $COVERAGE_THRESHOLD%"</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>      if (( $(echo "$coverage_percentage &lt; $COVERAGE_THRESHOLD" | bc -l) )); then</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>        echo "❌ ##vso[task.logissue type=error]Code coverage ($coverage_percentage%) is below the threshold of $COVERAGE_THRESHOLD%"</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>        exit 1</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>      else</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>        echo "✅ Code coverage ($coverage_percentage%) meets or exceeds the threshold of $COVERAGE_THRESHOLD%"</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>      fi</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">displayName</span><span class="kw">:</span><span class="at"> </span><span class="st">'📊 Check Code Coverage Threshold'</span></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">workingDirectory</span><span class="kw">:</span><span class="at"> $(CodeDirectory)</span></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">env</span><span class="kw">:</span></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">COVERAGE_THRESHOLD</span><span class="kw">:</span><span class="at"> $(coverageThreshold)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="step-7-publish-coverage-report" class="level3">
+<h3 class="anchored" data-anchor-id="step-7-publish-coverage-report">Step 7: Publish Coverage Report</h3>
+<p>Finally, let’s publish our coverage report:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">task</span><span class="kw">:</span><span class="at"> PublishCodeCoverageResults@1</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">inputs</span><span class="kw">:</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">codeCoverageTool</span><span class="kw">:</span><span class="at"> </span><span class="st">'cobertura'</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">summaryFileLocation</span><span class="kw">:</span><span class="at"> </span><span class="st">'$(CodeDirectory)/coverage.xml'</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">reportDirectory</span><span class="kw">:</span><span class="at"> </span><span class="st">'$(CodeDirectory)/htmlcov'</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">displayName</span><span class="kw">:</span><span class="at"> </span><span class="st">'📈 Publish Coverage Report'</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">publish</span><span class="kw">:</span><span class="at"> $(CodeDirectory)/htmlcov</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">artifact</span><span class="kw">:</span><span class="at"> CodeCoverageReport</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">displayName</span><span class="kw">:</span><span class="at"> </span><span class="st">'📦 Publish Coverage Report as Artifact'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+</section>
+<section id="setting-up-local-development-environment" class="level2">
+<h2 class="anchored" data-anchor-id="setting-up-local-development-environment">Setting Up Local Development Environment</h2>
+<p>To ensure developers can run these checks locally, add the following instructions to your project’s README:</p>
+<section id="prerequisites" class="level3">
+<h3 class="anchored" data-anchor-id="prerequisites">Prerequisites</h3>
+<ul>
+<li>Python 3.9</li>
+<li>pip (Python package manager)</li>
+</ul>
+</section>
+<section id="setting-up-your-environment" class="level3">
+<h3 class="anchored" data-anchor-id="setting-up-your-environment">Setting Up Your Environment</h3>
+<ol type="1">
+<li><p>Clone the repository:</p>
+<pre><code>git clone &lt;repository-url&gt;
+cd &lt;repository-name&gt;</code></pre></li>
+<li><p>Create a virtual environment:</p>
+<pre><code>python -m venv venv
+source venv/bin/activate  # On Windows, use `venv\Scripts\activate`</code></pre></li>
+<li><p>Install dependencies:</p>
+<pre><code>pip install -r sourcecode/requirements.txt
+pip install black flake8 isort pytest pytest-cov httpx</code></pre></li>
+</ol>
+</section>
+<section id="running-checks-locally" class="level3">
+<h3 class="anchored" data-anchor-id="running-checks-locally">Running Checks Locally</h3>
+<p>To ensure your code passes the pipeline checks, run these commands from the project root:</p>
+<ol type="1">
+<li><p>Black (code formatting):</p>
+<pre><code>black --check --line-length 79 sourcecode</code></pre></li>
+<li><p>isort (import sorting):</p>
+<pre><code>isort --check-only sourcecode</code></pre></li>
+<li><p>Flake8 (linting):</p>
+<pre><code>flake8 sourcecode</code></pre></li>
+<li><p>pytest (unit tests and coverage):</p>
+<pre><code>pytest --cov=sourcecode --cov-report=xml --cov-report=html ./tests</code></pre></li>
+</ol>
+</section>
+</section>
+<section id="setting-up-pre-commit-hooks" class="level2">
+<h2 class="anchored" data-anchor-id="setting-up-pre-commit-hooks">Setting Up Pre-commit Hooks</h2>
+<p>To catch issues before they even make it to the pipeline, set up pre-commit hooks:</p>
+<ol type="1">
+<li><p>Install pre-commit:</p>
+<pre><code>pip install pre-commit</code></pre></li>
+<li><p>Create a <code>.pre-commit-config.yaml</code> file in your project root:</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">repos</span><span class="kw">:</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="kw">-</span><span class="at"> </span><span class="fu">repo</span><span class="kw">:</span><span class="at"> https://github.com/psf/black</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">rev</span><span class="kw">:</span><span class="at"> </span><span class="fl">22.3.0</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">hooks</span><span class="kw">:</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">id</span><span class="kw">:</span><span class="at"> black</span></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">args</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="at">--line-length=</span><span class="dv">79</span><span class="kw">]</span></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a><span class="kw">-</span><span class="at"> </span><span class="fu">repo</span><span class="kw">:</span><span class="at"> https://github.com/PyCQA/isort</span></span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">rev</span><span class="kw">:</span><span class="at"> </span><span class="fl">5.10.1</span></span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">hooks</span><span class="kw">:</span></span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">id</span><span class="kw">:</span><span class="at"> isort</span></span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a><span class="kw">-</span><span class="at"> </span><span class="fu">repo</span><span class="kw">:</span><span class="at"> https://github.com/PyCQA/flake8</span></span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">rev</span><span class="kw">:</span><span class="at"> </span><span class="fl">4.0.1</span></span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">hooks</span><span class="kw">:</span></span>
+<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">id</span><span class="kw">:</span><span class="at"> flake8</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<li><p>Install the hooks:</p>
+<pre><code>pre-commit install</code></pre></li>
+</ol>
+</section>
+<section id="configuring-isort" class="level2">
+<h2 class="anchored" data-anchor-id="configuring-isort">Configuring isort</h2>
+<p>To ensure consistent import sorting that aligns with Black’s formatting, create a file named <code>.isort.cfg</code> in the <code>sourcecode/</code> directory:</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode ini code-with-copy"><code class="sourceCode ini"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="kw">[settings]</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="dt">profile </span><span class="ot">=</span><span class="st"> black</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="dt">multi_line_output </span><span class="ot">=</span><span class="st"> </span><span class="dv">3</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="dt">include_trailing_comma </span><span class="ot">=</span><span class="st"> </span><span class="kw">True</span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="dt">force_grid_wrap </span><span class="ot">=</span><span class="st"> </span><span class="dv">0</span></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a><span class="dt">use_parentheses </span><span class="ot">=</span><span class="st"> </span><span class="kw">True</span></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a><span class="dt">ensure_newline_before_comments </span><span class="ot">=</span><span class="st"> </span><span class="kw">True</span></span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a><span class="dt">line_length </span><span class="ot">=</span><span class="st"> </span><span class="dv">79</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>ok Now how can we setup this pipeline to make sure any of our code get’s scanned properly before it goes to the main branch?</p>
+<p>First we need a PAT token to clone any repo across azure devops organisation so to get that first then set up the pipeline as a branch policy.</p>
+</section>
+<section id="step-1-create-a-personal-access-token-pat" class="level2">
+<h2 class="anchored" data-anchor-id="step-1-create-a-personal-access-token-pat">Step 1: Create a Personal Access Token (PAT)</h2>
+<p>To clone repositories across your Azure DevOps organization, you’ll need a PAT with appropriate permissions. Here’s how to create one:</p>
+<ol type="1">
+<li>Sign in to your Azure DevOps organization (https://dev.azure.com/{your-organization}).</li>
+<li>In the top right corner, click on your profile picture and select “Personal access tokens”. ![alt text]../media/image.png)</li>
+<li>Click on “New Token”.</li>
+<li>Give your token a name (e.g., “Build Validation Pipeline”).</li>
+<li>Set the organization to your Azure DevOps organization.</li>
+<li>For expiration, choose an appropriate timeframe (e.g., 1 year).</li>
+<li>Under “Scopes”, select “Custom defined” and then check the following permissions:
+<ul>
+<li>Code (Read &amp; Write)</li>
+<li>Build (Read &amp; Execute)</li>
+</ul></li>
+<li>Click “Create”. <img src="../media/image-1.png" class="img-fluid" alt="alt text"></li>
+<li>Copy the generated token and store it securely. You won’t be able to see it again.</li>
+</ol>
+</section>
+<section id="step-2-add-the-pat-as-a-pipeline-variable" class="level2">
+<h2 class="anchored" data-anchor-id="step-2-add-the-pat-as-a-pipeline-variable">Step 2: Add the PAT as a Pipeline Variable</h2>
+<p>Now that you have a PAT, you need to add it as a variable in your pipeline:</p>
+<ol type="1">
+<li>In Azure DevOps, go to “Pipelines” &gt; “Library”.</li>
+<li>Click on “+ Variable group”.</li>
+<li>Name the group (e.g., “BuildValidationTokens”).</li>
+<li>Add a new variable:
+<ul>
+<li>Name: <code>Code_Read_PAT</code></li>
+<li>Value: Paste your PAT here</li>
+</ul></li>
+<li>Check the “Keep this value secret” box.</li>
+<li>Click “Save”.</li>
+</ol>
+</section>
+<section id="step-3-update-your-pipeline-yaml" class="level2">
+<h2 class="anchored" data-anchor-id="step-3-update-your-pipeline-yaml">Step 3: Update Your Pipeline YAML</h2>
+<p>Update your <code>azure-pipelines.yml</code> to use the variable group:</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">variables</span><span class="kw">:</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">group</span><span class="kw">:</span><span class="at"> BuildValidationTokens</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="co">  # ... other variables ...</span></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a><span class="co"># ... rest of your pipeline configuration ...</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="step-4-create-a-branch-policy" class="level2">
+<h2 class="anchored" data-anchor-id="step-4-create-a-branch-policy">Step 4: Create a Branch Policy</h2>
+<p>To ensure this pipeline runs on all pull requests to your main branch:</p>
+<ol type="1">
+<li>Go to your Azure DevOps project.</li>
+<li>Navigate to “Repos” &gt; “Branches”.</li>
+<li>Find your main branch (often named <code>main</code> or <code>master</code>).</li>
+<li>Click the ellipsis (…) next to the branch name and select “Branch policies”.</li>
+<li>Under “Build Validation”, click “+ Add build policy”.</li>
+<li>Select your build validation pipeline. <img src="../media/image-2.png" class="img-fluid" alt="alt text"></li>
+<li>Set “Trigger” to “Automatic”.</li>
+<li>Set “Policy requirement” to “Required”.</li>
+<li>Set “Build expiration” as per your preference (e.g., “Immediately”).</li>
+<li>Click “Save”.</li>
+</ol>
+</section>
+<section id="step-5-configure-branch-protection" class="level2">
+<h2 class="anchored" data-anchor-id="step-5-configure-branch-protection">Step 5: Configure Branch Protection</h2>
+<p>To prevent direct pushes to the main branch:</p>
+<ol type="1">
+<li>Still in the branch policies page for your main branch.</li>
+<li>Under “Require a minimum number of reviewers”, check the box.</li>
+<li>Set the minimum number of reviewers (e.g., 1 or 2).</li>
+<li>Optionally, check “Allow requestors to approve their own changes” based on your team’s preferences.</li>
+<li>Click “Save”.</li>
+</ol>
+</section>
+<section id="step-6-update-repository-settings" class="level2">
+<h2 class="anchored" data-anchor-id="step-6-update-repository-settings">Step 6: Update Repository Settings</h2>
+<p>Ensure your repository settings align with your new policy:</p>
+<ol type="1">
+<li>Go to “Project settings” &gt; “Repositories”.</li>
+<li>Select your repository.</li>
+<li>Under “Policies”:
+<ul>
+<li>Check “Require a minimum number of reviewers”.</li>
+<li>Set “Minimum number of reviewers” (should match your branch policy).</li>
+<li>Check “Check for linked work items”.</li>
+<li>Check “Check for comment resolution”.</li>
+<li>Optionally, check other policies as per your team’s needs.</li>
+</ul></li>
+<li>Click “Save”.</li>
+</ol>
+</section>
+<section id="step-7-educate-your-team" class="level2">
+<h2 class="anchored" data-anchor-id="step-7-educate-your-team">Step 7: Educate Your Team</h2>
+<p>Finally, make sure your team understands the new process:</p>
+<ol type="1">
+<li>Create documentation explaining the new pipeline and its checks.</li>
+<li>Highlight the importance of running checks locally before creating a pull request.</li>
+<li>Explain how to interpret and act on the pipeline results.</li>
+<li>Encourage the use of pre-commit hooks for catching issues early.</li>
+</ol>
+<p>By following these steps, you’ve now set up a robust system where:</p>
+<ol type="1">
+<li>All code changes must go through a pull request.</li>
+<li>Each pull request automatically triggers your build validation pipeline.</li>
+<li>The pipeline checks code formatting, linting, tests, and coverage.</li>
+<li>Pull requests cannot be merged until the pipeline passes and required reviews are completed.</li>
+</ol>
+<p>Now in the repo where you have added the build validation just try to merge the code into main branch you will the build validation pipeline will be automatically added in queue and you can see the logs from the pipeline</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../media/image-3.png" class="img-fluid figure-img"></p>
+<figcaption>alt text</figcaption>
+</figure>
+</div>
+<p>After that if we go into the pipeline one step back there will be two important things <img src="../media/image-4.png" class="img-fluid" alt="alt text"></p>
+<p>on top left there will be a tab called code coverage upon clicking that you will be able to view line by line coverage report of each of the files <img src="../media/image-5.png" class="img-fluid" alt="alt text"></p>
+<p>This setup ensures that all code going into your main branch meets your quality standards. Remember to periodically review and update your pipeline as your project evolves and new best practices emerge.</p>
+</section>
+<section id="conclusion" class="level2">
+<h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
+<p>By following these steps, you’ll have a robust build validation pipeline that ensures code quality across your Python projects. This setup:</p>
+<ul>
+<li>Enforces consistent code style</li>
+<li>Catches potential bugs early</li>
+<li>Encourages comprehensive testing</li>
+<li>Provides clear feedback to developers</li>
+</ul>
+<p>Remember, the key to success is continuous improvement. Don’t hesitate to iterate on this pipeline as you learn what works best for your team and projects. Happy coding!</p>
+<p>It takes lot of time to write up and share with comminity if you think this can benifit you do share the word</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+    let newTheme = '';
+    if(darkModeDefault) {
+      newTheme = isAlternate ? baseTheme : alternateTheme;
+    } else {
+      newTheme = isAlternate ? alternateTheme : baseTheme;
+    }
+    const changeGiscusTheme = () => {
+      // From: https://github.com/giscus/giscus/issues/336
+      const sendMessage = (message) => {
+        const iframe = document.querySelector('iframe.giscus-frame');
+        if (!iframe) return;
+        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+      }
+      sendMessage({
+        setConfig: {
+          theme: newTheme
+        }
+      });
+    }
+    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+    if (isGiscussLoaded) {
+      changeGiscusTheme();
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  const darkModeDefault = false;
+  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+    toggleGiscusIfUsed(toAlternate, darkModeDefault);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/kunaldas\.dev");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<script src="https://giscus.app/client.js" data-repo="kunalworldwide/kunalworldwide.github.io" data-repo-id="R_kgDOLCIa1w" data-category="General" data-category-id="DIC_kwDOLCIa184ClGQR" data-mapping="pathname" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="bottom" data-theme="preferred_color_scheme" data-lang="en" crossorigin="anonymous" async="">
+</script>
+<input type="hidden" id="giscus-base-theme" value="preferred_color_scheme">
+<input type="hidden" id="giscus-alt-theme" value="preferred_color_scheme">
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/kunalworldwide">
+      <i class="bi bi-github" role="img">
+</i> 
+    </a>
+  </li>  
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://twitter.com/kunald_official">
+      <i class="bi bi-twitter" role="img">
+</i> 
+    </a>
+  </li>  
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://linkedin.com/in/kunaldaskd">
+      <i class="bi bi-linkedin" role="img">
+</i> 
+    </a>
+  </li>  
+</ul>
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>
