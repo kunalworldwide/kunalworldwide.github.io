@@ -2,6 +2,7 @@
   {
     "listing": "/talks.html",
     "items": [
+      "/talks/2025-09-06-zero-downtime-dreams.html",
       "/talks/2025-08-23-future-of-kubernetes-ai-driven-management.html",
       "/talks/2025-07-27-future-of-kubernetes-ai-driven-management.html",
       "/talks/2025-04-16-kubernetes-free-microservices.html",
