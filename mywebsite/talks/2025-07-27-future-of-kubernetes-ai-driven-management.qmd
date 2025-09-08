@@ -1,0 +1,26 @@
+---
+title: "The Future of Kubernetes: AI-Driven Management"
+description: "Explore how AI is redefining Kubernetes management for scalability and efficiency."
+date: "2025-07-27"
+location: "Bengaluru, India"
+venue: "Couchbase Office, Bengaluru"
+categories: [Kubernetes, AI, "Cloud Infrastructure", Automation, DevOps]
+slides: "https://1drv.ms/b/c/28810acff77e4c54/EUYuj40R9M1MlKQPgpx4fwIBqNzOhcfqyAefvVZNSytqDg?e=e7SNcY"
+event: "https://lu.ma/izmtx4lj"
+speakers: ["Kunal Das (Developer Advocate APAC, CAST AI)"]
+co_presenters: ["Santanu Kumar Das (Sr DevOps Engineer, Optym)"]
+---
+
+Get the [Slides here](https://1drv.ms/b/c/28810acff77e4c54/EUYuj40R9M1MlKQPgpx4fwIBqNzOhcfqyAefvVZNSytqDg?e=e7SNcY)
+
+[Event Link](https://lu.ma/izmtx4lj)
+
+Speakers: Kunal Das (Developer Advocate APAC, CAST AI)
+
+Co-presenter: Santanu Kumar Das (Sr DevOps Engineer, Optym)
+
+In today’s rapidly evolving cloud landscape, Kubernetes has become the backbone of modern infrastructure. This keynote explores how artificial intelligence is transforming Kubernetes management, enabling organizations to achieve unprecedented levels of automation, optimization, and resilience.
+
+Attendees will discover state-of-the-art AI-driven approaches to cluster monitoring, resource allocation, and automated troubleshooting. Through real-world examples, the session highlights how AI can predict workloads, reduce operational overhead, and keep mission-critical applications running smoothly.
+
+The talk will also discuss challenges such as ensuring trust, scalability, and integration with existing DevOps practices. By the end, participants will gain a strategic view of where Kubernetes and AI are headed—empowering them to architect future-ready cloud platforms.

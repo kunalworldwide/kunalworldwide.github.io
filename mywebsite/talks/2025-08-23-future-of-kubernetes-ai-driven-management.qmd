@@ -1,0 +1,27 @@
+---
+title: "The Future of Kubernetes: AI-Driven Management"
+date: "2025-08-23"
+location: "Bengaluru, India"
+venue: "Google Cloud Community Day Bengaluru"
+description: "Explore how AI is redefining Kubernetes management for scalability and efficiency."
+categories: [Kubernetes, AI, "Cloud Infrastructure", Automation, DevOps]
+slides: "https://1drv.ms/b/c/28810acff77e4c54/EUvpdMYDijpGq8QT4otohv8BGt3C5Oa59XlDd2ewFRwlpQ?e=ePM5Ev"
+event:
+  - "https://konfhub.com/ccdblr25"
+  - "https://gdg.community.dev/events/details/google-gdg-cloud-bengaluru-presents-google-cloud-community-day-bengaluru-2025/"
+---
+Get the [Slides here]({{< meta slides >}})
+
+Event links:
+
+- https://konfhub.com/ccdblr25
+- https://gdg.community.dev/events/details/google-gdg-cloud-bengaluru-presents-google-cloud-community-day-bengaluru-2025/
+
+Explore how AI is redefining Kubernetes management for scalability and efficiency.
+
+Kubernetes has become the foundation of modern cloud infrastructure, and AI is rapidly transforming how it is managed. This session dives into AI-driven techniques enhancing cluster automation, resource optimization, and operational reliability. Attendees will learn about predictive workload management, automated troubleshooting driven by machine learning, and strategies to build resilient Kubernetes environments. The talk also addresses challenges in trust, scalability, and DevOps integration, providing a comprehensive view of Kubernetes’ AI-powered future.
+
+## Resources
+
+- Slides: {{< meta slides >}}
+- Event details: {{< meta event >}}
