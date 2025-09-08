@@ -1,8 +1,14 @@
-# Quarto build artifacts
+# Quarto build artifacts (generated output)
 /_site/
-/.quarto/
+mywebsite/_site/
+.quarto/
+_cache/
 *_files/
 *.html
+
+# Quarto source files - ignore Quarto markdown sources locally so they are not pushed
+# Keep this so you can work with .qmd locally but not commit them to the remote repo
+*.qmd
 
 # R specific
 .Rproj.user
