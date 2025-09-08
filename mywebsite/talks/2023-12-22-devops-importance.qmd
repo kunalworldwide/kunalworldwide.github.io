@@ -5,11 +5,11 @@ date: "2023-12-22"
 location: "Kolkata, India"
 venue: "Google DevFest Kolkata 2023"
 categories: [DevOps, Software Development, Best Practices]
-slides: "https://docs.google.com/presentation/d/1S9fVJeADSnkDMEZUIiMN5YjkkRimAPkJWISasAmcwz8/edit?usp=sharing"
+slides: "https://raw.githubusercontent.com/kunalworldwide/Sessions/main/2023/IND-KOL-EXT-DF23-KUNAL-DAS-DEVOPS.pdf"
 repo: "https://github.com/kunalworldwide/python-deployment-demo"
 ---
 
-Get the [Slides here](https://docs.google.com/presentation/d/1S9fVJeADSnkDMEZUIiMN5YjkkRimAPkJWISasAmcwz8/edit?usp=sharing)
+Get the [Slides here](https://raw.githubusercontent.com/kunalworldwide/Sessions/main/2023/IND-KOL-EXT-DF23-KUNAL-DAS-DEVOPS.pdf)
 
 Code used in Demo [here](https://github.com/kunalworldwide/python-deployment-demo)
 

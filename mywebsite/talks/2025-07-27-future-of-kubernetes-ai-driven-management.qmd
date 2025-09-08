@@ -5,13 +5,13 @@ date: "2025-07-27"
 location: "Bengaluru, India"
 venue: "Couchbase Office, Bengaluru"
 categories: [Kubernetes, AI, "Cloud Infrastructure", Automation, DevOps]
-slides: "https://1drv.ms/b/c/28810acff77e4c54/EUYuj40R9M1MlKQPgpx4fwIBqNzOhcfqyAefvVZNSytqDg?e=e7SNcY"
+slides: "https://raw.githubusercontent.com/kunalworldwide/Sessions/main/2025/C3%20%231/The%20Future%20of%20Kubernetes%20AI-Driven%20Management.pdf"
 event: "https://lu.ma/izmtx4lj"
 speakers: ["Kunal Das (Developer Advocate APAC, CAST AI)"]
 co_presenters: ["Santanu Kumar Das (Sr DevOps Engineer, Optym)"]
 ---
 
-Get the [Slides here](https://1drv.ms/b/c/28810acff77e4c54/EUYuj40R9M1MlKQPgpx4fwIBqNzOhcfqyAefvVZNSytqDg?e=e7SNcY)
+Get the [Slides here](https://raw.githubusercontent.com/kunalworldwide/Sessions/main/2025/C3%20%231/The%20Future%20of%20Kubernetes%20AI-Driven%20Management.pdf)
 
 [Event Link](https://lu.ma/izmtx4lj)
 

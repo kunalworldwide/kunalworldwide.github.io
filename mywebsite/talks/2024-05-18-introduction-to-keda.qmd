@@ -5,7 +5,7 @@ date: "2024-05-18"
 location: "Bengaluru, India"
 venue: "Kubetools Day 2.0 at Guidewire Software"
 categories: [Kubernetes, KEDA, Autoscaling, Cloud Native]
-slides: "https://github.com/kunalworldwide/introductiontokeda/blob/main/Introduction%20to%20KEDA.pdf"
+slides: "https://raw.githubusercontent.com/kunalworldwide/introductiontokeda/main/Introduction%20to%20KEDA.pdf"
 demo: "https://lnkd.in/du2NFM7F"
 video: "https://lnkd.in/deKraEQb"
 event: "https://www.meetup.com/collabnix/events/300163572/"

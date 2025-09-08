@@ -5,7 +5,7 @@ date: "2025-04-04"
 location: "Bengaluru, India"
 venue: "Build with AI Workshop Series at Amity University Bengaluru"
 categories: [AI, Model Context Protocol, Intelligent Assistants, MCP]
-slides: "https://1drv.ms/b/c/28810acff77e4c54/ESGGE0xmJ8JAqOCqQJW3vXcBUrO5RovwhxZ0D3MQh25T2g?e=w2IbDU"
+slides: "https://raw.githubusercontent.com/kunalworldwide/Sessions/main/2025/Build%20with%20AI%20%40%20Amity%20University/Amity_APR_2025_design.pdf"
 repo: "https://github.com/kunalworldwide/mcp_server_demo"
 event: "https://gdg.community.dev/events/details/google-gdg-on-campus-amity-university-bengaluru-india-presents-build-with-ai-2025-04-04/"
 ---

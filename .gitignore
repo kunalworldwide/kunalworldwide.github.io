@@ -6,9 +6,7 @@ _cache/
 *_files/
 *.html
 
-# Quarto source files - ignore Quarto markdown sources locally so they are not pushed
-# Keep this so you can work with .qmd locally but not commit them to the remote repo
-*.qmd
+# Quarto source files - keep .qmd tracked so sources are included in the repo
 
 # R specific
 .Rproj.user
