@@ -1,12 +1,12 @@
 ---
 title: "Container Live Migration: The Missing Piece of the Kubernetes Ecosystem"
 description: "Discover an innovative Kubernetes technique for live migration of stateful containers with zero downtime"
-date: "2025-09-20"
-location: "Kolkata, India"
-venue: "India Power Corporation,Plot No.X 1, 2 & 3, EP Block, Sector V, Bidhannagar, Kolkata, West Bengal 700091"
+date: "2025-09-13"
+location: "Kerala, India"
+venue: "Sree Gokulam Convention Center , Kochi, Ernakulam, Kerala 682017"
 categories: [Optimization, Kubernetes, DevOps, SRE]
-slides: "https://github.com/kunalworldwide/Sessions/blob/main/2025/Cloudnative%20Kolkata/CNCG%20KOLKATA.pdf"
-event: "https://community.cncf.io/events/details/cncf-cloud-native-kolkata-presents-cloud-native-puja-meetup-scaling-cloud-celebrating-culture/cohost-cloud-native-kolkata"
+slides: "https://github.com/kunalworldwide/Sessions/blob/main/2025/DMCON%2025/DMCON%2025.pdf"
+event: "https://events.devopsmalayalam.io/"
 speakers: ["Kunal Das (Developer Advocate APAC, CAST AI)"]
 ---
 
