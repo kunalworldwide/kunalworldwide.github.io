@@ -6,9 +6,7 @@ venue: "Google Cloud Community Day Bengaluru"
 description: "Explore how AI is redefining Kubernetes management for scalability and efficiency."
 categories: [Kubernetes, AI, "Cloud Infrastructure", Automation, DevOps]
 slides: "https://raw.githubusercontent.com/kunalworldwide/Sessions/main/2025/GDG_BLR/GCCDBLR-The%20Future%20of%20Kubernetes%20AI-Driven%20Management.pdf"
-event:
-  - "https://konfhub.com/ccdblr25"
-  - "https://gdg.community.dev/events/details/google-gdg-cloud-bengaluru-presents-google-cloud-community-day-bengaluru-2025/"
+event: "https://gdg.community.dev/events/details/google-gdg-cloud-bengaluru-presents-google-cloud-community-day-bengaluru-2025/"
 ---
 Get the [Slides here]({{< meta slides >}})
 
