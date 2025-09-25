@@ -1,22 +1,5 @@
 [
   {
-    "listing": "/talks.html",
-    "items": [
-      "/talks/2025-09-06-zero-downtime-dreams.html",
-      "/talks/2025-08-23-future-of-kubernetes-ai-driven-management.html",
-      "/talks/2025-07-27-future-of-kubernetes-ai-driven-management.html",
-      "/talks/2025-04-16-kubernetes-free-microservices.html",
-      "/talks/2025-04-04-building-intelligent-assistants-mcp.html",
-      "/talks/2024-08-24-policy-control-opa.html",
-      "/talks/2024-05-18-introduction-to-keda.html",
-      "/talks/2024-05-11-containerization-kubernetes.html",
-      "/talks/2024-05-04-containerization-scale.html",
-      "/talks/2023-12-22-devops-importance.html",
-      "/talks/2023-07-11-telecom-churn-prediction.html",
-      "/talks/2023-05-23-lead-scoring-model.html"
-    ]
-  },
-  {
     "listing": "/posts.html",
     "items": [
       "/posts/2025-06-07-azure-containerapps-handson.html",
@@ -52,6 +35,25 @@
       "/posts/2022-12-03-azure-best-practices.html",
       "/posts/2022-11-18-azure-devops-agent-trick.html",
       "/posts/2022-10-12-deploying-azure-services-with-terraform.html"
+    ]
+  },
+  {
+    "listing": "/talks.html",
+    "items": [
+      "/talks/2025-09-13-container-live-migration.html",
+      "/talks/2025-09-06-zero-downtime-dreams.html",
+      "/talks/2025-09-20-moving-workloads-without-downtime.html",
+      "/talks/2025-08-23-future-of-kubernetes-ai-driven-management.html",
+      "/talks/2025-07-27-future-of-kubernetes-ai-driven-management.html",
+      "/talks/2025-04-16-kubernetes-free-microservices.html",
+      "/talks/2025-04-04-building-intelligent-assistants-mcp.html",
+      "/talks/2024-08-24-policy-control-opa.html",
+      "/talks/2024-05-18-introduction-to-keda.html",
+      "/talks/2024-05-11-containerization-kubernetes.html",
+      "/talks/2024-05-04-containerization-scale.html",
+      "/talks/2023-12-22-devops-importance.html",
+      "/talks/2023-07-11-telecom-churn-prediction.html",
+      "/talks/2023-05-23-lead-scoring-model.html"
     ]
   }
 ]
