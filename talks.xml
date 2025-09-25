@@ -12,8 +12,8 @@
 <generator>quarto-1.6.39</generator>
 <lastBuildDate>Sat, 20 Sep 2025 00:00:00 GMT</lastBuildDate>
 <item>
-  <title>Container Live Migration: The Missing Piece of the Kubernetes Ecosystem</title>
-  <link>https://kunaldas.dev/talks/2025-09-13-container-live-migration.html</link>
+  <title>Moving workloads without downtime: Container Live Migration</title>
+  <link>https://kunaldas.dev/talks/2025-09-20-moving-workloads-without-downtime.html</link>
   <description><![CDATA[ 
 
 
@@ -22,7 +22,17 @@
 <p>Get the <a href="https://github.com/kunalworldwide/Sessions/blob/main/2025/Cloudnative%20Kolkata/CNCG%20KOLKATA.pdf">Slides here</a></p>
 <p><a href="https://community.cncf.io/events/details/cncf-cloud-native-kolkata-presents-cloud-native-puja-meetup-scaling-cloud-celebrating-culture/cohost-cloud-native-kolkata">Event Link</a></p>
 <p>Speaker: Kunal Das (Developer Advocate APAC, CAST AI)</p>
-<p>Explore a cutting-edge approach to achieving zero-downtime live migration for stateful workloads in Kubernetes.</p>
+<p>This session covers practical approaches to observability and optimisation that help teams achieve live migrations, safer deployments, and lower operational cost while maintaining availability.</p>
+<section id="agenda" class="level2">
+<h2 class="anchored" data-anchor-id="agenda">Agenda</h2>
+<ol type="1">
+<li>Why observability matters for uptime and optimisation</li>
+<li>Key signals and telemetry for live migrations</li>
+<li>Automated optimisation: examples and tooling</li>
+<li>Patterns for near-zero downtime deployments</li>
+<li>Case studies and lessons learned</li>
+</ol>
+</section>
 <section id="resources" class="level2">
 <h2 class="anchored" data-anchor-id="resources">Resources</h2>
 <ul>
@@ -38,8 +48,38 @@
   <category>Kubernetes</category>
   <category>DevOps</category>
   <category>SRE</category>
-  <guid>https://kunaldas.dev/talks/2025-09-13-container-live-migration.html</guid>
+  <guid>https://kunaldas.dev/talks/2025-09-20-moving-workloads-without-downtime.html</guid>
   <pubDate>Sat, 20 Sep 2025 00:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Container Live Migration: The Missing Piece of the Kubernetes Ecosystem</title>
+  <link>https://kunaldas.dev/talks/2025-09-13-container-live-migration.html</link>
+  <description><![CDATA[ 
+
+
+
+
+<p>Get the <a href="https://github.com/kunalworldwide/Sessions/blob/main/2025/DMCON%2025/DMCON%2025.pdf">Slides here</a></p>
+<p><a href="https://events.devopsmalayalam.io/">Event Link</a></p>
+<p>Speaker: Kunal Das (Developer Advocate APAC, CAST AI)</p>
+<p>Explore a cutting-edge approach to achieving zero-downtime live migration for stateful workloads in Kubernetes.</p>
+<section id="resources" class="level2">
+<h2 class="anchored" data-anchor-id="resources">Resources</h2>
+<ul>
+<li>Slides: https://github.com/kunalworldwide/Sessions/blob/main/2025/DMCON%2025/DMCON%2025.pdf</li>
+<li>Event: https://events.devopsmalayalam.io/</li>
+</ul>
+
+
+</section>
+
+ ]]></description>
+  <category>Optimization</category>
+  <category>Kubernetes</category>
+  <category>DevOps</category>
+  <category>SRE</category>
+  <guid>https://kunaldas.dev/talks/2025-09-13-container-live-migration.html</guid>
+  <pubDate>Sat, 13 Sep 2025 00:00:00 GMT</pubDate>
 </item>
 <item>
   <title>Zero-Downtime Dreams: Observability &amp; Optimisation for Live Systems</title>
@@ -80,47 +120,6 @@
   <category>DevOps</category>
   <category>SRE</category>
   <guid>https://kunaldas.dev/talks/2025-09-06-zero-downtime-dreams.html</guid>
-  <pubDate>Sat, 06 Sep 2025 00:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>Moving workloads without downtime: Container Live Migration</title>
-  <link>https://kunaldas.dev/talks/2025-09-20-moving-workloads-without-downtime.html</link>
-  <description><![CDATA[ 
-
-
-
-
-<p>Get the <a href="https://raw.githubusercontent.com/kunalworldwide/Sessions/main/2025/Observability%20%26%20Optimisation/Zero-Downtime%20Dreams_compressed.pdf">Slides here</a></p>
-<p><a href="https://lu.ma/q6ypbkep">Event Link</a></p>
-<p>Speaker: Kunal Das (Developer Advocate APAC, CAST AI)</p>
-<p>This session covers practical approaches to observability and optimisation that help teams achieve live migrations, safer deployments, and lower operational cost while maintaining availability.</p>
-<section id="agenda" class="level2">
-<h2 class="anchored" data-anchor-id="agenda">Agenda</h2>
-<ol type="1">
-<li>Why observability matters for uptime and optimisation</li>
-<li>Key signals and telemetry for live migrations</li>
-<li>Automated optimisation: examples and tooling</li>
-<li>Patterns for near-zero downtime deployments</li>
-<li>Case studies and lessons learned</li>
-</ol>
-</section>
-<section id="resources" class="level2">
-<h2 class="anchored" data-anchor-id="resources">Resources</h2>
-<ul>
-<li>Slides: https://raw.githubusercontent.com/kunalworldwide/Sessions/main/2025/Observability%20%26%20Optimisation/Zero-Downtime%20Dreams_compressed.pdf</li>
-<li>Event: https://lu.ma/q6ypbkep</li>
-</ul>
-
-
-</section>
-
- ]]></description>
-  <category>Observability</category>
-  <category>Optimization</category>
-  <category>Kubernetes</category>
-  <category>DevOps</category>
-  <category>SRE</category>
-  <guid>https://kunaldas.dev/talks/2025-09-20-moving-workloads-without-downtime.html</guid>
   <pubDate>Sat, 06 Sep 2025 00:00:00 GMT</pubDate>
 </item>
 <item>
