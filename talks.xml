@@ -10,7 +10,69 @@
 <atom:link href="https://kunaldas.dev/talks.xml" rel="self" type="application/rss+xml"/>
 <description>DevOps &amp; Cloud Technology Blog</description>
 <generator>quarto-1.6.39</generator>
-<lastBuildDate>Sat, 20 Sep 2025 00:00:00 GMT</lastBuildDate>
+<lastBuildDate>Sat, 11 Oct 2025 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>Migration Dreams: Zero Downtime, Maximum Impact</title>
+  <link>https://kunaldas.dev/talks/2025-10-11-migration-dreams-zero-downtime-maximum-impact.html</link>
+  <description><![CDATA[ 
+
+
+
+
+<p>Get the <a href="https://github.com/kunalworldwide/Sessions/blob/main/2025/Aws%20Community%20Day%20Mumbai%2025/MUM_AWS_COMMUNITY_DAY_2025.pdf">Slides here</a></p>
+<p>This session covers practical strategies for executing migrations with zero downtime while maximizing business impact. Key topics include:</p>
+<ul>
+<li>Planning and executing zero-downtime migrations</li>
+<li>Migration strategies for AWS workloads</li>
+<li>Minimizing risk during critical transitions</li>
+<li>Best practices for maintaining service availability</li>
+<li>Real-world migration case studies</li>
+</ul>
+<p><strong>Event:</strong> AWS Community Day Mumbai 2025</p>
+<p><strong>Venue:</strong> Nesco IT Park Mumbai</p>
+
+
+
+ ]]></description>
+  <category>Migration</category>
+  <category>AWS</category>
+  <category>DevOps</category>
+  <category>Zero Downtime</category>
+  <category>Cloud</category>
+  <guid>https://kunaldas.dev/talks/2025-10-11-migration-dreams-zero-downtime-maximum-impact.html</guid>
+  <pubDate>Sat, 11 Oct 2025 00:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Smart Kubernetes: AI-Powered Cluster Optimization Without Breaking the Bank</title>
+  <link>https://kunaldas.dev/talks/2025-10-09-smart-kubernetes-ai-powered-cluster-optimization.html</link>
+  <description><![CDATA[ 
+
+
+
+
+<p>Get the <a href="https://github.com/kunalworldwide/Sessions/blob/main/2025/Tech%20Week%20Singapore/CAI_DEVOPS_DAY%202_1140pptx.pdf">Slides here</a></p>
+<p>This session explores how AI-powered optimization can help manage Kubernetes clusters efficiently without breaking the bank. Learn practical strategies for:</p>
+<ul>
+<li>Leveraging AI for intelligent resource allocation</li>
+<li>Cost optimization techniques for Kubernetes clusters</li>
+<li>Balancing performance and budget constraints</li>
+<li>Real-world implementations and best practices</li>
+</ul>
+<p><strong>Time:</strong> 11:40 - 12:00</p>
+<p><strong>Venue:</strong> DevOps &amp; Platform Engineering Theatre, Sands Marina Bay Singapore</p>
+
+
+
+ ]]></description>
+  <category>Kubernetes</category>
+  <category>AI</category>
+  <category>Optimization</category>
+  <category>Cost Optimization</category>
+  <category>DevOps</category>
+  <category>Platform Engineering</category>
+  <guid>https://kunaldas.dev/talks/2025-10-09-smart-kubernetes-ai-powered-cluster-optimization.html</guid>
+  <pubDate>Thu, 09 Oct 2025 00:00:00 GMT</pubDate>
+</item>
 <item>
   <title>Moving workloads without downtime: Container Live Migration</title>
   <link>https://kunaldas.dev/talks/2025-09-20-moving-workloads-without-downtime.html</link>

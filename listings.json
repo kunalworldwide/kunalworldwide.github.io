@@ -40,6 +40,8 @@
   {
     "listing": "/talks.html",
     "items": [
+      "/talks/2025-10-11-migration-dreams-zero-downtime-maximum-impact.html",
+      "/talks/2025-10-09-smart-kubernetes-ai-powered-cluster-optimization.html",
       "/talks/2025-09-20-moving-workloads-without-downtime.html",
       "/talks/2025-09-13-container-live-migration.html",
       "/talks/2025-09-06-zero-downtime-dreams.html",
