@@ -1,0 +1,22 @@
+---
+title: "Smart Kubernetes: AI-Powered Cluster Optimization Without Breaking the Bank"
+description: "AI-powered approaches to Kubernetes cluster optimization focused on cost efficiency and performance"
+date: "2025-10-09"
+location: "Singapore"
+venue: "Sands Marina Bay Singapore, DevOps & Platform Engineering Theatre"
+categories: [Kubernetes, AI, Optimization, Cost Optimization, DevOps, Platform Engineering]
+slides: "https://github.com/kunalworldwide/Sessions/blob/main/2025/Tech%20Week%20Singapore/CAI_DEVOPS_DAY%202_1140pptx.pdf"
+---
+
+Get the [Slides here]({{< meta slides >}})
+
+This session explores how AI-powered optimization can help manage Kubernetes clusters efficiently without breaking the bank. Learn practical strategies for:
+
+- Leveraging AI for intelligent resource allocation
+- Cost optimization techniques for Kubernetes clusters
+- Balancing performance and budget constraints
+- Real-world implementations and best practices
+
+**Time:** 11:40 - 12:00
+
+**Venue:** DevOps & Platform Engineering Theatre, Sands Marina Bay Singapore
