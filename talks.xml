@@ -10,7 +10,40 @@
 <atom:link href="https://kunaldas.dev/talks.xml" rel="self" type="application/rss+xml"/>
 <description>DevOps &amp; Cloud Technology Blog</description>
 <generator>quarto-1.6.39</generator>
-<lastBuildDate>Sat, 11 Oct 2025 00:00:00 GMT</lastBuildDate>
+<lastBuildDate>Sat, 08 Nov 2025 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>AI Enabler: Intelligent LLM Routing at Scale</title>
+  <link>https://kunaldas.dev/talks/2025-11-08-ai-enabler-intelligent-llm-routing-at-scale.html</link>
+  <description><![CDATA[ 
+
+
+
+
+<p>Get the <a href="https://github.com/kunalworldwide/Sessions/blob/main/2025/AiXChange/AI%20Enabler%20Intelligent%20LLM%20Routing%20at%20Scale%20.pdf">Slides here</a></p>
+<p>This session explores intelligent LLM routing strategies and how to scale them effectively for production AI applications. Key topics include:</p>
+<ul>
+<li>Understanding intelligent routing patterns for LLMs</li>
+<li>Scaling considerations for LLM-based systems</li>
+<li>Performance optimization techniques</li>
+<li>Cost-effective routing strategies</li>
+<li>Real-world implementation patterns</li>
+</ul>
+<p><strong>Event:</strong> AI XCHANGE Meetup - The Right Way to Build AI?</p>
+<p><strong>Venue:</strong> IBM Innovation Center, Embassy Golf Links, Koramangala</p>
+<p><strong>Host:</strong> Prem Goswami</p>
+
+
+
+ ]]></description>
+  <category>AI</category>
+  <category>LLM</category>
+  <category>Routing</category>
+  <category>Scale</category>
+  <category>Machine Learning</category>
+  <category>Cloud</category>
+  <guid>https://kunaldas.dev/talks/2025-11-08-ai-enabler-intelligent-llm-routing-at-scale.html</guid>
+  <pubDate>Sat, 08 Nov 2025 00:00:00 GMT</pubDate>
+</item>
 <item>
   <title>Migration Dreams: Zero Downtime, Maximum Impact</title>
   <link>https://kunaldas.dev/talks/2025-10-11-migration-dreams-zero-downtime-maximum-impact.html</link>
