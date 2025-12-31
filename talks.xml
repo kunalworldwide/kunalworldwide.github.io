@@ -10,7 +10,33 @@
 <atom:link href="https://kunaldas.dev/talks.xml" rel="self" type="application/rss+xml"/>
 <description>DevOps &amp; Cloud Technology Blog</description>
 <generator>quarto-1.6.39</generator>
-<lastBuildDate>Sun, 16 Nov 2025 00:00:00 GMT</lastBuildDate>
+<lastBuildDate>Sat, 22 Nov 2025 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>Same Quality, Half the Cost: The LLM Optimization Playbook</title>
+  <link>https://kunaldas.dev/talks/2025-11-22-agentic-genai-community-meetup.html</link>
+  <description><![CDATA[ 
+
+
+
+
+<p>Presenting strategies for optimizing large language model costs while maintaining output quality at the Agentic &amp; GenAI Community Meetup.</p>
+<p>This session addresses practical approaches to reducing LLM operational costs without compromising on performance and quality.</p>
+<p><strong>Event:</strong> Agentic &amp; GenAI Community Meetup</p>
+<p><strong>Time:</strong> 11:40 AM - 12:20 PM IST</p>
+<p><strong>Venue:</strong> Samarthanam Auditorium, HSR Layout, Bengaluru</p>
+<p><a href="https://luma.com/uvk48pfa">Register for the event</a></p>
+
+
+
+ ]]></description>
+  <category>AI</category>
+  <category>LLM</category>
+  <category>GenAI</category>
+  <category>Optimization</category>
+  <category>Cost Management</category>
+  <guid>https://kunaldas.dev/talks/2025-11-22-agentic-genai-community-meetup.html</guid>
+  <pubDate>Sat, 22 Nov 2025 00:00:00 GMT</pubDate>
+</item>
 <item>
   <title>Cluster &amp; Chai meetup ☕️ ☁️</title>
   <link>https://kunaldas.dev/talks/2025-11-16-cluster-and-chai-meetup.html</link>
@@ -23,6 +49,7 @@
 <p><strong>Event:</strong> Cluster &amp; Chai Meetup</p>
 <p><strong>Time:</strong> 10:00 AM - 2:00 PM IST</p>
 <p><strong>Venue:</strong> WeWork Roshni Tech Hub, Marathahalli, Bangalore</p>
+<p><a href="https://luma.com/mr1si9oe">Event Details</a></p>
 
 
 
