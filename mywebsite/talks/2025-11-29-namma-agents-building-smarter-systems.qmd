@@ -1,0 +1,22 @@
+---
+title: "From Complex to Click - AI Made Simple"
+description: "Exploring multi-agent AI systems and how intelligent agents collaborate to solve complex problems autonomously"
+date: "2025-11-29"
+location: "Bengaluru, India"
+venue: "Google Kyoto East, Bagmane Capital Park"
+categories: [AI, Multi-Agent Systems, LangChain, AutoGen, CrewAI, Agents]
+event: "Namma AGENTS: Building Smarter Systems"
+event-link: "https://luma.com/mdajv6ef"
+---
+
+Host and speaker at Namma AGENTS meetup, presenting "From Complex to Click - AI Made Simple" - exploring how multi-agent AI systems enable intelligent agents to collaborate, reason, and solve complex problems autonomously.
+
+This hands-on technical meetup explores agentic frameworks like LangChain, AutoGen, and CrewAI.
+
+**Event:** Namma AGENTS: Building Smarter Systems
+
+**Time:** 11:30 AM - 12:00 PM IST
+
+**Venue:** Google Kyoto East, Bagmane Capital Park, Kyoto East Tower, Dodanakundi, Marathahalli Post, Mahadevapura, Bengaluru
+
+[Register for the event]({{< meta event-link >}})
