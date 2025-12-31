@@ -35,6 +35,55 @@
   <pubDate>Sun, 16 Nov 2025 00:00:00 GMT</pubDate>
 </item>
 <item>
+  <title>Building Production-Ready Kubernetes on Ubuntu: A Checklist Approach</title>
+  <link>https://kunaldas.dev/talks/2025-11-15-building-production-ready-kubernetes-ubuntu.html</link>
+  <description><![CDATA[ 
+
+
+
+
+<p>Get the <a href="https://github.com/kunalworldwide/Sessions/blob/main/2025/UbuCon%20India/Building%20Production-Ready%20Kubernetes%20on%20Ubuntu_compressed_compressed.pdf">Slides here</a></p>
+<p>This practical presentation offers implementable guidance for deploying production-grade Kubernetes clusters on Ubuntu. The session addresses critical infrastructure decisions and provides actionable insights you can implement immediately.</p>
+<section id="key-topics" class="level2">
+<h2 class="anchored" data-anchor-id="key-topics">Key Topics</h2>
+<ul>
+<li>Container networking interfaces (CNI) selection and configuration</li>
+<li>Persistent storage solutions for production workloads</li>
+<li>Security hardening aligned with CIS benchmarks</li>
+<li>Runtime monitoring via eBPF technology</li>
+<li>Vulnerability assessment automation</li>
+<li>AppArmor container security implementation</li>
+<li>Resource optimization strategies</li>
+<li>Scalable observability from small to multi-region deployments</li>
+</ul>
+</section>
+<section id="what-youll-get" class="level2">
+<h2 class="anchored" data-anchor-id="what-youll-get">What You’ll Get</h2>
+<ul>
+<li>Downloadable checklist covering networking, storage configuration, and access control</li>
+<li>kubectl commands, YAML configurations, and automation scripts for Ubuntu environments</li>
+<li>Disaster recovery procedures and security scanning tools</li>
+<li>Common pitfalls to avoid in production Kubernetes deployments</li>
+</ul>
+<p><strong>Event:</strong> UbuCon India 2025</p>
+<p><strong>Track:</strong> DevOps &amp; Security</p>
+<p><strong>Duration:</strong> 30 minutes</p>
+<p><strong>Time:</strong> 3:00 PM IST</p>
+
+
+</section>
+
+ ]]></description>
+  <category>Kubernetes</category>
+  <category>Ubuntu</category>
+  <category>DevOps</category>
+  <category>Security</category>
+  <category>Production</category>
+  <category>Cloud Native</category>
+  <guid>https://kunaldas.dev/talks/2025-11-15-building-production-ready-kubernetes-ubuntu.html</guid>
+  <pubDate>Sat, 15 Nov 2025 00:00:00 GMT</pubDate>
+</item>
+<item>
   <title>AI Enabler: Intelligent LLM Routing at Scale</title>
   <link>https://kunaldas.dev/talks/2025-11-08-ai-enabler-intelligent-llm-routing-at-scale.html</link>
   <description><![CDATA[ 
