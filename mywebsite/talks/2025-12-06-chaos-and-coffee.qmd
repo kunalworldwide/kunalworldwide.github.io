@@ -1,0 +1,22 @@
+---
+title: "Building Bulletproof AI: Cost-Optimized Resiliency for LLM Workloads"
+description: "Optimizing infrastructure costs while maintaining resilient AI systems and LLM workloads"
+date: "2025-12-06"
+location: "Bengaluru, India"
+venue: "Harness"
+categories: [AI, LLM, Resiliency, Cost Optimization, Infrastructure, Cloud]
+event: "Chaos & Coffee: Brewing Resilient Systems with AI"
+event-link: "https://luma.com/hdjinbkm"
+---
+
+Presenting strategies for building resilient AI systems with cost-optimized infrastructure for LLM workloads at Chaos & Coffee meetup.
+
+This session explores how to transform infrastructure chaos into structured, resilient cloud systems while maintaining cost efficiency for AI workloads.
+
+**Event:** Chaos & Coffee: Brewing Resilient Systems with AI
+
+**Time:** 10:30 AM - 2:30 PM IST
+
+**Venue:** Harness, Bengaluru
+
+[Event Details]({{< meta event-link >}})
