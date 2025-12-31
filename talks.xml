@@ -10,7 +10,34 @@
 <atom:link href="https://kunaldas.dev/talks.xml" rel="self" type="application/rss+xml"/>
 <description>DevOps &amp; Cloud Technology Blog</description>
 <generator>quarto-1.6.39</generator>
-<lastBuildDate>Sat, 22 Nov 2025 00:00:00 GMT</lastBuildDate>
+<lastBuildDate>Sat, 29 Nov 2025 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>From Complex to Click - AI Made Simple</title>
+  <link>https://kunaldas.dev/talks/2025-11-29-namma-agents-building-smarter-systems.html</link>
+  <description><![CDATA[ 
+
+
+
+
+<p>Host and speaker at Namma AGENTS meetup, presenting “From Complex to Click - AI Made Simple” - exploring how multi-agent AI systems enable intelligent agents to collaborate, reason, and solve complex problems autonomously.</p>
+<p>This hands-on technical meetup explores agentic frameworks like LangChain, AutoGen, and CrewAI.</p>
+<p><strong>Event:</strong> Namma AGENTS: Building Smarter Systems</p>
+<p><strong>Time:</strong> 11:30 AM - 12:00 PM IST</p>
+<p><strong>Venue:</strong> Google Kyoto East, Bagmane Capital Park, Kyoto East Tower, Dodanakundi, Marathahalli Post, Mahadevapura, Bengaluru</p>
+<p><a href="https://luma.com/mdajv6ef">Register for the event</a></p>
+
+
+
+ ]]></description>
+  <category>AI</category>
+  <category>Multi-Agent Systems</category>
+  <category>LangChain</category>
+  <category>AutoGen</category>
+  <category>CrewAI</category>
+  <category>Agents</category>
+  <guid>https://kunaldas.dev/talks/2025-11-29-namma-agents-building-smarter-systems.html</guid>
+  <pubDate>Sat, 29 Nov 2025 00:00:00 GMT</pubDate>
+</item>
 <item>
   <title>Same Quality, Half the Cost: The LLM Optimization Playbook</title>
   <link>https://kunaldas.dev/talks/2025-11-22-agentic-genai-community-meetup.html</link>
@@ -777,117 +804,6 @@
   <category>Analytics</category>
   <guid>https://kunaldas.dev/talks/2023-07-11-telecom-churn-prediction.html</guid>
   <pubDate>Tue, 11 Jul 2023 00:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>Lead Scoring Model for Education Institute</title>
-  <link>https://kunaldas.dev/talks/2023-05-23-lead-scoring-model.html</link>
-  <description><![CDATA[ 
-
-
-
-
-<section id="table-of-contents" class="level1">
-<h1>Table of Contents</h1>
-<ol type="1">
-<li>Project Overview</li>
-<li>Approach
-<ol type="1">
-<li>Data Understanding and Cleaning</li>
-<li>Exploratory Data Analysis (EDA)</li>
-<li>Feature Engineering</li>
-<li>Model Building and Evaluation</li>
-</ol></li>
-<li>Key Learnings</li>
-<li>Conclusion</li>
-<li>Further Reading</li>
-<li>Co-Authors</li>
-</ol>
-<section id="project-overview" class="level2">
-<h2 class="anchored" data-anchor-id="project-overview">Project Overview</h2>
-<p>This project involves developing a lead scoring model for X Education to identify potential customers with a higher likelihood of conversion. The goal is to achieve a lead conversion rate of around 80%.</p>
-</section>
-<section id="approach" class="level2">
-<h2 class="anchored" data-anchor-id="approach">Approach</h2>
-<p>The approach was divided into four key stages:</p>
-<ol type="1">
-<li><strong>Data Understanding and Cleaning</strong></li>
-<li><strong>Exploratory Data Analysis (EDA)</strong></li>
-<li><strong>Feature Engineering</strong></li>
-<li><strong>Model Building and Evaluation</strong></li>
-</ol>
-<section id="part-1-data-understanding-and-cleaning" class="level3">
-<h3 class="anchored" data-anchor-id="part-1-data-understanding-and-cleaning">Part 1: Data Understanding and Cleaning</h3>
-<ul>
-<li><strong>Objective</strong>: Understanding the dataset’s structure and cleaning the data.</li>
-<li><strong>Tasks Performed</strong>:
-<ul>
-<li>Handling missing values.</li>
-<li>Dropping irrelevant columns.</li>
-<li>Addressing data inconsistencies.</li>
-</ul></li>
-</ul>
-</section>
-<section id="part-2-exploratory-data-analysis-eda" class="level3">
-<h3 class="anchored" data-anchor-id="part-2-exploratory-data-analysis-eda">Part 2: Exploratory Data Analysis (EDA)</h3>
-<ul>
-<li><strong>Objective</strong>: Gaining insights through visualizations and statistical summaries.</li>
-<li><strong>Key Findings</strong>:
-<ul>
-<li>Importance of features like total visits, time spent on the website, and page views in predicting conversion.</li>
-</ul></li>
-</ul>
-</section>
-<section id="part-3-feature-engineering" class="level3">
-<h3 class="anchored" data-anchor-id="part-3-feature-engineering">Part 3: Feature Engineering</h3>
-<ul>
-<li><strong>Objective</strong>: Enhancing the model’s predictive power through feature transformation and creation.</li>
-<li><strong>Tasks Performed</strong>:
-<ul>
-<li>Encoding categorical variables.</li>
-<li>Scaling numerical features.</li>
-<li>Handling outliers.</li>
-<li>Splitting the dataset into training and testing sets.</li>
-</ul></li>
-</ul>
-</section>
-<section id="part-4-model-building-and-evaluation" class="level3">
-<h3 class="anchored" data-anchor-id="part-4-model-building-and-evaluation">Part 4: Model Building and Evaluation</h3>
-<ul>
-<li><strong>Model Used</strong>: Logistic Regression.</li>
-<li><strong>Performance</strong>:
-<ul>
-<li>Achieved an accuracy of approximately 79.05% on the test set.</li>
-<li>Evaluated using sensitivity, specificity, precision, and the precision-recall curve.</li>
-<li>Identified areas for improvement in recall.</li>
-</ul></li>
-</ul>
-</section>
-</section>
-<section id="key-learnings" class="level2">
-<h2 class="anchored" data-anchor-id="key-learnings">Key Learnings</h2>
-<ul>
-<li><strong>Data Preprocessing</strong>: Essential for accurate modeling.</li>
-<li><strong>Exploratory Data Analysis (EDA)</strong>: Crucial for understanding the dataset and feature selection.</li>
-<li><strong>Feature Engineering</strong>: Significantly impacts model performance.</li>
-<li><strong>Model Selection and Evaluation</strong>: Vital for achieving desired outcomes.</li>
-<li><strong>Interpretability and Explainability</strong>: Important for providing actionable insights.</li>
-<li><strong>Precision-Recall Trade-off</strong>: Aids in selecting an optimal threshold for the model.</li>
-</ul>
-</section>
-<section id="conclusion" class="level2">
-<h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
-<p>The project successfully developed a lead scoring model for X Education, employing a systematic approach and best practices in data preprocessing and modeling.</p>
-
-
-</section>
-</section>
-
- ]]></description>
-  <category>Machine Learning</category>
-  <category>Education</category>
-  <category>Case Study</category>
-  <guid>https://kunaldas.dev/talks/2023-05-23-lead-scoring-model.html</guid>
-  <pubDate>Tue, 23 May 2023 00:00:00 GMT</pubDate>
 </item>
 </channel>
 </rss>
