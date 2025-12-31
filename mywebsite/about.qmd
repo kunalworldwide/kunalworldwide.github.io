@@ -19,8 +19,16 @@ title: "About Me"
 ::: {.column width="70%"}
 ## Professional Journey
 
+### Developer Advocate at Cast AI
+*July 2025 - Present*
+
+- Advocating for cloud-native technologies and Kubernetes optimization in the APAC region
+- Building community engagement through technical talks and meetups
+- Creating educational content on AI/ML infrastructure, LLM routing, and cost optimization
+- Demonstrating best practices for production-ready Kubernetes deployments
+
 ### Sr DevOps Engineer at Cyncly
-*March 2024 - Present*
+*March 2024 - July 2025*
 
 - Collaboration with developers to deploy API in microservice based architecture
 - Branching strategy, Deployment strategy, approval mechanism, DevOps Workflow design and setup
