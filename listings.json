@@ -1,45 +1,8 @@
 [
   {
-    "listing": "/posts.html",
-    "items": [
-      "/posts/2025-06-07-azure-containerapps-handson.html",
-      "/posts/2024-12-06-gpu-workloads-kubernetes.html",
-      "/posts/2024-10-03-python-build-validation-pipeline.html",
-      "/posts/2024-01-19-exploring-azure-storage-services.html",
-      "/posts/2023-11-03-seamless-data-factory-deployment.html",
-      "/posts/2023-08-25-kubernetes-cluster-management-tools.html",
-      "/posts/2023-07-19-mastering-github-private-repos.html",
-      "/posts/2023-07-07-azure-webapp-cicd-terraform.html",
-      "/posts/2023-03-07-infrastructure-cost-estimation.html",
-      "/posts/2023-02-23-streamlining-synapse-cicd.html",
-      "/posts/2022-12-26-publishing-from-azure-devops-release-pipeline.html",
-      "/posts/2022-12-03-azure-best-practices.html",
-      "/posts/2022-11-18-azure-devops-agent-trick.html",
-      "/posts/2022-10-12-deploying-azure-services-with-terraform.html"
-    ]
-  },
-  {
-    "listing": "/index.html",
-    "items": [
-      "/posts/2025-06-07-azure-containerapps-handson.html",
-      "/posts/2024-12-06-gpu-workloads-kubernetes.html",
-      "/posts/2024-10-03-python-build-validation-pipeline.html",
-      "/posts/2024-01-19-exploring-azure-storage-services.html",
-      "/posts/2023-11-03-seamless-data-factory-deployment.html",
-      "/posts/2023-08-25-kubernetes-cluster-management-tools.html",
-      "/posts/2023-07-19-mastering-github-private-repos.html",
-      "/posts/2023-07-07-azure-webapp-cicd-terraform.html",
-      "/posts/2023-03-07-infrastructure-cost-estimation.html",
-      "/posts/2023-02-23-streamlining-synapse-cicd.html",
-      "/posts/2022-12-26-publishing-from-azure-devops-release-pipeline.html",
-      "/posts/2022-12-03-azure-best-practices.html",
-      "/posts/2022-11-18-azure-devops-agent-trick.html",
-      "/posts/2022-10-12-deploying-azure-services-with-terraform.html"
-    ]
-  },
-  {
     "listing": "/talks.html",
     "items": [
+      "/talks/2025-12-21-devfest-kolkata.html",
       "/talks/2025-12-06-chaos-and-coffee.html",
       "/talks/2025-11-29-namma-agents-building-smarter-systems.html",
       "/talks/2025-11-22-agentic-genai-community-meetup.html",
@@ -62,6 +25,44 @@
       "/talks/2023-12-22-devops-importance.html",
       "/talks/2023-07-11-telecom-churn-prediction.html",
       "/talks/2023-05-23-lead-scoring-model.html"
+    ]
+  },
+  {
+    "listing": "/index.html",
+    "items": [
+      "/posts/2025-06-07-azure-containerapps-handson.html",
+      "/posts/2024-12-06-gpu-workloads-kubernetes.html",
+      "/posts/2024-10-03-python-build-validation-pipeline.html",
+      "/posts/2024-01-19-exploring-azure-storage-services.html",
+      "/posts/2023-11-03-seamless-data-factory-deployment.html",
+      "/posts/2023-08-25-kubernetes-cluster-management-tools.html",
+      "/posts/2023-07-19-mastering-github-private-repos.html",
+      "/posts/2023-07-07-azure-webapp-cicd-terraform.html",
+      "/posts/2023-03-07-infrastructure-cost-estimation.html",
+      "/posts/2023-02-23-streamlining-synapse-cicd.html",
+      "/posts/2022-12-26-publishing-from-azure-devops-release-pipeline.html",
+      "/posts/2022-12-03-azure-best-practices.html",
+      "/posts/2022-11-18-azure-devops-agent-trick.html",
+      "/posts/2022-10-12-deploying-azure-services-with-terraform.html"
+    ]
+  },
+  {
+    "listing": "/posts.html",
+    "items": [
+      "/posts/2025-06-07-azure-containerapps-handson.html",
+      "/posts/2024-12-06-gpu-workloads-kubernetes.html",
+      "/posts/2024-10-03-python-build-validation-pipeline.html",
+      "/posts/2024-01-19-exploring-azure-storage-services.html",
+      "/posts/2023-11-03-seamless-data-factory-deployment.html",
+      "/posts/2023-08-25-kubernetes-cluster-management-tools.html",
+      "/posts/2023-07-19-mastering-github-private-repos.html",
+      "/posts/2023-07-07-azure-webapp-cicd-terraform.html",
+      "/posts/2023-03-07-infrastructure-cost-estimation.html",
+      "/posts/2023-02-23-streamlining-synapse-cicd.html",
+      "/posts/2022-12-26-publishing-from-azure-devops-release-pipeline.html",
+      "/posts/2022-12-03-azure-best-practices.html",
+      "/posts/2022-11-18-azure-devops-agent-trick.html",
+      "/posts/2022-10-12-deploying-azure-services-with-terraform.html"
     ]
   }
 ]

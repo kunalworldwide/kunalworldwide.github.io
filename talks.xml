@@ -10,7 +10,36 @@
 <atom:link href="https://kunaldas.dev/talks.xml" rel="self" type="application/rss+xml"/>
 <description>DevOps &amp; Cloud Technology Blog</description>
 <generator>quarto-1.6.39</generator>
-<lastBuildDate>Sat, 06 Dec 2025 00:00:00 GMT</lastBuildDate>
+<lastBuildDate>Sun, 21 Dec 2025 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>AI Enabler: Intelligent LLM Routing at Scale</title>
+  <link>https://kunaldas.dev/talks/2025-12-21-devfest-kolkata.html</link>
+  <description><![CDATA[ 
+
+
+
+
+<p>Get the <a href="https://github.com/kunalworldwide/Sessions/blob/main/2025/GDG_KOL/AI%20Enabler%20Intelligent%20LLM%20Routing%20at%20Scale%20_compressed.pdf">Slides here</a></p>
+<p>Presenting intelligent LLM routing strategies and how to scale them effectively for production AI applications at Kolkata’s biggest celebration of technology, innovation, and community.</p>
+<p>This session explores intelligent routing patterns for LLMs, scaling considerations, performance optimization techniques, and cost-effective routing strategies.</p>
+<p><strong>Event:</strong> DevFest Kolkata 2025</p>
+<p><strong>Venue:</strong> Vedic Village, Kolkata</p>
+<p><strong>Hosted by:</strong> Google Developer Group Kolkata</p>
+<p><a href="https://www.devfestkolkata.in">Event Website</a></p>
+
+
+
+ ]]></description>
+  <category>AI</category>
+  <category>LLM</category>
+  <category>Routing</category>
+  <category>Scale</category>
+  <category>Machine Learning</category>
+  <category>Cloud</category>
+  <category>DevFest</category>
+  <guid>https://kunaldas.dev/talks/2025-12-21-devfest-kolkata.html</guid>
+  <pubDate>Sun, 21 Dec 2025 00:00:00 GMT</pubDate>
+</item>
 <item>
   <title>Building Bulletproof AI: Cost-Optimized Resiliency for LLM Workloads</title>
   <link>https://kunaldas.dev/talks/2025-12-06-chaos-and-coffee.html</link>
@@ -716,27 +745,6 @@
   <category>Scaling</category>
   <guid>https://kunaldas.dev/talks/2024-05-04-containerization-scale.html</guid>
   <pubDate>Sat, 04 May 2024 00:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>Importance of DevOps in Modern Software Development Lifecycle</title>
-  <link>https://kunaldas.dev/talks/2023-12-22-devops-importance.html</link>
-  <description><![CDATA[ 
-
-
-
-
-<p>Get the <a href="https://raw.githubusercontent.com/kunalworldwide/Sessions/main/2023/IND-KOL-EXT-DF23-KUNAL-DAS-DEVOPS.pdf">Slides here</a></p>
-<p>Code used in Demo <a href="https://github.com/kunalworldwide/python-deployment-demo">here</a></p>
-<p>In the presentation “Importance of DevOps in Modern Software Development Lifecycle” by Kunal Das, the focus is on the critical role of DevOps in contemporary software development. The presentation elaborates on the definition and core principles of DevOps, highlighting its significance in integrating development and operations for efficient workflow. It also provides an insightful look into DevSecOps tools, underscoring the importance of security in the DevOps process. Furthermore, it covers aspects of Continuous Integration and Deployment, discussing the benefits and challenges of DevOps implementation. The session concludes with a demonstration and a Q&amp;A segment, emphasizing its practical application in the industry.</p>
-
-
-
- ]]></description>
-  <category>DevOps</category>
-  <category>Software Development</category>
-  <category>Best Practices</category>
-  <guid>https://kunaldas.dev/talks/2023-12-22-devops-importance.html</guid>
-  <pubDate>Fri, 22 Dec 2023 00:00:00 GMT</pubDate>
 </item>
 </channel>
 </rss>
