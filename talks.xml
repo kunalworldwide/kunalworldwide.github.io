@@ -10,7 +10,34 @@
 <atom:link href="https://kunaldas.dev/talks.xml" rel="self" type="application/rss+xml"/>
 <description>DevOps &amp; Cloud Technology Blog</description>
 <generator>quarto-1.6.39</generator>
-<lastBuildDate>Sat, 29 Nov 2025 00:00:00 GMT</lastBuildDate>
+<lastBuildDate>Sat, 06 Dec 2025 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>Building Bulletproof AI: Cost-Optimized Resiliency for LLM Workloads</title>
+  <link>https://kunaldas.dev/talks/2025-12-06-chaos-and-coffee.html</link>
+  <description><![CDATA[ 
+
+
+
+
+<p>Presenting strategies for building resilient AI systems with cost-optimized infrastructure for LLM workloads at Chaos &amp; Coffee meetup.</p>
+<p>This session explores how to transform infrastructure chaos into structured, resilient cloud systems while maintaining cost efficiency for AI workloads.</p>
+<p><strong>Event:</strong> Chaos &amp; Coffee: Brewing Resilient Systems with AI</p>
+<p><strong>Time:</strong> 10:30 AM - 2:30 PM IST</p>
+<p><strong>Venue:</strong> Harness, Bengaluru</p>
+<p><a href="https://luma.com/hdjinbkm">Event Details</a></p>
+
+
+
+ ]]></description>
+  <category>AI</category>
+  <category>LLM</category>
+  <category>Resiliency</category>
+  <category>Cost Optimization</category>
+  <category>Infrastructure</category>
+  <category>Cloud</category>
+  <guid>https://kunaldas.dev/talks/2025-12-06-chaos-and-coffee.html</guid>
+  <pubDate>Sat, 06 Dec 2025 00:00:00 GMT</pubDate>
+</item>
 <item>
   <title>From Complex to Click - AI Made Simple</title>
   <link>https://kunaldas.dev/talks/2025-11-29-namma-agents-building-smarter-systems.html</link>
@@ -710,100 +737,6 @@
   <category>Best Practices</category>
   <guid>https://kunaldas.dev/talks/2023-12-22-devops-importance.html</guid>
   <pubDate>Fri, 22 Dec 2023 00:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>Telecom Churn Prediction</title>
-  <link>https://kunaldas.dev/talks/2023-07-11-telecom-churn-prediction.html</link>
-  <description><![CDATA[ 
-
-
-
-
-<section id="telecom-churn-prediction-project" class="level1">
-<h1>Telecom Churn Prediction Project</h1>
-<p>In the competitive telecom industry, understanding and predicting customer churn is crucial for maintaining profitability. This project focuses on analyzing customer-level data from a leading telecom firm to build predictive models for identifying high-risk churn customers, particularly in the high-value segment. The goal is to provide actionable insights and strategies to reduce customer churn.</p>
-<section id="table-of-contents" class="level2">
-<h2 class="anchored" data-anchor-id="table-of-contents">Table of Contents</h2>
-<ul>
-<li>Project Overview</li>
-<li>Dataset Description</li>
-<li>Churn Definition</li>
-<li>High-Value Churn</li>
-<li>Project Goals</li>
-<li>Contents</li>
-<li>Usage</li>
-<li>Conclusion</li>
-<li>Repository Link</li>
-<li>Authors</li>
-</ul>
-</section>
-<section id="project-overview" class="level2">
-<h2 class="anchored" data-anchor-id="project-overview">Project Overview</h2>
-<p>The telecom industry faces a significant challenge with customer churn. Acquiring new customers is often more expensive than retaining existing ones. This project aims to analyze customer data to identify key indicators of churn and develop predictive models to target retention efforts effectively.</p>
-</section>
-<section id="dataset-description" class="level2">
-<h2 class="anchored" data-anchor-id="dataset-description">Dataset Description</h2>
-<p>The dataset includes customer-level information focusing on usage, revenue, and other relevant factors in the Indian and Southeast Asian telecom markets.</p>
-</section>
-<section id="churn-definition" class="level2">
-<h2 class="anchored" data-anchor-id="churn-definition">Churn Definition</h2>
-<p>Churn is identified as customers who have not used any services (like outgoing calls, internet, SMS, etc.) for a certain period, which is particularly relevant for prepaid customers.</p>
-</section>
-<section id="high-value-churn" class="level2">
-<h2 class="anchored" data-anchor-id="high-value-churn">High-Value Churn</h2>
-<p>Focusing on the top 20% of customers, who contribute to approximately 80% of the telecom industry’s revenue, this project aims to reduce churn in this high-value customer segment.</p>
-</section>
-<section id="project-goals" class="level2">
-<h2 class="anchored" data-anchor-id="project-goals">Project Goals</h2>
-<ol type="1">
-<li>Analyze customer behavior and patterns in the telecom dataset.</li>
-<li>Identify key indicators of churn among high-value customers.</li>
-<li>Develop predictive models for accurate churn prediction.</li>
-<li>Evaluate model performance and select the most effective one.</li>
-<li>Provide business insights and recommendations based on the analysis.</li>
-</ol>
-</section>
-<section id="contents" class="level2">
-<h2 class="anchored" data-anchor-id="contents">Contents</h2>
-<ul>
-<li><code>telecom_churn_data.csv</code>: Dataset with customer-level data.</li>
-<li><code>telecom_churn.ipynb</code>: Jupyter Notebook for data preprocessing, feature engineering, model building, and evaluation.</li>
-<li><code>README.md</code>: Overview of the project.</li>
-</ul>
-</section>
-<section id="usage" class="level2">
-<h2 class="anchored" data-anchor-id="usage">Usage</h2>
-<ol type="1">
-<li>Download <code>telecom_churn_data.csv</code> and place it in the same directory as the Jupyter Notebooks.</li>
-<li>Open <code>telecom_churn.ipynb</code> and execute the cells for data processing and model evaluation.</li>
-<li>Review the results, insights, and recommendations.</li>
-</ol>
-</section>
-<section id="conclusion" class="level2">
-<h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
-<p>This project assists telecom companies in predicting and reducing churn among high-value customers, thereby minimizing revenue loss and enhancing customer retention.</p>
-</section>
-<section id="repository-link" class="level2">
-<h2 class="anchored" data-anchor-id="repository-link">Repository Link</h2>
-<p>For a detailed analysis, code implementation, and model evaluation, visit the <a href="https://github.com/kunalworldwide/Telecom-churn-case-study">GitHub Repository</a>.</p>
-</section>
-<section id="authors" class="level2">
-<h2 class="anchored" data-anchor-id="authors">Authors</h2>
-<ul>
-<li>Kunal</li>
-<li>Co-Author: Yogesh Kumar Pati</li>
-</ul>
-
-
-</section>
-</section>
-
- ]]></description>
-  <category>Machine Learning</category>
-  <category>Telecom</category>
-  <category>Analytics</category>
-  <guid>https://kunaldas.dev/talks/2023-07-11-telecom-churn-prediction.html</guid>
-  <pubDate>Tue, 11 Jul 2023 00:00:00 GMT</pubDate>
 </item>
 </channel>
 </rss>
