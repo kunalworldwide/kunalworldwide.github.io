@@ -1,0 +1,40 @@
+---
+title: "Building Production-Ready Kubernetes on Ubuntu: A Checklist Approach"
+description: "Practical guidance for deploying production-grade Kubernetes clusters on Ubuntu with actionable insights and implementation strategies"
+date: "2025-11-15"
+location: "Bengaluru, India"
+venue: "Indian Institute of Science"
+categories: [Kubernetes, Ubuntu, DevOps, Security, Production, Cloud Native]
+slides: "https://github.com/kunalworldwide/Sessions/blob/main/2025/UbuCon%20India/Building%20Production-Ready%20Kubernetes%20on%20Ubuntu_compressed_compressed.pdf"
+event: "UbuCon India 2025"
+---
+
+Get the [Slides here]({{< meta slides >}})
+
+This practical presentation offers implementable guidance for deploying production-grade Kubernetes clusters on Ubuntu. The session addresses critical infrastructure decisions and provides actionable insights you can implement immediately.
+
+## Key Topics
+
+- Container networking interfaces (CNI) selection and configuration
+- Persistent storage solutions for production workloads
+- Security hardening aligned with CIS benchmarks
+- Runtime monitoring via eBPF technology
+- Vulnerability assessment automation
+- AppArmor container security implementation
+- Resource optimization strategies
+- Scalable observability from small to multi-region deployments
+
+## What You'll Get
+
+- Downloadable checklist covering networking, storage configuration, and access control
+- kubectl commands, YAML configurations, and automation scripts for Ubuntu environments
+- Disaster recovery procedures and security scanning tools
+- Common pitfalls to avoid in production Kubernetes deployments
+
+**Event:** UbuCon India 2025
+
+**Track:** DevOps & Security
+
+**Duration:** 30 minutes
+
+**Time:** 3:00 PM IST
