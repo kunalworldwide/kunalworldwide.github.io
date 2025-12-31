@@ -1,0 +1,17 @@
+---
+title: "Cluster & Chai meetup ☕️ ☁️"
+description: "Fireside chat with Kunal Kushwaha at Cluster & Chai community meetup"
+date: "2025-11-16"
+location: "Bangalore, India"
+venue: "WeWork Roshni Tech Hub, Marathahalli"
+categories: [Kubernetes, Cloud, Community, Fireside Chat]
+event: "Cluster & Chai Meetup"
+---
+
+Fireside chat with Kunal Kushwaha at this half-day community gathering for Kubernetes enthusiasts and cloud professionals.
+
+**Event:** Cluster & Chai Meetup
+
+**Time:** 10:00 AM - 2:00 PM IST
+
+**Venue:** WeWork Roshni Tech Hub, Marathahalli, Bangalore
