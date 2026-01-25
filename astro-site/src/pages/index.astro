@@ -1,0 +1,110 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/sections/Hero';
+import BentoGrid from '../components/sections/BentoGrid';
+import MediumPosts from '../components/sections/MediumPosts';
+import CommunityEvents from '../components/sections/CommunityEvents';
+import SocialFeed from '../components/sections/SocialFeed';
+import { getCollection } from 'astro:content';
+
+// Get recent posts
+let recentPosts: Array<{ title: string; slug: string; date: string }> = [];
+try {
+  const posts = await getCollection('posts');
+  recentPosts = posts
+    .filter((post) => !post.data.draft)
+    .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+    .slice(0, 3)
+    .map((post) => ({
+      title: post.data.title,
+      slug: post.id,
+      date: post.data.date.toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'short',
+        day: 'numeric',
+      }),
+    }));
+} catch {
+  // Collections not yet populated
+}
+
+// Get featured project
+let featuredProject: { title: string; description: string; demo?: string } | undefined;
+try {
+  const projects = await getCollection('projects');
+  const featured = projects.find((p) => p.data.featured);
+  if (featured) {
+    featuredProject = {
+      title: featured.data.title,
+      description: featured.data.description,
+      demo: featured.data.demo,
+    };
+  }
+} catch {
+  // Collections not yet populated
+}
+---
+
+<BaseLayout title="Home" description="DevOps & Cloud Technology Blog by Kunal Das - Developer Advocate, Kubernetes Expert, and Cloud Native Enthusiast">
+  <Hero client:load />
+  <BentoGrid client:visible recentPosts={recentPosts} featuredProject={featuredProject} />
+
+  <!-- Medium Posts Section -->
+  <section class="py-16 px-4 sm:px-6 lg:px-8 bg-slate-900/50">
+    <div class="max-w-7xl mx-auto">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl sm:text-4xl font-bold mb-4 text-white">
+          Latest <span class="gradient-text">Blog Posts</span>
+        </h2>
+        <p class="text-lg text-slate-300">
+          Technical articles and tutorials on DevOps, Cloud, and Kubernetes
+        </p>
+      </div>
+      <MediumPosts client:visible limit={3} showViewMore={true} />
+    </div>
+  </section>
+
+  <!-- Community Events -->
+  <section class="py-16 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-7xl mx-auto">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl sm:text-4xl font-bold mb-4 text-white">
+          Upcoming <span class="gradient-text">Events</span>
+        </h2>
+        <p class="text-lg text-slate-300">
+          Join me at these community meetups and conferences
+        </p>
+      </div>
+      <CommunityEvents client:visible />
+    </div>
+  </section>
+
+  <!-- Social Feed -->
+  <SocialFeed client:visible />
+
+  <!-- CTA Section -->
+  <section class="py-20 px-4 sm:px-6 lg:px-8 bg-slate-900">
+    <div class="max-w-4xl mx-auto text-center">
+      <h2 class="text-3xl sm:text-4xl font-bold mb-6 text-white">
+        Let's Build Something <span class="gradient-text">Amazing</span> Together
+      </h2>
+      <p class="text-lg text-slate-300 mb-8">
+        Whether you need help with cloud architecture, DevOps practices, or just want to chat about tech, I'm always open to connecting.
+      </p>
+      <div class="flex flex-wrap justify-center gap-4">
+        <a
+          href="/contact"
+          class="px-8 py-4 rounded-xl gradient-bg text-white font-semibold text-lg hover:opacity-90 transition-opacity shadow-lg"
+        >
+          Get in Touch
+        </a>
+        <a
+          href="/talks"
+          class="px-8 py-4 rounded-xl bg-slate-800 text-white font-semibold text-lg hover:bg-slate-700 transition-colors border border-slate-600 shadow-lg"
+        >
+          Watch My Talks
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

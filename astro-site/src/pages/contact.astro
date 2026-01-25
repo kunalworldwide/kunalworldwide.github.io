@@ -1,0 +1,111 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const contactOptions = [
+  {
+    title: 'Book a Call',
+    description: 'Schedule a 1:1 consultation to discuss cloud architecture, DevOps practices, or career advice.',
+    icon: '📅',
+    href: 'https://topmate.io/kunaldas',
+    buttonText: 'Schedule on Topmate',
+    color: 'from-blue-500 to-cyan-500',
+  },
+  {
+    title: 'Send an Email',
+    description: 'For general inquiries, collaborations, or speaking opportunities.',
+    icon: '✉️',
+    href: 'mailto:contactkunalmail.region943@passinbox.com',
+    buttonText: 'Send Email',
+    color: 'from-purple-500 to-pink-500',
+  },
+  {
+    title: 'Connect on LinkedIn',
+    description: 'Let\'s connect professionally and stay in touch.',
+    icon: '💼',
+    href: 'https://linkedin.com/in/kunaldaskd',
+    buttonText: 'View Profile',
+    color: 'from-blue-600 to-blue-800',
+  },
+];
+
+const socialLinks = [
+  { name: 'Twitter', href: 'https://twitter.com/kunald_official', handle: '@kunald_official' },
+  { name: 'GitHub', href: 'https://github.com/kunalworldwide', handle: '@kunalworldwide' },
+  { name: 'Medium', href: 'https://medium.com/@kunaldaskd', handle: '@kunaldaskd' },
+];
+---
+
+<BaseLayout title="Contact" description="Get in touch with Kunal Das - Book a consultation, send an email, or connect on social media">
+  <!-- Header -->
+  <section class="pt-32 pb-12 px-4 sm:px-6 lg:px-8 animated-gradient text-white">
+    <div class="max-w-7xl mx-auto text-center">
+      <h1 class="text-4xl sm:text-5xl font-extrabold tracking-tight mb-4">
+        Get in Touch
+      </h1>
+      <p class="text-xl opacity-90 max-w-2xl mx-auto">
+        Have a question or want to work together? I'd love to hear from you!
+      </p>
+    </div>
+  </section>
+
+  <section class="py-12 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-5xl mx-auto">
+      <!-- Contact Cards -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
+        {contactOptions.map((option) => (
+          <div class="rounded-2xl bg-slate-800 border border-slate-700 overflow-hidden card-hover">
+            <div class={`h-2 bg-gradient-to-r ${option.color}`} />
+            <div class="p-6">
+              <div class="text-4xl mb-4">{option.icon}</div>
+              <h2 class="text-xl font-bold mb-2 text-white">{option.title}</h2>
+              <p class="text-slate-400 text-sm mb-6">
+                {option.description}
+              </p>
+              <a
+                href={option.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                class={`inline-flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r ${option.color} text-white rounded-xl font-medium text-sm hover:opacity-90 transition-opacity`}
+              >
+                {option.buttonText}
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                </svg>
+              </a>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <!-- Social Links -->
+      <div class="text-center">
+        <h2 class="text-2xl font-bold mb-6 text-white">Follow Me</h2>
+        <div class="flex flex-wrap justify-center gap-4">
+          {socialLinks.map((social) => (
+            <a
+              href={social.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="flex items-center gap-3 px-6 py-4 rounded-xl bg-slate-800 border border-slate-700 hover:border-blue-500 transition-colors group"
+            >
+              <span class="font-bold text-white">{social.name}</span>
+              <span class="text-slate-400 text-sm group-hover:text-blue-400 transition-colors">
+                {social.handle}
+              </span>
+            </a>
+          ))}
+        </div>
+      </div>
+
+      <!-- Location -->
+      <div class="mt-16 text-center">
+        <p class="text-slate-400">
+          📍 Based in <strong class="text-white">Bengaluru, India</strong>
+        </p>
+        <p class="text-slate-500 text-sm mt-2">
+          Open to remote collaborations worldwide
+        </p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

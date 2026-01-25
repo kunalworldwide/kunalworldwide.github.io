@@ -1,0 +1,51 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import MediumPosts from '../../components/sections/MediumPosts';
+---
+
+<BaseLayout title="Blog" description="Technical articles on DevOps, Kubernetes, Cloud Computing, and more by Kunal Das">
+  <!-- Header -->
+  <section class="pt-32 pb-12 px-4 sm:px-6 lg:px-8 animated-gradient text-white">
+    <div class="max-w-7xl mx-auto text-center">
+      <h1 class="text-4xl sm:text-5xl font-extrabold tracking-tight mb-4">
+        Blog
+      </h1>
+      <p class="text-xl opacity-90 max-w-2xl mx-auto">
+        Thoughts on DevOps, cloud architecture, Kubernetes, and building scalable systems
+      </p>
+      <a
+        href="https://kunaldaskd.medium.com"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="mt-6 inline-flex items-center gap-2 text-white/80 hover:text-white transition-colors"
+      >
+        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M13.54 12a6.8 6.8 0 01-6.77 6.82A6.8 6.8 0 010 12a6.8 6.8 0 016.77-6.82A6.8 6.8 0 0113.54 12zM20.96 12c0 3.54-1.51 6.42-3.38 6.42-1.87 0-3.39-2.88-3.39-6.42s1.52-6.42 3.39-6.42 3.38 2.88 3.38 6.42M24 12c0 3.17-.53 5.75-1.19 5.75-.66 0-1.19-2.58-1.19-5.75s.53-5.75 1.19-5.75C23.47 6.25 24 8.83 24 12z"/>
+        </svg>
+        <span>Follow me on Medium</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- Posts Grid -->
+  <section class="py-12 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-7xl mx-auto">
+      <MediumPosts client:load />
+
+      <!-- Direct Medium Link -->
+      <div class="mt-12 text-center">
+        <a
+          href="https://kunaldaskd.medium.com"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-2 text-slate-400 hover:text-blue-400 transition-colors"
+        >
+          <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M13.54 12a6.8 6.8 0 01-6.77 6.82A6.8 6.8 0 010 12a6.8 6.8 0 016.77-6.82A6.8 6.8 0 0113.54 12zM20.96 12c0 3.54-1.51 6.42-3.38 6.42-1.87 0-3.39-2.88-3.39-6.42s1.52-6.42 3.39-6.42 3.38 2.88 3.38 6.42M24 12c0 3.17-.53 5.75-1.19 5.75-.66 0-1.19-2.58-1.19-5.75s.53-5.75 1.19-5.75C23.47 6.25 24 8.83 24 12z"/>
+          </svg>
+          Follow me on Medium for more posts →
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

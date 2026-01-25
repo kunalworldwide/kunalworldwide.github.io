@@ -1,0 +1,278 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import CommunityEvents from '../components/sections/CommunityEvents';
+import CommunityGallery from '../components/sections/CommunityGallery';
+
+// City skyline SVGs
+const skylines: Record<string, string> = {
+  'Bengaluru': `<svg viewBox="0 0 400 100" preserveAspectRatio="xMidYMax slice" class="w-full h-full"><defs><linearGradient id="bengaluru-grad" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" style="stop-color:currentColor;stop-opacity:0.3"/><stop offset="100%" style="stop-color:currentColor;stop-opacity:0.05"/></linearGradient></defs><path fill="url(#bengaluru-grad)" d="M0,100 L0,70 L15,70 L15,55 L25,55 L25,45 L35,45 L35,55 L45,55 L45,35 L55,35 L55,25 L60,20 L65,25 L65,35 L75,35 L75,50 L85,50 L85,40 L95,40 L95,30 L105,30 L105,40 L115,40 L115,55 L125,55 L125,45 L130,40 L135,35 L140,40 L145,45 L145,55 L155,55 L155,35 L165,35 L165,45 L175,45 L175,60 L185,60 L185,50 L190,45 L200,40 L210,45 L215,50 L215,60 L225,60 L225,30 L235,30 L235,20 L240,15 L245,10 L250,15 L255,20 L255,30 L265,30 L265,45 L275,45 L275,55 L285,55 L285,40 L295,40 L295,50 L305,50 L305,65 L315,65 L315,45 L325,45 L325,55 L335,55 L335,70 L345,70 L345,60 L355,60 L355,50 L365,50 L365,65 L375,65 L375,75 L385,75 L385,65 L395,65 L395,80 L400,80 L400,100 Z"/></svg>`,
+  'Kolkata': `<svg viewBox="0 0 400 100" preserveAspectRatio="xMidYMax slice" class="w-full h-full"><defs><linearGradient id="kolkata-grad" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" style="stop-color:currentColor;stop-opacity:0.3"/><stop offset="100%" style="stop-color:currentColor;stop-opacity:0.05"/></linearGradient></defs><path fill="url(#kolkata-grad)" d="M0,100 L0,75 L20,75 L20,65 L30,65 L30,70 L40,70 L45,50 L50,35 L55,25 L60,20 L65,15 L70,12 L80,12 L85,15 L90,20 L95,25 L100,35 L105,50 L110,70 L120,70 L120,60 L130,60 L130,70 L140,70 L140,55 L145,55 L145,45 L155,40 L165,45 L165,55 L170,55 L170,70 L180,70 L180,60 L200,60 L200,50 L210,45 L215,40 L220,35 L230,30 L240,28 L250,28 L260,30 L270,35 L275,40 L280,45 L290,50 L290,60 L310,60 L310,70 L320,70 L320,55 L330,50 L340,55 L340,70 L350,70 L350,60 L360,60 L360,70 L380,70 L380,80 L400,80 L400,100 Z"/><ellipse fill="url(#kolkata-grad)" cx="225" cy="50" rx="35" ry="25"/></svg>`,
+  'Mumbai': `<svg viewBox="0 0 400 100" preserveAspectRatio="xMidYMax slice" class="w-full h-full"><defs><linearGradient id="mumbai-grad" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" style="stop-color:currentColor;stop-opacity:0.3"/><stop offset="100%" style="stop-color:currentColor;stop-opacity:0.05"/></linearGradient></defs><path fill="url(#mumbai-grad)" d="M0,100 L0,70 L20,70 L20,55 L30,55 L30,60 L40,60 L40,40 L50,40 L50,30 L55,25 L60,30 L60,40 L70,40 L70,50 L80,50 L80,35 L90,35 L90,20 L95,15 L100,10 L105,15 L110,20 L110,35 L120,35 L120,45 L130,45 L130,55 L140,55 L140,40 L145,40 L150,30 L160,25 L170,20 L180,18 L190,20 L200,25 L210,30 L215,40 L220,55 L230,55 L230,45 L240,45 L240,25 L245,20 L250,15 L255,10 L260,8 L265,10 L270,15 L275,20 L280,25 L280,45 L290,45 L290,55 L300,55 L300,35 L310,35 L310,45 L320,45 L320,60 L330,60 L330,50 L340,50 L340,40 L350,40 L350,55 L360,55 L360,70 L380,70 L380,65 L390,65 L390,75 L400,75 L400,100 Z"/><path fill="url(#mumbai-grad)" d="M175,40 L180,25 L185,20 L195,20 L200,25 L205,40 L200,45 L195,50 L185,50 L180,45 Z"/></svg>`,
+  'Pan-India': `<svg viewBox="0 0 400 100" preserveAspectRatio="xMidYMax slice" class="w-full h-full"><defs><linearGradient id="india-grad" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" style="stop-color:currentColor;stop-opacity:0.25"/><stop offset="100%" style="stop-color:currentColor;stop-opacity:0.05"/></linearGradient></defs><path fill="url(#india-grad)" d="M180,15 L195,12 L210,10 L225,12 L240,18 L250,15 L260,20 L268,25 L275,22 L280,28 L275,35 L280,40 L285,38 L290,45 L285,52 L280,58 L275,55 L270,60 L265,65 L260,62 L255,68 L250,72 L245,70 L240,75 L235,80 L225,85 L215,88 L205,85 L200,90 L195,92 L190,88 L185,82 L180,78 L175,80 L170,75 L168,68 L165,62 L160,58 L155,55 L150,50 L148,45 L150,40 L155,35 L160,30 L165,25 L170,20 L175,18 Z"/><circle fill="currentColor" opacity="0.4" cx="220" cy="55" r="3"/><circle fill="currentColor" opacity="0.4" cx="245" cy="45" r="3"/><circle fill="currentColor" opacity="0.4" cx="190" cy="70" r="3"/><circle fill="currentColor" opacity="0.4" cx="175" cy="50" r="3"/><circle fill="currentColor" opacity="0.4" cx="265" cy="55" r="3"/></svg>`
+};
+
+const communities = [
+  {
+    name: 'CLOUDxAI Conference 2026',
+    city: 'Bengaluru',
+    description: "Bringing together engineers, AI and application developers, platform teams, and cloud practitioners who are building the next phase of cloud-native evolution, where automation begins to think for itself. Meet and hear from well-known speakers, leading brands, and engineering teams driving real innovation.",
+    tagline: 'When a machine learns, the cloud starts to think.',
+    role: 'Conference Organizer',
+    period: 'Jan 2026 - Present',
+    links: [
+      { label: 'Conference Website', url: 'https://cloudxai.dev', color: 'teal' },
+    ],
+    gradient: 'from-teal-500 to-blue-600',
+    featured: true,
+  },
+  {
+    name: 'HashiCorp User Group Bengaluru',
+    city: 'Bengaluru',
+    description: 'Organizing and leading Bengaluru\'s HashiCorp User Group, building a thriving community of DevOps engineers, platform engineers, and cloud enthusiasts. Quarterly technical meetups on Terraform, Vault, Consul, and the HashiCorp ecosystem.',
+    role: 'Co-Organizer',
+    period: 'Aug 2025 - Present',
+    members: '800+',
+    links: [
+      { label: 'Meetup', url: 'https://www.meetup.com/hug-bangalore', color: 'red' },
+    ],
+    gradient: 'from-violet-500 to-purple-500',
+    featured: false,
+  },
+  {
+    name: 'Cloud Computing Circle (C3)',
+    city: 'Bengaluru',
+    description: 'A vibrant community of cloud-native enthusiasts in Bengaluru. We meet regularly to discuss Kubernetes, containers, and cloud technologies.',
+    role: 'Organizer',
+    period: 'Jul 2025 - Present',
+    members: '5000+',
+    links: [
+      { label: 'Luma', url: 'https://lu.ma/cloudevents', color: 'blue' },
+      { label: 'All Links', url: 'https://c3meetup.taplink.bio', color: 'slate' },
+    ],
+    gradient: 'from-orange-500 to-red-500',
+    featured: false,
+  },
+  {
+    name: 'Cloud Native Kolkata',
+    city: 'Kolkata',
+    description: 'CNCF community chapter for Kolkata, bringing cloud-native technologies and Kubernetes knowledge to eastern India.',
+    role: 'Organizer',
+    period: 'Jul 2025 - Present',
+    members: '500+',
+    links: [
+      { label: 'CNCF Community', url: 'https://community.cncf.io/cloud-native-kolkata/', color: 'blue' },
+    ],
+    gradient: 'from-blue-500 to-cyan-500',
+    featured: false,
+  },
+  {
+    name: 'KSUG.AI – KubeSmart & AI User Group',
+    city: 'Pan-India',
+    description: 'A thriving community focused on Kubernetes, multi-cloud architectures, and AI/ML workloads. Bringing together developers, architects, platform engineers, and innovators from across India to share knowledge and best practices in cloud-native technologies.',
+    role: 'Organizer',
+    period: 'Dec 2024 - Jul 2025',
+    members: '400+',
+    links: [
+      { label: 'KSUG.AI', url: 'https://ksug.ai', color: 'blue' },
+    ],
+    gradient: 'from-pink-500 to-rose-500',
+    featured: false,
+  },
+  {
+    name: 'Cloud Native Mumbai',
+    city: 'Mumbai',
+    description: 'CNCF community chapter for Mumbai, fostering cloud-native adoption in the financial capital of India.',
+    role: 'Co-Organizer',
+    period: '2024 - Present',
+    members: '300+',
+    links: [
+      { label: 'CNCF Community', url: 'https://community.cncf.io/cloud-native-mumbai-city/', color: 'blue' },
+    ],
+    gradient: 'from-emerald-500 to-teal-500',
+    featured: false,
+  },
+];
+
+const featuredCommunity = communities.find(c => c.featured);
+const otherCommunities = communities.filter(c => !c.featured);
+
+// Helper to get skyline for a city
+const getSkyline = (city: string) => {
+  return skylines[city] || skylines['Bengaluru'];
+};
+---
+
+<BaseLayout title="Communities" description="Cloud Native communities organized by Kunal Das across India - Bengaluru, Kolkata, Mumbai and Pan-India">
+  <!-- Header -->
+  <section class="pt-32 pb-12 px-4 sm:px-6 lg:px-8 animated-gradient text-white">
+    <div class="max-w-7xl mx-auto text-center">
+      <h1 class="text-4xl sm:text-5xl font-extrabold tracking-tight mb-4">
+        Communities
+      </h1>
+      <p class="text-xl opacity-90 max-w-2xl mx-auto">
+        Building and nurturing cloud-native communities across India
+      </p>
+    </div>
+  </section>
+
+  <!-- Community Gallery - Right after header -->
+  <section class="py-12 px-4 sm:px-6 lg:px-8 overflow-hidden">
+    <div class="max-w-7xl mx-auto">
+      <CommunityGallery client:visible />
+    </div>
+  </section>
+
+  <section class="py-12 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-7xl mx-auto">
+
+      <!-- Featured Community - CLOUDxAI -->
+      {featuredCommunity && (
+        <div class="mb-12">
+          <div class="rounded-3xl overflow-hidden bg-gradient-to-br from-slate-800 to-slate-900 border border-teal-500/30 shadow-xl shadow-teal-500/10 relative">
+            <div class={`h-2 bg-gradient-to-r ${featuredCommunity.gradient}`} />
+            <!-- City Skyline Background -->
+            <div class="absolute bottom-0 left-0 right-0 h-32 text-teal-500 opacity-30 pointer-events-none" set:html={getSkyline(featuredCommunity.city)} />
+            <div class="p-8 md:p-12 relative z-10">
+              <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-6">
+                <div class="flex-1">
+                  <div class="flex items-center gap-3 mb-4">
+                    <span class="px-3 py-1 bg-teal-500/20 text-teal-400 rounded-full text-sm font-medium">
+                      {featuredCommunity.role}
+                    </span>
+                    <span class="text-slate-400 text-sm">{featuredCommunity.period}</span>
+                  </div>
+
+                  <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">{featuredCommunity.name}</h2>
+                  <p class="text-lg text-teal-400 font-medium mb-4">📍 {featuredCommunity.city}</p>
+
+                  <p class="text-slate-300 text-lg mb-4">
+                    {featuredCommunity.description}
+                  </p>
+
+                  {featuredCommunity.tagline && (
+                    <p class="text-slate-400 italic text-lg mb-6">"{featuredCommunity.tagline}"</p>
+                  )}
+
+                  <div class="flex flex-wrap gap-3">
+                    {featuredCommunity.links.map((link) => (
+                      <a
+                        href={link.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-teal-500 text-white font-semibold transition-all hover:bg-teal-600 hover:scale-105"
+                      >
+                        {link.label}
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                        </svg>
+                      </a>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      <!-- Other Communities -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
+        {otherCommunities.map((community) => {
+          const skylineColor = community.gradient.includes('violet') ? 'text-violet-500'
+            : community.gradient.includes('orange') ? 'text-orange-500'
+            : community.gradient.includes('blue') ? 'text-blue-500'
+            : community.gradient.includes('pink') ? 'text-pink-500'
+            : community.gradient.includes('emerald') ? 'text-emerald-500'
+            : 'text-slate-500';
+          return (
+            <div class="rounded-2xl overflow-hidden bg-slate-800 border border-slate-700 card-hover relative">
+              <div class={`h-2 bg-gradient-to-r ${community.gradient}`} />
+              <!-- City Skyline Background -->
+              <div class={`absolute bottom-0 left-0 right-0 h-24 ${skylineColor} opacity-20 pointer-events-none`} set:html={getSkyline(community.city)} />
+              <div class="p-6 relative z-10">
+                <div class="flex items-center justify-between mb-3">
+                  <span class="text-2xl">📍</span>
+                  <span class="px-2 py-1 bg-blue-900/30 text-blue-400 rounded text-xs font-medium">
+                    {community.role}
+                  </span>
+                </div>
+
+                <h2 class="text-xl font-bold mb-1 text-white">{community.name}</h2>
+                <p class="text-teal-400 font-medium mb-1">{community.city}</p>
+                <p class="text-slate-500 text-xs mb-3">{community.period}</p>
+
+                <p class="text-slate-400 text-sm mb-4 line-clamp-3">
+                  {community.description}
+                </p>
+
+                {community.members && (
+                  <div class="flex items-center gap-2 mb-4">
+                    <span class="text-lg">👥</span>
+                    <span class="font-bold text-white">{community.members}</span>
+                    <span class="text-slate-400 text-sm">members</span>
+                  </div>
+                )}
+
+                <div class="flex flex-wrap gap-2">
+                  {community.links.map((link) => (
+                    <a
+                      href={link.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class={`inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all hover:scale-105 ${
+                        link.color === 'red'
+                          ? 'bg-red-500 text-white hover:bg-red-600'
+                          : link.color === 'blue'
+                          ? 'bg-blue-500 text-white hover:bg-blue-600'
+                          : link.color === 'teal'
+                          ? 'bg-teal-500 text-white hover:bg-teal-600'
+                          : 'bg-slate-700 text-slate-300 hover:bg-slate-600'
+                      }`}
+                    >
+                      {link.label}
+                      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                      </svg>
+                    </a>
+                  ))}
+                </div>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+
+      <!-- Events Section -->
+      <div class="mt-16">
+        <h2 class="text-3xl font-bold text-center mb-12 text-white">
+          Upcoming <span class="gradient-text">Events</span>
+        </h2>
+        <CommunityEvents client:visible />
+      </div>
+
+      <!-- Join CTA -->
+      <div class="mt-16 text-center p-12 rounded-3xl bg-gradient-to-r from-teal-500 to-blue-500 text-white">
+        <h2 class="text-3xl font-bold mb-4">Want to Join or Speak?</h2>
+        <p class="text-lg opacity-90 mb-8 max-w-2xl mx-auto">
+          We're always looking for passionate speakers and contributors. Whether you want to share your knowledge or learn from others, our communities welcome you!
+        </p>
+        <div class="flex flex-wrap justify-center gap-4">
+          <a
+            href="/contact"
+            class="px-8 py-4 rounded-xl bg-white text-teal-600 font-semibold text-lg hover:bg-slate-100 transition-colors"
+          >
+            Get in Touch
+          </a>
+          <a
+            href="https://cloudxai.dev"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="px-8 py-4 rounded-xl bg-white/20 text-white font-semibold text-lg hover:bg-white/30 transition-colors backdrop-blur-sm"
+          >
+            CLOUDxAI Conference
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

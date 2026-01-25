@@ -1,0 +1,22 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import AboutContent from '../components/sections/AboutContent';
+---
+
+<BaseLayout title="About Me" description="Learn more about Kunal Das - Developer Advocate APAC at CAST AI, DevOps Engineer, and Cloud Native Community Leader">
+  <!-- Header -->
+  <section class="pt-32 pb-8 px-4 sm:px-6 lg:px-8 animated-gradient text-white">
+    <div class="max-w-7xl mx-auto text-center">
+      <h1 class="text-4xl sm:text-5xl font-extrabold tracking-tight mb-4">
+        About Me
+      </h1>
+      <p class="text-xl opacity-90 max-w-2xl mx-auto">
+        Developer Advocate | DevOps Engineer | Community Leader
+      </p>
+    </div>
+  </section>
+
+  <section class="py-8 px-4 sm:px-6 lg:px-8">
+    <AboutContent client:load />
+  </section>
+</BaseLayout>

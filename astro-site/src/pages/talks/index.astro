@@ -1,0 +1,79 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+import TalksContent from '../../components/sections/TalksContent';
+
+interface Talk {
+  id: string;
+  title: string;
+  description: string;
+  date: string;
+  location: string;
+  venue: string;
+  categories: string[];
+  slides?: string;
+  video?: string;
+  event?: string;
+}
+
+let talks: Talk[] = [];
+
+try {
+  const allTalks = await getCollection('talks');
+  talks = allTalks
+    .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+    .map((talk) => ({
+      id: talk.id,
+      title: talk.data.title,
+      description: talk.data.description,
+      date: talk.data.date.toISOString(),
+      location: talk.data.location,
+      venue: talk.data.venue,
+      categories: talk.data.categories,
+      slides: talk.data.slides,
+      video: talk.data.video,
+      event: talk.data.eventLink || talk.data.event,
+    }));
+} catch {
+  // Collection not yet populated
+}
+---
+
+<BaseLayout title="Talks" description="Conference talks and presentations on DevOps, Kubernetes, Cloud Computing, and more">
+  <!-- Header -->
+  <section class="pt-32 pb-8 px-4 sm:px-6 lg:px-8 animated-gradient text-white">
+    <div class="max-w-7xl mx-auto text-center">
+      <h1 class="text-4xl sm:text-5xl font-extrabold tracking-tight mb-4">
+        Talks & Presentations
+      </h1>
+      <p class="text-xl opacity-90 max-w-2xl mx-auto">
+        I regularly speak at conferences and meetups about Cloud Computing, DevOps, and emerging technologies
+      </p>
+      <div class="flex justify-center gap-6 mt-6 text-lg">
+        <div class="flex items-center gap-2">
+          <span class="text-3xl font-bold">{talks.length}</span>
+          <span class="opacity-80">Talks</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="text-3xl font-bold">{[...new Set(talks.map(t => t.location))].length}</span>
+          <span class="opacity-80">Cities</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Talks Content -->
+  <section class="py-12 px-4 sm:px-6 lg:px-8">
+    {talks.length > 0 ? (
+      <TalksContent talks={talks} client:only="react" />
+    ) : (
+      <div class="max-w-7xl mx-auto text-center py-20">
+        <div class="text-6xl mb-4">🎤</div>
+        <h2 class="text-2xl font-bold mb-2 text-white">No talks yet</h2>
+        <p class="text-slate-400">
+          Check back soon for upcoming presentations!
+        </p>
+      </div>
+    )}
+  </section>
+</BaseLayout>

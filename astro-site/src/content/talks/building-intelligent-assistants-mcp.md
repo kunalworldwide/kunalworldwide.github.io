@@ -1,0 +1,48 @@
+---
+title: "Building Intelligent Assistants with Model Context Protocol"
+description: "Extending AI Capabilities Beyond Chat Interfaces through Model Context Protocol"
+date: 2025-04-04
+location: "Bengaluru, India"
+venue: "Build with AI Workshop Series at Amity University Bengaluru"
+event: "Build with AI Workshop Series"
+eventLink: "https://gdg.community.dev/events/details/google-gdg-on-campus-amity-university-bengaluru-india-presents-build-with-ai-2025-04-04/"
+slides: "https://raw.githubusercontent.com/kunalworldwide/Sessions/main/2025/Build%20with%20AI%20%40%20Amity%20University/Amity_APR_2025_design.pdf"
+categories: [AI, Model Context Protocol, Intelligent Assistants, MCP]
+---
+
+This workshop focuses on building intelligent assistants using the Model Context Protocol (MCP), going beyond traditional chat interfaces to create more powerful AI-powered applications.
+
+## Agenda
+
+1. Introduction to Model Context Protocol
+   - Understanding the limitations of current chat interfaces
+   - How MCP extends AI capabilities
+   - Architecture and design principles
+
+2. Implementing MCP Servers
+   - Core components of an MCP server
+   - Building context-aware AI assistants
+   - Integration with different AI models and services
+
+3. Building Applications with MCP
+   - Extending AI capabilities into various applications
+   - Creating domain-specific assistants
+   - Custom tools and function calling
+
+4. Hands-on Workshop
+   - Setting up an MCP server
+   - Implementing context providers
+   - Building and testing intelligent assistants
+   - Extending functionality with custom tools
+
+5. Best Practices and Future Directions
+   - Performance optimization
+   - Security considerations
+   - Emerging trends in AI assistants
+   - Integration with enterprise systems
+
+## Resources
+
+- [Presentation Slides](https://raw.githubusercontent.com/kunalworldwide/Sessions/main/2025/Build%20with%20AI%20%40%20Amity%20University/Amity_APR_2025_design.pdf)
+- [Demo Repository](https://github.com/kunalworldwide/mcp_server_demo)
+- [Event Details](https://gdg.community.dev/events/details/google-gdg-on-campus-amity-university-bengaluru-india-presents-build-with-ai-2025-04-04/)

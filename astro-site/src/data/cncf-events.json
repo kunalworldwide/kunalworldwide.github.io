@@ -1,0 +1,51 @@
+{
+  "lastUpdated": "2026-01-25T00:00:00Z",
+  "sources": [
+    {
+      "name": "Cloud Native Kolkata",
+      "slug": "cloud-native-kolkata",
+      "url": "https://community.cncf.io/cloud-native-kolkata/"
+    },
+    {
+      "name": "Cloud Native Mumbai",
+      "slug": "cloud-native-mumbai",
+      "url": "https://community.cncf.io/cloud-native-mumbai/"
+    },
+    {
+      "name": "Cloud Native Hooghly",
+      "slug": "cloud-native-hooghly",
+      "url": "https://community.cncf.io/cloud-native-hooghly/"
+    },
+    {
+      "name": "Cloud Native Bengaluru",
+      "slug": "cloud-native-bangalore",
+      "url": "https://community.cncf.io/cloud-native-bangalore/"
+    }
+  ],
+  "events": [
+    {
+      "title": "The Platform Effect",
+      "date": "2026-02-21",
+      "displayDate": "Sat, Feb 21, 2026",
+      "url": "https://community.cncf.io/events/details/cncf-cloud-native-kolkata-presents-the-platform-effect/",
+      "community": "Cloud Native Kolkata",
+      "location": "Kolkata"
+    },
+    {
+      "title": "Kubernetes and Friends",
+      "date": "2026-02-24",
+      "displayDate": "Tue, Feb 24, 2026",
+      "url": "https://community.cncf.io/events/details/cncf-cloud-native-hooghly-presents-kubernetes-and-friends/",
+      "community": "Cloud Native Hooghly",
+      "location": "Kolkata Region"
+    },
+    {
+      "title": "KubeCon + CloudNativeCon India 2026",
+      "date": "2026-06-18",
+      "displayDate": "Thu, Jun 18-19, 2026",
+      "url": "https://events.linuxfoundation.org/kubecon-cloudnativecon-india/",
+      "community": "CNCF",
+      "location": "Mumbai"
+    }
+  ]
+}
