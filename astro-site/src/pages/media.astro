@@ -1,0 +1,226 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+// Video data - add your videos here
+const videos = [
+  {
+    title: 'Live Container Migration with CAST AI',
+    description: 'Live demonstration of container migration capabilities using CAST AI, showcasing zero-downtime workload movement across Kubernetes clusters.',
+    youtubeId: 'EhVMYsqdE3w',
+    category: 'Livestream',
+    channel: 'CAST AI',
+    date: '2025-01-01',
+    featured: true,
+  },
+  {
+    title: 'Demystifying DevOps: Cloud, Automation & Career Growth',
+    description: 'Podcast episode discussing DevOps practices, cloud technologies, automation strategies, and career growth tips in the tech industry.',
+    youtubeId: 'NGc3zKtZHcU',
+    category: 'Podcast',
+    channel: 'Tech Podcast',
+    date: '2024-12-01',
+    featured: false,
+  },
+  {
+    title: 'Beyond the Basics: DevOps, AI & Quantum Futures',
+    description: 'Deep dive conversation with Kashinath Gokarn exploring the intersection of DevOps, artificial intelligence, and emerging quantum computing technologies.',
+    youtubeId: 'Lk5a1q7P9OY',
+    category: 'Podcast',
+    channel: 'Tech Podcast',
+    date: '2024-11-01',
+    featured: false,
+  },
+];
+
+// Categories for filtering
+const categories = ['All', 'Podcast', 'Livestream', 'Collaboration', 'Guest Appearance'];
+
+const featuredVideos = videos.filter(v => v.featured);
+const regularVideos = videos.filter(v => !v.featured);
+
+// Helper to get YouTube thumbnail
+const getThumbnail = (youtubeId: string) => `https://img.youtube.com/vi/${youtubeId}/maxresdefault.jpg`;
+const getYouTubeUrl = (youtubeId: string) => `https://www.youtube.com/watch?v=${youtubeId}`;
+---
+
+<BaseLayout title="Media" description="YouTube appearances, podcasts, livestreams, and collaborations featuring Kunal Das">
+  <!-- Header -->
+  <section class="pt-32 pb-8 px-4 sm:px-6 lg:px-8 animated-gradient text-white">
+    <div class="max-w-7xl mx-auto text-center">
+      <h1 class="text-4xl sm:text-5xl font-extrabold tracking-tight mb-4">
+        Media & Appearances
+      </h1>
+      <p class="text-xl opacity-90 max-w-2xl mx-auto">
+        Podcasts, livestreams, and collaborations on YouTube
+      </p>
+      {videos.length > 0 && (
+        <div class="flex justify-center gap-6 mt-6 text-lg">
+          <div class="flex items-center gap-2">
+            <span class="text-3xl font-bold">{videos.length}</span>
+            <span class="opacity-80">Videos</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="text-3xl font-bold">{[...new Set(videos.map(v => v.channel))].length}</span>
+            <span class="opacity-80">Channels</span>
+          </div>
+        </div>
+      )}
+    </div>
+  </section>
+
+  <section class="py-12 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-7xl mx-auto">
+
+      {videos.length === 0 ? (
+        <!-- Empty State -->
+        <div class="text-center py-20">
+          <div class="text-6xl mb-4">🎬</div>
+          <h2 class="text-2xl font-bold mb-2 text-white">Coming Soon</h2>
+          <p class="text-slate-400 max-w-md mx-auto">
+            Video appearances and podcast episodes will be added here. Check back soon!
+          </p>
+        </div>
+      ) : (
+        <>
+          <!-- Featured Videos (Embedded) -->
+          {featuredVideos.length > 0 && (
+            <div class="mb-16">
+              <h2 class="text-2xl font-bold mb-8 text-white">
+                Featured <span class="gradient-text">Videos</span>
+              </h2>
+              <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                {featuredVideos.map((video) => (
+                  <div class="rounded-2xl overflow-hidden bg-slate-800 border border-slate-700">
+                    <div class="aspect-video">
+                      <iframe
+                        src={`https://www.youtube.com/embed/${video.youtubeId}`}
+                        title={video.title}
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen
+                        class="w-full h-full"
+                      />
+                    </div>
+                    <div class="p-6">
+                      <div class="flex items-center gap-2 mb-3">
+                        <span class="px-2 py-1 bg-red-500/20 text-red-400 rounded text-xs font-medium">
+                          {video.category}
+                        </span>
+                        <span class="text-slate-500 text-sm">{video.channel}</span>
+                      </div>
+                      <h3 class="text-xl font-bold text-white mb-2">{video.title}</h3>
+                      <p class="text-slate-400 text-sm">{video.description}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          <!-- Category Filter -->
+          <div class="mb-8">
+            <div class="flex flex-wrap gap-2" id="category-filters">
+              {categories.map((cat, index) => (
+                <button
+                  data-category={cat}
+                  class:list={[
+                    "px-4 py-2 rounded-lg font-medium transition-all",
+                    index === 0
+                      ? "bg-blue-600 text-white"
+                      : "bg-slate-800 text-slate-300 hover:bg-slate-700"
+                  ]}
+                >
+                  {cat}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          <!-- Video Grid (Thumbnails) -->
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="video-grid">
+            {regularVideos.map((video) => (
+              <a
+                href={getYouTubeUrl(video.youtubeId)}
+                target="_blank"
+                rel="noopener noreferrer"
+                data-category={video.category}
+                class="group rounded-2xl overflow-hidden bg-slate-800 border border-slate-700 card-hover"
+              >
+                <div class="aspect-video relative overflow-hidden">
+                  <img
+                    src={getThumbnail(video.youtubeId)}
+                    alt={video.title}
+                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                    loading="lazy"
+                  />
+                  <div class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                    <div class="w-16 h-16 rounded-full bg-red-600 flex items-center justify-center">
+                      <svg class="w-8 h-8 text-white ml-1" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M8 5v14l11-7z"/>
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+                <div class="p-4">
+                  <div class="flex items-center gap-2 mb-2">
+                    <span class="px-2 py-1 bg-red-500/20 text-red-400 rounded text-xs font-medium">
+                      {video.category}
+                    </span>
+                    <span class="text-slate-500 text-xs">{video.date}</span>
+                  </div>
+                  <h3 class="font-bold text-white mb-1 line-clamp-2 group-hover:text-blue-400 transition-colors">
+                    {video.title}
+                  </h3>
+                  <p class="text-slate-400 text-sm">{video.channel}</p>
+                </div>
+              </a>
+            ))}
+          </div>
+        </>
+      )}
+
+      <!-- CTA -->
+      <div class="mt-16 text-center p-12 rounded-3xl bg-gradient-to-r from-red-500 to-pink-500 text-white">
+        <h2 class="text-3xl font-bold mb-4">Want to Collaborate?</h2>
+        <p class="text-lg opacity-90 mb-8 max-w-2xl mx-auto">
+          I'm always open to podcast invitations, livestream collaborations, and guest appearances to discuss DevOps, Kubernetes, and cloud technologies.
+        </p>
+        <a
+          href="/contact"
+          class="inline-block px-8 py-4 rounded-xl bg-white text-red-600 font-semibold text-lg hover:bg-slate-100 transition-colors"
+        >
+          Get in Touch
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<script>
+  // Category filtering
+  const filterButtons = document.querySelectorAll('#category-filters button');
+  const videoCards = document.querySelectorAll('#video-grid > a');
+
+  filterButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const category = btn.getAttribute('data-category');
+
+      // Update button styles
+      filterButtons.forEach(b => {
+        b.classList.remove('bg-blue-600', 'text-white');
+        b.classList.add('bg-slate-800', 'text-slate-300');
+      });
+      btn.classList.remove('bg-slate-800', 'text-slate-300');
+      btn.classList.add('bg-blue-600', 'text-white');
+
+      // Filter videos
+      videoCards.forEach(card => {
+        const cardCategory = card.getAttribute('data-category');
+        if (category === 'All' || cardCategory === category) {
+          (card as HTMLElement).style.display = 'block';
+        } else {
+          (card as HTMLElement).style.display = 'none';
+        }
+      });
+    });
+  });
+</script>
