@@ -1,52 +1,61 @@
-# [kunaldas.dev](https://kunaldas.dev) [![Deploy Quarto Website](https://github.com/kunalworldwide/kunalworldwide.github.io/actions/workflows/deploy-quarto-website.yml/badge.svg)](https://github.com/kunalworldwide/kunalworldwide.github.io/actions/workflows/deploy-quarto-website.yml)
+# [kunaldas.net](https://kunaldas.net) [![Deploy Astro Site](https://github.com/kunalworldwide/kunalworldwide.github.io/actions/workflows/deploy-astro.yml/badge.svg)](https://github.com/kunalworldwide/kunalworldwide.github.io/actions/workflows/deploy-astro.yml)
 
-Welcome to the repository for my personal website! This site is built using Quarto and automatically deployed using GitHub Actions.
+Personal portfolio and technical blog built with Astro.
 
-## 📋 Overview
+## Overview
 
-This website serves as my personal portfolio and blog, where I share:
+This website serves as my personal portfolio and blog, featuring:
 
 - Technical articles and tutorials
-- Talks and presentations
+- Conference talks and presentations
+- Media appearances (podcasts, livestreams)
 - Project showcases
-- Professional experience
+- Community involvement
 
-## 🛠️ Technology Stack
+## Tech Stack
 
-- **Framework**: [Quarto](https://quarto.org/) - An open-source scientific and technical publishing system
-- **Deployment**: GitHub Actions with automated build and deployment to GitHub Pages
-- **Hosting**: GitHub Pages with custom domain (kunaldas.dev)
+- **Framework**: [Astro](https://astro.build/) with React components
+- **Styling**: [Tailwind CSS](https://tailwindcss.com/)
+- **Deployment**: GitHub Actions → GitHub Pages
+- **Domain**: kunaldas.net
 
-## 🚀 Deployment Process
+## Local Development
 
-The site follows a modern CI/CD workflow:
+```bash
+# Navigate to the Astro site
+cd astro-site
 
-1. Content is authored in the `main` branch using Quarto's `.qmd` format
-2. When changes are pushed to `main`, GitHub Actions automatically:
-   - Renders the Quarto project
-   - Publishes the built site to the `gh-pages` branch
-3. GitHub Pages serves the content from the `gh-pages` branch
+# Install dependencies
+npm install
 
-## 📊 Build Status
+# Start dev server
+npm run dev
 
-The status badge at the top of this README shows the current state of the deployment workflow. Click on it to view detailed workflow runs and logs.
+# Build for production
+npm run build
 
-If the badge shows:
-- ✅ **Passing (green)**: The site has been successfully built and deployed
-- ❌ **Failing (red)**: There's an issue with the build or deployment process
-- 🟡 **In progress (yellow)**: A deployment is currently in progress
+# Preview production build
+npm run preview
+```
 
-## 🧑‍💻 Local Development
+## Project Structure
 
-To work on this website locally:
+```
+astro-site/
+├── src/
+│   ├── components/    # React & Astro components
+│   ├── content/       # MDX content (talks, projects)
+│   ├── layouts/       # Page layouts
+│   ├── pages/         # Route pages
+│   └── styles/        # Global styles
+├── public/            # Static assets
+└── astro.config.mjs   # Astro configuration
+```
 
-1. Clone this repository
-2. Install [Quarto CLI](https://quarto.org/docs/get-started/)
-3. Navigate to the `mywebsite/` directory
-4. Run `quarto preview` to start a local development server
-5. Make your changes and see them live at `http://localhost:4000`
+## Deployment
 
-## 📝 License
+Pushes to `main` branch trigger automatic deployment via GitHub Actions.
 
-This project is licensed under the terms included in the [LICENSE](LICENSE) file.
+## License
 
+This project is licensed under the terms in the [LICENSE](LICENSE) file.
