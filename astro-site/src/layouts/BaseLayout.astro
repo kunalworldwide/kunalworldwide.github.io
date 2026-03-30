@@ -10,8 +10,13 @@ interface Props {
   image?: string;
 }
 
-const { title, description = "DevOps & Cloud Technology Blog by Kunal Das", image } = Astro.props;
+const { title, description = "Kunal Das is a Developer Advocate and Cloud Native Consultant specializing in Kubernetes cost optimization and CNCF community leadership across APAC.", image } = Astro.props;
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const isHome = Astro.url.pathname === '/';
+const ogImage = image || 'https://kunaldas.net/profile_hq.png';
+const pageTitle = isHome
+  ? 'Kunal Das — Developer Advocate & Cloud Native Consultant | Bengaluru, India'
+  : `${title} | Kunal Das`;
 ---
 
 <!doctype html>
@@ -24,23 +29,59 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     <meta name="generator" content={Astro.generator} />
 
     <!-- SEO -->
-    <title>{title} | Kunal Das</title>
+    <title>{pageTitle}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonicalURL} />
 
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content={canonicalURL} />
-    <meta property="og:title" content={title} />
+    <meta property="og:title" content={pageTitle} />
     <meta property="og:description" content={description} />
-    {image && <meta property="og:image" content={image} />}
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:site_name" content="Kunal Das" />
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:site" content="@kunald_official" />
-    <meta name="twitter:title" content={title} />
+    <meta name="twitter:title" content={pageTitle} />
     <meta name="twitter:description" content={description} />
-    {image && <meta name="twitter:image" content={image} />}
+    <meta name="twitter:image" content={ogImage} />
+
+    <!-- JSON-LD Person Schema -->
+    {isHome && <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Kunal Das",
+      "url": "https://kunaldas.net",
+      "image": "https://kunaldas.net/profile_hq.png",
+      "jobTitle": "Developer Advocate & Cloud Native Consultant",
+      "worksFor": {
+        "@type": "Organization",
+        "name": "CAST AI"
+      },
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Bengaluru",
+        "addressCountry": "IN"
+      },
+      "knowsAbout": [
+        "Kubernetes",
+        "Cloud Native",
+        "FinOps",
+        "DevOps",
+        "Site Reliability Engineering",
+        "CNCF",
+        "OpenCost",
+        "Platform Engineering"
+      ],
+      "sameAs": [
+        "https://linkedin.com/in/kunaldaskd",
+        "https://github.com/kunalworldwide",
+        "https://twitter.com/kunald_official",
+        "https://medium.com/@kunaldaskd"
+      ]
+    })} />}
 
     <!-- Leaflet CSS for maps -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />

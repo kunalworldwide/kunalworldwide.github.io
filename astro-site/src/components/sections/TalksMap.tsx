@@ -29,6 +29,8 @@ const locationCoords: Record<string, { lat: number; lng: number; name: string }>
   'kerala': { lat: 10.8505, lng: 76.2711, name: 'Kerala' },
   // International
   'singapore': { lat: 1.3521, lng: 103.8198, name: 'Singapore' },
+  'bangkok': { lat: 13.7563, lng: 100.5018, name: 'Bangkok' },
+  'thailand': { lat: 13.7563, lng: 100.5018, name: 'Bangkok' },
   'london': { lat: 51.5074, lng: -0.1278, name: 'London' },
   'uk': { lat: 51.5074, lng: -0.1278, name: 'UK' },
   'united kingdom': { lat: 51.5074, lng: -0.1278, name: 'UK' },
