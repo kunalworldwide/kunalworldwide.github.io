@@ -1,0 +1,194 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Early Adopters Program"
+  description="Join the Kimchi Early Adopters Program — an AI coding platform by Kunal Das"
+>
+  <!-- Hero / Header Section -->
+  <section class="pt-32 pb-12 px-4 sm:px-6 lg:px-8 animated-gradient text-white">
+    <div class="max-w-4xl mx-auto text-center">
+      <h1 class="text-4xl sm:text-5xl font-extrabold tracking-tight mb-4">
+        You're Invited
+      </h1>
+      <p class="text-xl opacity-90 max-w-2xl mx-auto">
+        Kunal Das is inviting you to be part of the Early Adopters Program for Kimchi — an AI coding platform to unleash the power of open-source models. Share a few details and you'll get an email in a day or two.
+      </p>
+    </div>
+  </section>
+
+  <!-- Form Section -->
+  <section class="py-16 px-4 sm:px-6 lg:px-8" id="formSection">
+    <div class="max-w-lg mx-auto">
+      <div
+        class="rounded-2xl bg-slate-800 border border-slate-700 p-8 sm:p-10"
+        id="formCard"
+      >
+        <form id="inviteForm" novalidate>
+          <!-- Full Name -->
+          <div class="mb-5">
+            <label for="fullName" class="block text-sm font-medium text-slate-300 mb-2">
+              Full Name <span class="text-red-400">*</span>
+            </label>
+            <input
+              type="text"
+              id="fullName"
+              name="Full Name"
+              placeholder="Your full name"
+              required
+              class="w-full px-4 py-3 rounded-xl bg-slate-900 border border-slate-600 text-white placeholder-slate-500 focus:outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500 transition-all"
+            />
+          </div>
+
+          <!-- Email -->
+          <div class="mb-5">
+            <label for="email" class="block text-sm font-medium text-slate-300 mb-2">
+              Email <span class="text-red-400">*</span>
+            </label>
+            <input
+              type="email"
+              id="email"
+              name="Email"
+              placeholder="you@example.com"
+              required
+              class="w-full px-4 py-3 rounded-xl bg-slate-900 border border-slate-600 text-white placeholder-slate-500 focus:outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500 transition-all"
+            />
+          </div>
+
+          <!-- LinkedIn / GitHub -->
+          <div class="mb-6">
+            <label for="linkedinGithub" class="block text-sm font-medium text-slate-300 mb-2">
+              LinkedIn / GitHub
+            </label>
+            <input
+              type="url"
+              id="linkedinGithub"
+              name="LinkedIn / GitHub"
+              placeholder="https://linkedin.com/in/... or https://github.com/..."
+              class="w-full px-4 py-3 rounded-xl bg-slate-900 border border-slate-600 text-white placeholder-slate-500 focus:outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500 transition-all"
+            />
+          </div>
+
+          <!-- Hidden Fields -->
+          <input type="hidden" name="Invited By" value="Kunal Das" />
+          <input type="hidden" name="Date Invited" value="" />
+
+          <!-- Error Message -->
+          <div
+            id="errorMessage"
+            class="hidden mb-4 px-4 py-3 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-300 text-sm"
+          ></div>
+
+          <!-- Submit Button -->
+          <button
+            type="submit"
+            id="submitBtn"
+            class="w-full py-3.5 rounded-xl gradient-bg text-white font-semibold text-lg hover:opacity-90 transition-opacity shadow-lg flex items-center justify-center gap-2"
+          >
+            Request Invite
+          </button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Success Section (hidden initially) -->
+  <section class="py-16 px-4 sm:px-6 lg:px-8 hidden" id="successSection">
+    <div class="max-w-lg mx-auto text-center">
+      <div class="rounded-2xl bg-slate-800 border border-slate-700 p-8 sm:p-10">
+        <!-- Checkmark Icon -->
+        <div class="flex justify-center mb-6">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="64"
+            height="64"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="#2dd4bf"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <circle cx="12" cy="12" r="10" />
+            <path d="m9 12 2 2 4-4" />
+          </svg>
+        </div>
+
+        <h2 class="text-2xl font-bold text-white mb-3">You're on the list!</h2>
+        <p class="text-slate-300 mb-8">
+          I'll send you an invite link within 1–2 days.
+        </p>
+
+        <a
+          href="https://kimchi.dev/earlyadopters"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center justify-center gap-2 w-full py-3.5 px-6 rounded-xl gradient-bg text-white font-semibold text-lg hover:opacity-90 transition-opacity shadow-lg"
+        >
+          Learn More About Kimchi
+          <svg
+            class="w-4 h-4"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+            />
+          </svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <script is:inline>
+    const SCRIPT_URL =
+      'https://script.google.com/macros/s/AKfycbyg95KlTMlNNWMJaM4Gt-LTwXMBB1TCDF7AUD1rR6NIfLFOr_bv_FDOpbbE1sU5xLt3aA/exec';
+
+    const form = document.getElementById('inviteForm');
+    const submitBtn = document.getElementById('submitBtn');
+    const errorMessage = document.getElementById('errorMessage');
+    const formSection = document.getElementById('formSection');
+    const successSection = document.getElementById('successSection');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      errorMessage.classList.add('hidden');
+      submitBtn.disabled = true;
+      submitBtn.innerHTML =
+        '<span class="inline-block w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></span><span>Sending...</span>';
+
+      const fd = new FormData(form);
+      const params = new URLSearchParams();
+      for (const [key, value] of fd) {
+        params.append(key, value);
+      }
+
+      try {
+        const response = await fetch(SCRIPT_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: params.toString(),
+        });
+        const result = await response.json();
+
+        if (result.result === 'success') {
+          formSection.classList.add('hidden');
+          successSection.classList.remove('hidden');
+        } else {
+          throw new Error(result.error || 'Submission failed');
+        }
+      } catch (error) {
+        errorMessage.innerHTML =
+          "Something went wrong, but your submission may have still gone through. I'll send you an invite link within 1\u20132 days. If you don't hear from me, feel free to try again.";
+        errorMessage.classList.remove('hidden');
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = 'Request Invite';
+      }
+    });
+  </script>
+</BaseLayout>
