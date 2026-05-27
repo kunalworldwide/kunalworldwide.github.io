@@ -1,0 +1,57 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="404 — Page Not Found" description="The page you're looking for doesn't exist.">
+  <div class="animated-gradient min-h-[80vh] flex items-center justify-center px-4 py-16">
+    <div class="text-center">
+      <!-- Decorative terminal icon -->
+      <div class="mb-8 flex justify-center">
+        <svg
+          class="w-24 h-24 text-slate-600"
+          viewBox="0 0 100 100"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <rect x="5" y="15" width="90" height="70" rx="8" stroke="currentColor" stroke-width="3" fill="none"/>
+          <circle cx="18" cy="31" r="4" fill="#ef4444"/>
+          <circle cx="32" cy="31" r="4" fill="#eab308"/>
+          <circle cx="46" cy="31" r="4" fill="#22c55e"/>
+          <path d="M20 55 L35 65 L20 75" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M40 75 L75 75" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+        </svg>
+      </div>
+
+      <!-- Large 404 -->
+      <h1 class="text-8xl sm:text-9xl font-extrabold gradient-text leading-none">404</h1>
+
+      <!-- Heading -->
+      <h2 class="text-2xl sm:text-3xl font-bold text-white mt-4">Page Not Found</h2>
+
+      <!-- Body text -->
+      <p class="text-lg text-slate-300 max-w-md mx-auto mt-6">
+        Oops! Looks like this page wandered off into the open-source void.
+      </p>
+
+      <!-- CTA Buttons -->
+      <div class="mt-10 flex flex-col sm:flex-row gap-4 justify-center items-center">
+        <a
+          href="/"
+          class="gradient-bg text-white px-8 py-3 rounded-xl font-medium inline-flex items-center gap-2 hover:opacity-90 transition-opacity"
+        >
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
+          </svg>
+          Take me Home
+        </a>
+        <a
+          href="/about/"
+          class="border border-slate-600 text-slate-300 px-6 py-3 rounded-xl hover:border-teal-500 hover:text-teal-400 transition-colors"
+        >
+          About Kunal
+          <span class="ml-1">→</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</BaseLayout>
