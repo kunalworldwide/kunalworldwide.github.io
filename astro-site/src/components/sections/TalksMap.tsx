@@ -38,6 +38,7 @@ const locationCoords: Record<string, { lat: number; lng: number; name: string }>
   'new york': { lat: 40.7128, lng: -74.0060, name: 'New York' },
   'san francisco': { lat: 37.7749, lng: -122.4194, name: 'San Francisco' },
   'tokyo': { lat: 35.6762, lng: 139.6503, name: 'Tokyo' },
+  'yokohama': { lat: 35.4437, lng: 139.6380, name: 'Yokohama' },
   'sydney': { lat: -33.8688, lng: 151.2093, name: 'Sydney' },
   'berlin': { lat: 52.5200, lng: 13.4050, name: 'Berlin' },
   'amsterdam': { lat: 52.3676, lng: 4.9041, name: 'Amsterdam' },
