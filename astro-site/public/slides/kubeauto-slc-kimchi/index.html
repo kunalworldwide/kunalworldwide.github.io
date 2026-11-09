@@ -203,8 +203,9 @@ img, svg, picture, video { display: block; max-width: 100%; }
 
 /* Spaced mono eyebrow with orange tick */
 .sg-eyebrow {
-  font-family: var(--bp-font-mono); font-size: 13px; font-weight: 500;
+  font-family: var(--bp-font-mono); font-size: 15px; font-weight: 500;
   letter-spacing: 0.22em; text-transform: uppercase; color: var(--bp-muted);
+  font-size: 15px;
 }
 .sg-eyebrow .acc { color: var(--bp-accent); }
 
@@ -218,7 +219,7 @@ img, svg, picture, video { display: block; max-width: 100%; }
 .sg-footer {
   position: absolute; left: 96px; right: 96px; bottom: 48px; z-index: 2;
   display: flex; align-items: center; justify-content: space-between;
-  font-family: var(--bp-font-mono); font-size: 12px; font-weight: 500;
+  font-family: var(--bp-font-mono); font-size: 14px; font-weight: 500;
   letter-spacing: 0.14em; text-transform: uppercase; color: var(--bp-text);
 }
 .sg-footer::before {
@@ -238,13 +239,13 @@ img, svg, picture, video { display: block; max-width: 100%; }
 }
 .sg-term-dot { width: 10px; height: 10px; background: var(--bp-muted); opacity: 0.45; }
 .sg-term-dot:last-of-type { background: var(--bp-accent); opacity: 1; }
-.sg-term-title { margin-left: 16px; font-family: var(--bp-font-mono); font-size: 13px; letter-spacing: 0.08em; color: var(--bp-muted); }
+.sg-term-title { margin-left: 16px; font-family: var(--bp-font-mono); font-size: 14px; letter-spacing: 0.08em; color: var(--bp-muted); }
 .sg-term-body { padding: 28px 24px 32px; font-family: var(--bp-font-mono); }
-.sg-cmd { font-size: 19px; font-weight: 600; color: var(--bp-text); margin: 0 0 24px; }
+.sg-cmd { font-size: 21px; font-weight: 600; color: var(--bp-text); margin: 0 0 24px; }
 .sg-cmd .prompt { color: var(--bp-accent); }
 .sg-line {
-  display: grid; grid-template-columns: 44px 124px 1fr 40px;
-  align-items: baseline; gap: 16px; padding: 10px 0; font-size: 15px;
+  display: grid; grid-template-columns: 48px 136px 1fr 44px;
+  align-items: baseline; gap: 16px; padding: 10px 0; font-size: 17px;
   border-bottom: 1px solid rgba(0,0,0,0.07);
 }
 .sg-line:last-child { border-bottom: 0; }
@@ -256,9 +257,9 @@ img, svg, picture, video { display: block; max-width: 100%; }
 /* Step bullets */
 .sg-steps { display: flex; flex-direction: column; gap: 32px; }
 .sg-step { display: grid; grid-template-columns: 56px 1fr; gap: 20px; align-items: start; }
-.sg-step .idx { font-family: var(--bp-font-mono); font-size: 15px; font-weight: 600; color: var(--bp-accent); padding-top: 4px; }
-.sg-step h3 { font-family: var(--bp-font-display); font-size: 24px; font-weight: 700; letter-spacing: -0.01em; margin: 0 0 8px; color: var(--bp-text); }
-.sg-step p { font-size: 18px; line-height: 1.45; color: var(--bp-muted); margin: 0; max-width: 42ch; }
+.sg-step .idx { font-family: var(--bp-font-mono); font-size: 17px; font-weight: 600; color: var(--bp-accent); padding-top: 4px; }
+.sg-step h3 { font-family: var(--bp-font-display); font-size: 26px; font-weight: 700; letter-spacing: -0.01em; margin: 0 0 8px; color: var(--bp-text); }
+.sg-step p { font-size: 20px; line-height: 1.45; color: var(--bp-muted); margin: 0; max-width: 42ch; }
 
 /* Feature tile — bordered module, mono index, grotesque heading */
 .sg-tiles { display: grid; gap: 24px; }
@@ -268,10 +269,10 @@ img, svg, picture, video { display: block; max-width: 100%; }
   border: 1px solid #1F1F1F; background: #FFFFFF;
   padding: 28px 28px 30px; display: flex; flex-direction: column; gap: 14px;
 }
-.sg-tile .t-idx { font-family: var(--bp-font-mono); font-size: 13px; font-weight: 600; letter-spacing: 0.12em; color: var(--bp-accent); }
-.sg-tile h3 { font-family: var(--bp-font-display); font-size: 25px; font-weight: 700; letter-spacing: -0.01em; margin: 0; line-height: 1.15; color: var(--bp-text); }
-.sg-tile p { font-size: 17px; line-height: 1.45; color: var(--bp-muted); margin: 0; }
-.sg-tile .t-tag { font-family: var(--bp-font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--bp-muted); margin-top: auto; padding-top: 8px; }
+.sg-tile .t-idx { font-family: var(--bp-font-mono); font-size: 15px; font-weight: 600; letter-spacing: 0.12em; color: var(--bp-accent); }
+.sg-tile h3 { font-family: var(--bp-font-display); font-size: 28px; font-weight: 700; letter-spacing: -0.01em; margin: 0; line-height: 1.15; color: var(--bp-text); }
+.sg-tile p { font-size: 19px; line-height: 1.45; color: var(--bp-muted); margin: 0; }
+.sg-tile .t-tag { font-family: var(--bp-font-mono); font-size: 13px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--bp-muted); margin-top: auto; padding-top: 8px; }
 .sg-tile--accent { background: var(--bp-accent); border-color: var(--bp-accent); }
 .sg-tile--accent .t-idx, .sg-tile--accent h3, .sg-tile--accent p, .sg-tile--accent .t-tag { color: #FFFFFF; }
 
@@ -279,18 +280,18 @@ img, svg, picture, video { display: block; max-width: 100%; }
 .sg-rows { display: flex; flex-direction: column; }
 .sg-row { display: grid; grid-template-columns: 64px 1fr; gap: 20px; padding: 22px 0; border-bottom: 1px solid #1F1F1F; align-items: start; }
 .sg-row:first-child { border-top: 1px solid #1F1F1F; }
-.sg-row .r-idx { font-family: var(--bp-font-mono); font-size: 15px; font-weight: 600; color: var(--bp-accent); padding-top: 5px; }
-.sg-row h3 { font-family: var(--bp-font-display); font-size: 26px; font-weight: 700; letter-spacing: -0.01em; margin: 0 0 6px; color: var(--bp-text); }
-.sg-row p { font-size: 17px; line-height: 1.4; color: var(--bp-muted); margin: 0; }
+.sg-row .r-idx { font-family: var(--bp-font-mono); font-size: 17px; font-weight: 600; color: var(--bp-accent); padding-top: 5px; }
+.sg-row h3 { font-family: var(--bp-font-display); font-size: 28px; font-weight: 700; letter-spacing: -0.01em; margin: 0 0 6px; color: var(--bp-text); }
+.sg-row p { font-size: 19px; line-height: 1.4; color: var(--bp-muted); margin: 0; }
 
 /* Split panel (models / spend) */
 .sg-panel { border: 1px solid #1F1F1F; background: #fff; padding: 36px 36px 40px; height: 100%; }
-.sg-panel h3 { font-family: var(--bp-font-display); font-size: 30px; font-weight: 800; letter-spacing: -0.02em; margin: 0 0 24px; color: var(--bp-text); }
+.sg-panel h3 { font-family: var(--bp-font-display); font-size: 32px; font-weight: 800; letter-spacing: -0.02em; margin: 0 0 24px; color: var(--bp-text); }
 .sg-panel h3 .tick { color: var(--bp-accent); }
 .sg-panel ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
 .sg-panel li {
-  font-size: 18px; line-height: 1.4; color: var(--bp-muted);
-  padding: 14px 0 14px 34px; position: relative;
+  font-size: 20px; line-height: 1.4; color: var(--bp-muted);
+  padding: 14px 0 14px 36px; position: relative;
   border-bottom: 1px solid rgba(0,0,0,0.07);
 }
 .sg-panel li:last-child { border-bottom: 0; }
@@ -304,7 +305,7 @@ img, svg, picture, video { display: block; max-width: 100%; }
 .sg-qr { border: 1px solid #1F1F1F; background: #fff; padding: 24px; width: 408px; }
 .sg-qr img { width: 360px; height: 360px; }
 .sg-qr .cap {
-  font-family: var(--bp-font-mono); font-size: 13px; letter-spacing: 0.1em;
+  font-family: var(--bp-font-mono); font-size: 14px; letter-spacing: 0.1em;
   text-transform: uppercase; color: var(--bp-text); text-align: center;
   padding-top: 18px; line-height: 1.6;
 }
@@ -313,9 +314,9 @@ img, svg, picture, video { display: block; max-width: 100%; }
 /* Event mini-agenda rows on closing slide */
 .sg-event { border-top: 1px solid #1F1F1F; }
 .sg-event .e-row { display: grid; grid-template-columns: 132px 1fr; gap: 20px; padding: 16px 0; border-bottom: 1px solid rgba(0,0,0,0.12); align-items: baseline; }
-.sg-event .e-time { font-family: var(--bp-font-mono); font-size: 14px; font-weight: 600; color: var(--bp-accent); }
-.sg-event .e-what { font-size: 18px; line-height: 1.35; color: var(--bp-text); }
-.sg-event .e-what .who { color: var(--bp-muted); font-size: 16px; }
+.sg-event .e-time { font-family: var(--bp-font-mono); font-size: 16px; font-weight: 600; color: var(--bp-accent); }
+.sg-event .e-what { font-size: 19px; line-height: 1.35; color: var(--bp-text); }
+.sg-event .e-what .who { color: var(--bp-muted); font-size: 17px; }
 
 /* Link styling */
 a.sg-link { color: var(--bp-text); text-decoration: none; border-bottom: 2px solid var(--bp-accent); }
@@ -357,7 +358,7 @@ a.sg-link:hover { background: var(--bp-accent-soft); }
           Plan, code, review, test, deploy, monitor — one continuous loop.
           Agents do the work. Your rules, models, and budgets stay in charge.
         </p>
-        <p class="bp-reveal-up" style="--bp-delay: 200ms; font-family: var(--bp-font-mono); font-size: 14px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--bp-text); margin: 44px 0 0;">
+        <p class="bp-reveal-up" style="--bp-delay: 200ms; font-family: var(--bp-font-mono); font-size: 16px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--bp-text); margin: 44px 0 0;">
           <span style="color: var(--bp-accent); font-weight: 600;">KubeCon + CloudNativeCon NA</span> week — Salt Lake City
         </p>
       </div>
@@ -741,27 +742,27 @@ a.sg-link:hover { background: var(--bp-accent-soft); }
         <div class="sg-event bp-reveal-up" style="--bp-delay: 240ms; margin-top: 36px; width: 940px;">
           <div class="e-row" style="padding: 13px 0;">
             <span class="e-time">STEP 1</span>
-            <span class="e-what bp-editable" style="font-size: 17px;">Join the event at <span style="font-family: var(--bp-font-mono);">castai.github.io/kimchi-workshop</span> — <span class="who">facilitator’s event code</span></span>
+            <span class="e-what bp-editable" style="font-size: 19px;">Join the event at <span style="font-family: var(--bp-font-mono);">castai.github.io/kimchi-workshop</span> — <span class="who">facilitator’s event code</span></span>
           </div>
           <div class="e-row" style="padding: 13px 0;">
             <span class="e-time">STEP 2</span>
-            <span class="e-what bp-editable" style="font-size: 17px;">Wait a bit — <span class="who">the org invite email for KubeAuto Kimchi Workshop arrives</span></span>
+            <span class="e-what bp-editable" style="font-size: 19px;">Wait a bit — <span class="who">the org invite email for KubeAuto Kimchi Workshop arrives</span></span>
           </div>
           <div class="e-row" style="padding: 13px 0;">
             <span class="e-time">STEP 3</span>
-            <span class="e-what bp-editable" style="font-size: 17px;">Click the link in the email — log in to kimchi.dev with your GitHub account</span>
+            <span class="e-what bp-editable" style="font-size: 19px;">Click the link in the email — log in to kimchi.dev with your GitHub account</span>
           </div>
           <div class="e-row" style="padding: 13px 0;">
             <span class="e-time">STEP 4</span>
-            <span class="e-what bp-editable" style="font-size: 17px;">Install Kimchi from kimchi.dev</span>
+            <span class="e-what bp-editable" style="font-size: 19px;">Install Kimchi from kimchi.dev</span>
           </div>
           <div class="e-row" style="padding: 13px 0;">
             <span class="e-time">STEP 5</span>
-            <span class="e-what bp-editable" style="font-size: 17px;">Select <strong>KubeAuto Kimchi Workshop</strong> as your organization</span>
+            <span class="e-what bp-editable" style="font-size: 19px;">Select <strong>KubeAuto Kimchi Workshop</strong> as your organization</span>
           </div>
           <div class="e-row" style="padding: 13px 0;">
             <span class="e-time">STEP 6</span>
-            <span class="e-what bp-editable" style="font-size: 17px;">Check <span style="font-family: var(--bp-font-mono);">/status</span> — verify org reads <strong>KubeAuto Kimchi Workshop</strong></span>
+            <span class="e-what bp-editable" style="font-size: 19px;">Check <span style="font-family: var(--bp-font-mono);">/status</span> — verify org reads <strong>KubeAuto Kimchi Workshop</strong></span>
           </div>
         </div>
       </div>
